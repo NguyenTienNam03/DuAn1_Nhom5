@@ -138,28 +138,28 @@ namespace C_PL.Views
             //}
             
         }
-        //public void AddGioHang(Guid id)
-        //{
-        //    var sp = _ictsp.GetAll().FirstOrDefault(c => c.ID == id);
-        //    var data = _lstgiohang.FirstOrDefault(c => c.IDSP == sp.ID);
-        //    if (data == null)
-        //    {
-        //        GioHangCT ghct = new GioHangCT()
-        //        {
-        //            IDGH = _giohang.ID,
-        //            IDSP = id,
-        //            SoLuong = 1,
-        //            DonGia = sp.GiaBan,
-        //        };
-        //        _lstgiohang.Add(ghct);
-        //    }
-        //    else
-        //    {
-        //        data.SoLuong++;
-        //    }
-        //    LoadGioHang();
+        public void AddGioHang(Guid id)
+        {
+            var sp = _ictsp.GetAll().FirstOrDefault(c => c.ID == id);
+            var data = _lstgiohang.FirstOrDefault(c => c.IDSP == sp.ID);
+            if (data == null)
+            {
+                GioHangCT ghct = new GioHangCT()
+                {
+                    IDGH = _giohang.ID,
+                    IDSP = id,
+                    SoLuong = 1,
+                    DonGia = sp.GiaBan,
+                };
+                _lstgiohang.Add(ghct);
+            }
+            else
+            {
+                data.SoLuong++;
+            }
+            LoadGioHang();
 
-        //}
+        }
 
         private void ptb_themgiohang_Click(object sender, EventArgs e)
         {
