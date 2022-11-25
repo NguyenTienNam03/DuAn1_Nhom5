@@ -24,6 +24,7 @@ namespace C_PL.Views
             LoadCV();
             //txt_macv.Enabled = false;
         }
+
         public void LoadCV()
         {
             int stt = 1;
