@@ -35,7 +35,7 @@ namespace C_PL.Views
                 MessageBox.Show(" Đăng Nhập Thành Công");
                 GiaoDien gd = new GiaoDien();
                 gd.ShowDialog();
-
+// jjejej
 
             }
         }
