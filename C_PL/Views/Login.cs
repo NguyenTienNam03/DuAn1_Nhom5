@@ -14,6 +14,7 @@ namespace C_PL.Views
 {
     public partial class Login : Form
     {
+        public static string layEmail = ""; //tạo biến cục bộ
         private INhanVienService _IDNhanVien;
         private Guid ID;
         public Login()
@@ -32,12 +33,15 @@ namespace C_PL.Views
             }
             else
             {
+                layEmail = text_user.Text; //gán giá trị
                 MessageBox.Show(" Đăng Nhập Thành Công");
-                GiaoDien gd = new GiaoDien();
+                FrmBanHang gd = new FrmBanHang();
                 gd.ShowDialog();
+                
 // jjejej
 
             }
+            
         }
     }
 }

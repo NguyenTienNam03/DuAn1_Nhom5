@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace A_DAL.Migrations
 {
-    public partial class tiennam : Migration
+    public partial class tr1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -129,10 +129,10 @@ namespace A_DAL.Migrations
                     IDSize = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IDMauSac = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MaSP = table.Column<string>(type: "nvarchar(20)", nullable: true),
-                    SoLuong = table.Column<int>(type: "Int", nullable: true),
+                    SoLuong = table.Column<int>(type: "Int", nullable: false),
                     Anh = table.Column<string>(type: "varchar(50)", nullable: true),
-                    GiaNhap = table.Column<decimal>(type: "decimal", nullable: true),
-                    GiaBan = table.Column<decimal>(type: "decimal", nullable: true),
+                    GiaNhap = table.Column<decimal>(type: "decimal", nullable: false),
+                    GiaBan = table.Column<decimal>(type: "decimal", nullable: false),
                     TrangThai = table.Column<string>(type: "nvarchar(225)", nullable: true)
                 },
                 constraints: table =>
@@ -199,10 +199,10 @@ namespace A_DAL.Migrations
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IDKH = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IDNV = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MaHD = table.Column<string>(type: "varchar(30)", nullable: true),
-                    DonGia = table.Column<decimal>(type: "decimal", nullable: true),
-                    SoLuong = table.Column<int>(type: "Int", nullable: true),
-                    NgayTao = table.Column<DateTime>(type: "Datetime", nullable: true),
+                    MaHD = table.Column<string>(type: "varchar(30)", nullable: false),
+                    DonGia = table.Column<decimal>(type: "decimal", nullable: false),
+                    SoLuong = table.Column<int>(type: "Int", nullable: false),
+                    NgayTao = table.Column<DateTime>(type: "Datetime", nullable: false),
                     TrangThai = table.Column<string>(type: "nvarchar(100)", nullable: true)
                 },
                 constraints: table =>

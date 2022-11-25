@@ -53,7 +53,7 @@ namespace C_PL.Views
             {
                 ID = Guid.NewGuid(),
             };
-            
+            label1.Text = Login.layEmail; //add thử Email vào label
         }
         
         public void LoadKH()

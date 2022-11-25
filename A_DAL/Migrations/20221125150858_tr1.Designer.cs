@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace A_DAL.Migrations
 {
     [DbContext(typeof(QuanLyBanGiayDBContext))]
-    [Migration("20221120175502_tiennam")]
-    partial class tiennam
+    [Migration("20221125150858_tr1")]
+    partial class tr1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,11 +34,11 @@ namespace A_DAL.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("Anh");
 
-                    b.Property<decimal?>("GiaBan")
+                    b.Property<decimal>("GiaBan")
                         .HasColumnType("decimal")
                         .HasColumnName("GiaBan");
 
-                    b.Property<decimal?>("GiaNhap")
+                    b.Property<decimal>("GiaNhap")
                         .HasColumnType("decimal")
                         .HasColumnName("GiaNhap");
 
@@ -58,7 +58,7 @@ namespace A_DAL.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("MaSP");
 
-                    b.Property<int?>("SoLuong")
+                    b.Property<int>("SoLuong")
                         .HasColumnType("Int")
                         .HasColumnName("SoLuong");
 
@@ -100,7 +100,7 @@ namespace A_DAL.Migrations
 
             modelBuilder.Entity("A_DAL.Models.GioHang", b =>
                 {
-                    b.Property<Guid?>("ID")
+                    b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -108,12 +108,10 @@ namespace A_DAL.Migrations
                         .HasColumnType("decimal")
                         .HasColumnName("DonGia");
 
-                    b.Property<Guid?>("IDKH")
-                        .IsRequired()
+                    b.Property<Guid>("IDKH")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("IDNV")
-                        .IsRequired()
+                    b.Property<Guid>("IDNV")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("MaGH")
@@ -135,10 +133,10 @@ namespace A_DAL.Migrations
 
             modelBuilder.Entity("A_DAL.Models.GioHangCT", b =>
                 {
-                    b.Property<Guid?>("IDSP")
+                    b.Property<Guid>("IDSP")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("IDGH")
+                    b.Property<Guid>("IDGH")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal?>("DonGia")
@@ -177,31 +175,30 @@ namespace A_DAL.Migrations
 
             modelBuilder.Entity("A_DAL.Models.HoaDon", b =>
                 {
-                    b.Property<Guid?>("ID")
+                    b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal?>("DonGia")
+                    b.Property<decimal>("DonGia")
                         .HasColumnType("decimal")
                         .HasColumnName("DonGia");
 
-                    b.Property<Guid?>("IDKH")
-                        .IsRequired()
+                    b.Property<Guid>("IDKH")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("IDNV")
-                        .IsRequired()
+                    b.Property<Guid>("IDNV")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("MaHD")
+                        .IsRequired()
                         .HasColumnType("varchar(30)")
                         .HasColumnName("MaHD");
 
-                    b.Property<DateTime?>("NgayTao")
+                    b.Property<DateTime>("NgayTao")
                         .HasColumnType("Datetime")
                         .HasColumnName("NgayTao");
 
-                    b.Property<int?>("SoLuong")
+                    b.Property<int>("SoLuong")
                         .HasColumnType("Int")
                         .HasColumnName("SoLuong");
 
@@ -220,10 +217,10 @@ namespace A_DAL.Migrations
 
             modelBuilder.Entity("A_DAL.Models.HoaDonCT", b =>
                 {
-                    b.Property<Guid?>("IDSP")
+                    b.Property<Guid>("IDSP")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("IDHD")
+                    b.Property<Guid>("IDHD")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal?>("DonGia")
@@ -356,7 +353,7 @@ namespace A_DAL.Migrations
 
             modelBuilder.Entity("A_DAL.Models.SanPham", b =>
                 {
-                    b.Property<Guid?>("ID")
+                    b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
