@@ -2020,11 +2020,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\A_DAL\\A_DAL.csproj",
+      "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\new\\A_DAL\\A_DAL.csproj",
       "projectName": "A_DAL",
-      "projectPath": "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\A_DAL\\A_DAL.csproj",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\new\\A_DAL\\A_DAL.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\A_DAL\\obj\\",
+      "outputPath": "C:\\Users\\Administrator\\Desktop\\new\\A_DAL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

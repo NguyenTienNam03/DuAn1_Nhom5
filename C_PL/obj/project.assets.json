@@ -1953,11 +1953,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\C_PL\\C_PL.csproj",
+      "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\new\\C_PL\\C_PL.csproj",
       "projectName": "C_PL",
-      "projectPath": "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\C_PL\\C_PL.csproj",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\new\\C_PL\\C_PL.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\C_PL\\obj\\",
+      "outputPath": "C:\\Users\\Administrator\\Desktop\\new\\C_PL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1978,8 +1978,8 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\B_BUS\\B_BUS.csproj": {
-              "projectPath": "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\B_BUS\\B_BUS.csproj"
+            "C:\\Users\\Administrator\\Desktop\\new\\B_BUS\\B_BUS.csproj": {
+              "projectPath": "C:\\Users\\Administrator\\Desktop\\new\\B_BUS\\B_BUS.csproj"
             }
           }
         }

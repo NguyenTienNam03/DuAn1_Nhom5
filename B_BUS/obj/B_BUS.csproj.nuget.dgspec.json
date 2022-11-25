@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\B_BUS\\B_BUS.csproj": {}
+    "C:\\Users\\Administrator\\Desktop\\new\\B_BUS\\B_BUS.csproj": {}
   },
   "projects": {
-    "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\A_DAL\\A_DAL.csproj": {
+    "C:\\Users\\Administrator\\Desktop\\new\\A_DAL\\A_DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\A_DAL\\A_DAL.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\new\\A_DAL\\A_DAL.csproj",
         "projectName": "A_DAL",
-        "projectPath": "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\A_DAL\\A_DAL.csproj",
+        "projectPath": "C:\\Users\\Administrator\\Desktop\\new\\A_DAL\\A_DAL.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\A_DAL\\obj\\",
+        "outputPath": "C:\\Users\\Administrator\\Desktop\\new\\A_DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -85,14 +85,14 @@
         }
       }
     },
-    "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\B_BUS\\B_BUS.csproj": {
+    "C:\\Users\\Administrator\\Desktop\\new\\B_BUS\\B_BUS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\B_BUS\\B_BUS.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\new\\B_BUS\\B_BUS.csproj",
         "projectName": "B_BUS",
-        "projectPath": "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\B_BUS\\B_BUS.csproj",
+        "projectPath": "C:\\Users\\Administrator\\Desktop\\new\\B_BUS\\B_BUS.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\B_BUS\\obj\\",
+        "outputPath": "C:\\Users\\Administrator\\Desktop\\new\\B_BUS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -113,8 +113,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\A_DAL\\A_DAL.csproj": {
-                "projectPath": "D:\\Fall2022\\Du_an_1\\DuAn1_Nhom5\\A_DAL\\A_DAL.csproj"
+              "C:\\Users\\Administrator\\Desktop\\new\\A_DAL\\A_DAL.csproj": {
+                "projectPath": "C:\\Users\\Administrator\\Desktop\\new\\A_DAL\\A_DAL.csproj"
               }
             }
           }
