@@ -26,14 +26,14 @@ namespace C_PL.Views
         private void bt_dangnhap_Click(object sender, EventArgs e)
         {
 
-            var x = _IDNhanVien.GetAllNV().FirstOrDefault(p => p.Email == text_user.Text && p.MatKhau == text_pass.Text);
+            var x = _IDNhanVien.GetAllNV().FirstOrDefault(p => p.Email == text_pass.Text && p.MatKhau == text_user.Text);
             if (x == null)
             {
                 MessageBox.Show(" Tài Khoản Này Không Tồn Tại. Mời Bạn Thử Lại");
             }
             else
             {
-                layEmail = text_user.Text; //gán giá trị
+                layEmail = text_pass.Text; //gán giá trị
                 MessageBox.Show(" Đăng Nhập Thành Công");
                 FrmBanHang gd = new FrmBanHang();
                 gd.ShowDialog();
