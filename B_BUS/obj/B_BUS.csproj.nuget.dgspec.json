@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Administrator\\Desktop\\da1\\B_BUS\\B_BUS.csproj": {}
+    "C:\\Users\\ducnguyenvann\\OneDrive\\Desktop\\Nhom5\\B_BUS\\B_BUS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Administrator\\Desktop\\da1\\A_DAL\\A_DAL.csproj": {
+    "C:\\Users\\ducnguyenvann\\OneDrive\\Desktop\\Nhom5\\A_DAL\\A_DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\da1\\A_DAL\\A_DAL.csproj",
+        "projectUniqueName": "C:\\Users\\ducnguyenvann\\OneDrive\\Desktop\\Nhom5\\A_DAL\\A_DAL.csproj",
         "projectName": "A_DAL",
-        "projectPath": "C:\\Users\\Administrator\\Desktop\\da1\\A_DAL\\A_DAL.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Desktop\\da1\\A_DAL\\obj\\",
+        "projectPath": "C:\\Users\\ducnguyenvann\\OneDrive\\Desktop\\Nhom5\\A_DAL\\A_DAL.csproj",
+        "packagesPath": "C:\\Users\\ducnguyenvann\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ducnguyenvann\\OneDrive\\Desktop\\Nhom5\\A_DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ducnguyenvann\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -71,8 +71,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -81,24 +80,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Administrator\\Desktop\\da1\\B_BUS\\B_BUS.csproj": {
+    "C:\\Users\\ducnguyenvann\\OneDrive\\Desktop\\Nhom5\\B_BUS\\B_BUS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\da1\\B_BUS\\B_BUS.csproj",
+        "projectUniqueName": "C:\\Users\\ducnguyenvann\\OneDrive\\Desktop\\Nhom5\\B_BUS\\B_BUS.csproj",
         "projectName": "B_BUS",
-        "projectPath": "C:\\Users\\Administrator\\Desktop\\da1\\B_BUS\\B_BUS.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Desktop\\da1\\B_BUS\\obj\\",
+        "projectPath": "C:\\Users\\ducnguyenvann\\OneDrive\\Desktop\\Nhom5\\B_BUS\\B_BUS.csproj",
+        "packagesPath": "C:\\Users\\ducnguyenvann\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ducnguyenvann\\OneDrive\\Desktop\\Nhom5\\B_BUS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ducnguyenvann\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -113,8 +112,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Administrator\\Desktop\\da1\\A_DAL\\A_DAL.csproj": {
-                "projectPath": "C:\\Users\\Administrator\\Desktop\\da1\\A_DAL\\A_DAL.csproj"
+              "C:\\Users\\ducnguyenvann\\OneDrive\\Desktop\\Nhom5\\A_DAL\\A_DAL.csproj": {
+                "projectPath": "C:\\Users\\ducnguyenvann\\OneDrive\\Desktop\\Nhom5\\A_DAL\\A_DAL.csproj"
               }
             }
           }
@@ -134,8 +133,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -144,7 +142,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
