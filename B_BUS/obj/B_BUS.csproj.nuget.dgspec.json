@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nguyen Truong\\OneDrive\\Máy tính\\du an\\B_BUS\\B_BUS.csproj": {}
+    "C:\\Users\\Administrator\\Desktop\\da1\\B_BUS\\B_BUS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nguyen Truong\\OneDrive\\Máy tính\\du an\\A_DAL\\A_DAL.csproj": {
+    "C:\\Users\\Administrator\\Desktop\\da1\\A_DAL\\A_DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nguyen Truong\\OneDrive\\Máy tính\\du an\\A_DAL\\A_DAL.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\da1\\A_DAL\\A_DAL.csproj",
         "projectName": "A_DAL",
-        "projectPath": "C:\\Users\\Nguyen Truong\\OneDrive\\Máy tính\\du an\\A_DAL\\A_DAL.csproj",
-        "packagesPath": "C:\\Users\\Nguyen Truong\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nguyen Truong\\OneDrive\\Máy tính\\du an\\A_DAL\\obj\\",
+        "projectPath": "C:\\Users\\Administrator\\Desktop\\da1\\A_DAL\\A_DAL.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Administrator\\Desktop\\da1\\A_DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Nguyen Truong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -85,20 +85,20 @@
         }
       }
     },
-    "C:\\Users\\Nguyen Truong\\OneDrive\\Máy tính\\du an\\B_BUS\\B_BUS.csproj": {
+    "C:\\Users\\Administrator\\Desktop\\da1\\B_BUS\\B_BUS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nguyen Truong\\OneDrive\\Máy tính\\du an\\B_BUS\\B_BUS.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\da1\\B_BUS\\B_BUS.csproj",
         "projectName": "B_BUS",
-        "projectPath": "C:\\Users\\Nguyen Truong\\OneDrive\\Máy tính\\du an\\B_BUS\\B_BUS.csproj",
-        "packagesPath": "C:\\Users\\Nguyen Truong\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nguyen Truong\\OneDrive\\Máy tính\\du an\\B_BUS\\obj\\",
+        "projectPath": "C:\\Users\\Administrator\\Desktop\\da1\\B_BUS\\B_BUS.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Administrator\\Desktop\\da1\\B_BUS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Nguyen Truong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -113,8 +113,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Nguyen Truong\\OneDrive\\Máy tính\\du an\\A_DAL\\A_DAL.csproj": {
-                "projectPath": "C:\\Users\\Nguyen Truong\\OneDrive\\Máy tính\\du an\\A_DAL\\A_DAL.csproj"
+              "C:\\Users\\Administrator\\Desktop\\da1\\A_DAL\\A_DAL.csproj": {
+                "projectPath": "C:\\Users\\Administrator\\Desktop\\da1\\A_DAL\\A_DAL.csproj"
               }
             }
           }

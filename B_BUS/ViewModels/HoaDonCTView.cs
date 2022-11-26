@@ -8,5 +8,9 @@ namespace B_BUS.ViewModels
 {
     public class HoaDonCTView
     {
+        public Guid IDSP { get; set; }
+        public Guid IDHD { get; set; }
+        public decimal DonGia { get; set; }
+        public int SoLuong { get; set; }
     }
 }
