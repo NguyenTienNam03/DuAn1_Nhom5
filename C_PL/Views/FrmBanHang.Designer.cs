@@ -71,6 +71,7 @@
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lb_tongtien = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.dtgrid_giohang = new System.Windows.Forms.DataGridView();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,7 +95,6 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lb_tongtien = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -547,6 +547,16 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Giỏ hàng ";
             // 
+            // lb_tongtien
+            // 
+            this.lb_tongtien.AutoSize = true;
+            this.lb_tongtien.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lb_tongtien.Location = new System.Drawing.Point(485, 474);
+            this.lb_tongtien.Name = "lb_tongtien";
+            this.lb_tongtien.Size = new System.Drawing.Size(151, 32);
+            this.lb_tongtien.TabIndex = 14;
+            this.lb_tongtien.Text = "Tổng tiền : ";
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -695,6 +705,7 @@
             this.btn_thanhtoan.TabIndex = 2;
             this.btn_thanhtoan.Text = "      Thanh Toán ";
             this.btn_thanhtoan.UseVisualStyleBackColor = false;
+            this.btn_thanhtoan.Click += new System.EventHandler(this.btn_thanhtoan_Click);
             // 
             // btn_huy
             // 
@@ -764,16 +775,6 @@
             this.Column6.MinimumWidth = 6;
             this.Column6.Name = "Column6";
             this.Column6.Width = 125;
-            // 
-            // lb_tongtien
-            // 
-            this.lb_tongtien.AutoSize = true;
-            this.lb_tongtien.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lb_tongtien.Location = new System.Drawing.Point(485, 474);
-            this.lb_tongtien.Name = "lb_tongtien";
-            this.lb_tongtien.Size = new System.Drawing.Size(151, 32);
-            this.lb_tongtien.TabIndex = 14;
-            this.lb_tongtien.Text = "Tổng tiền : ";
             // 
             // FrmBanHang
             // 

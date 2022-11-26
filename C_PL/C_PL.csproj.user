@@ -7,16 +7,28 @@
     <Compile Update="Views\FrmChucVu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\FrmDoiMk.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\FrmHangSX.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\FrmQLNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\FrmSanPham.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\FrmSize.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\FrmThanhToan.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\FrmThongKe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\FromLaymk.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\GiaoDien.cs">

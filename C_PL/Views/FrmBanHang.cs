@@ -97,7 +97,9 @@ namespace C_PL.Views
                 var sp = _isps.GetAllsp().Find(c => c.IDsp == x.IDSP);
                 
                 dtgrid_giohang.Rows.Add(x.ID , sp.TenSp , ms.Mau , s.SoSize , x.SoLuong , x.GiaBan , x.SoLuong * x.GiaBan );
+                //lb_tongtien.Text = 
             }
+            
         }
         public void LoadSpCT()
         {
@@ -114,52 +116,12 @@ namespace C_PL.Views
         }
         private void dtgrid_sp_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            //if (e.RowIndex >= 0)
-            //{
-            //    DataGridViewRow r = dtgrid_sp.Rows[e.RowIndex];
-            //    var _ctsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == Guid.Parse(r.Cells[0].Value.ToString())).ID;
-            //    AddGioHang(_ctsp);
-            //}
-            //LoadGioHang();
             int sll = 1;
-            
             DataGridViewRow r = dtgrid_sp.Rows[e.RowIndex];
-            //if ()
-            //{
-                dtgrid_giohang.Rows.Add(r.Cells[0].Value.ToString(), r.Cells[2].Value.ToString(), r.Cells[4].Value.ToString(), r.Cells[5].Value.ToString(), sll, r.Cells[7].Value.ToString(), 567);
-            //}
-            //DataGridViewRow y = dtgrid_giohang.Rows[e.RowIndex];
-            //if( y.Index > 0)
-            //{
-                //_tongtien = Convert.ToDouble(dtgrid_giohang.Rows[e.RowIndex].Cells[8].Value.ToString());
-            //}
-            
-            //}
-            
+            //if (dtgrid_sp.Rows[e.RowIndex].Cells[e.ColumnIndex].)
+            dtgrid_giohang.Rows.Add(r.Cells[0].Value.ToString(), r.Cells[2].Value.ToString(), r.Cells[4].Value.ToString(), r.Cells[5].Value.ToString(), sll, r.Cells[7].Value.ToString(), Convert.ToDouble(sll) * Convert.ToDouble(r.Cells[7].Value.ToString()));
         }
-        public void AddGioHang(Guid id)
-        {
-            var sp = _ictsp.GetAll().FirstOrDefault(c => c.ID == id);
-            var data = _lstgiohang.FirstOrDefault(c => c.IDSP == sp.ID);
-            if (data == null)
-            {
-                GioHangCT ghct = new GioHangCT()
-                {
-                    IDGH = _giohang.ID,
-                    IDSP = id,
-                    SoLuong = 1,
-                    DonGia = sp.GiaBan,
-                };
-                _lstgiohang.Add(ghct);
-            }
-            else
-            {
-                data.SoLuong++;
-            }
-            LoadGioHang();
-
-        }
+        
 
         private void ptb_themgiohang_Click(object sender, EventArgs e)
         {
@@ -204,7 +166,7 @@ namespace C_PL.Views
                 {
                     ID = Guid.NewGuid(),
                     MaHD = "HD" + Convert.ToString(_ihds.GetAllhd().Max(c => Convert.ToInt32(c.Mahd.Substring(2 ,c.Mahd.Length)) + 1)),
-                    TrangThai = "Chờ thanh toán",
+                    TrangThai = "",
                 };
                 _ihds.AddHoaDon(Hoadon);
                 foreach(var x in _lstgiohang)
@@ -234,6 +196,12 @@ namespace C_PL.Views
         private void dtgrid_sp_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void btn_thanhtoan_Click(object sender, EventArgs e)
+        {
+            FrmThanhToan thanhtoan = new FrmThanhToan();
+            thanhtoan.ShowDialog();
         }
     }
 }
