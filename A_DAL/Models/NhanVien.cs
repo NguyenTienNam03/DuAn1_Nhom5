@@ -12,7 +12,7 @@ namespace A_DAL.Models
         public Guid IDCV { get; set; }
         public string MaNV  { get; set; }
         public string? Ten { get ; set; }
-        public DateTime NgaySinh { get; set; }
+        public DateTime? NgaySinh { get; set; }
         public string? GioiTinh { get; set; }
         public string? DiaChi { get; set; }
         public string? SDT { get; set; }

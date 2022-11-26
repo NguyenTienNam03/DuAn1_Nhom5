@@ -14,7 +14,7 @@ namespace A_DAL.Models
         public Guid IDKH { get; set; }
         public string? MaGH { get; set; }
         public int SoLuong { get; set; }
-        public decimal DonGia { get; set; }
+        public decimal? DonGia { get; set; }
         public virtual  KhachHang? KhachHang { get; set; }
         public virtual NhanVien? NhanVien { get; set; }
     }

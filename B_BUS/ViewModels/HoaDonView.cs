@@ -13,9 +13,9 @@ namespace B_BUS.ViewModels
         public Guid IDkh { get; set; }
         public Guid IDnv { get; set; }
         public string Mahd { get; set; }
-        public decimal DonGia { get; set; }
+        public decimal? DonGia { get; set; }
         public int SoLuong { get; set; }
-        public DateTime NgayTao { get; set; }
+        public DateTime? NgayTao { get; set; }
         public string TrangThai { get; set; }
     }
 }

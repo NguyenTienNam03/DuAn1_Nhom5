@@ -10,7 +10,7 @@ namespace A_DAL.Models
     {
         public Guid IDSP { get; set; }
         public Guid IDGH { get; set; }
-        public decimal DonGia { get; set; }
+        public decimal? DonGia { get; set; }
         public int SoLuong { get; set; }
         public virtual ChiTietSanPham? ChiTietSanPham { get; set; }
         public virtual GioHang? GioHang { get; set; }

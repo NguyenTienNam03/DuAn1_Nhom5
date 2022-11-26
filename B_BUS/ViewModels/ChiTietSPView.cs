@@ -16,8 +16,8 @@ namespace B_BUS.ViewModels
         public string MaCTSP { get; set; }
         public string anh { get; set; }
         public int SoLuong { get; set; }
-        public decimal GiaNhap { get; set; }
-        public decimal GiaBan { get; set; }
+        public decimal? GiaNhap { get; set; }
+        public decimal? GiaBan { get; set; }
         public string Trangthai { get; set; }
     }
 }

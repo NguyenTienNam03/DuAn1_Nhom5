@@ -18,8 +18,8 @@ namespace A_DAL.Models
         public int SoLuong { get; set; }
         public string? Anh { get; set; }
 
-        public decimal GiaNhap { get; set; }
-        public decimal GiaBan { get; set; }
+        public decimal? GiaNhap { get; set; }
+        public decimal? GiaBan { get; set; }
         public string? TrangThai { get; set; }
         public virtual SanPham? SanPham { get; set; }
         public virtual HangSanXuat? HangSanXuat { get; set; }
