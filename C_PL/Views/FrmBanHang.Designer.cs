@@ -49,7 +49,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cbb_nhasx = new System.Windows.Forms.ComboBox();
             this.btn_loc = new System.Windows.Forms.Button();
-            this.ptb_themgiohang = new System.Windows.Forms.PictureBox();
             this.ptb_anhsp = new System.Windows.Forms.PictureBox();
             this.txt_timkiemsp = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -102,7 +101,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgrid_khachhang)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptb_themgiohang)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_anhsp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrid_sp)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -283,7 +281,6 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.cbb_nhasx);
             this.groupBox2.Controls.Add(this.btn_loc);
-            this.groupBox2.Controls.Add(this.ptb_themgiohang);
             this.groupBox2.Controls.Add(this.ptb_anhsp);
             this.groupBox2.Controls.Add(this.txt_timkiemsp);
             this.groupBox2.Controls.Add(this.label9);
@@ -341,17 +338,6 @@
             this.btn_loc.TabIndex = 14;
             this.btn_loc.Text = "      Lọc";
             this.btn_loc.UseVisualStyleBackColor = false;
-            // 
-            // ptb_themgiohang
-            // 
-            this.ptb_themgiohang.Image = global::C_PL.Properties.Resources.themvaogiohang;
-            this.ptb_themgiohang.Location = new System.Drawing.Point(745, 404);
-            this.ptb_themgiohang.Name = "ptb_themgiohang";
-            this.ptb_themgiohang.Size = new System.Drawing.Size(72, 58);
-            this.ptb_themgiohang.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ptb_themgiohang.TabIndex = 13;
-            this.ptb_themgiohang.TabStop = false;
-            this.ptb_themgiohang.Click += new System.EventHandler(this.ptb_themgiohang_Click);
             // 
             // ptb_anhsp
             // 
@@ -467,6 +453,7 @@
             this.dtgrid_sp.TabIndex = 0;
             this.dtgrid_sp.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgrid_sp_CellClick);
             this.dtgrid_sp.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgrid_sp_CellContentClick);
+            this.dtgrid_sp.DoubleClick += new System.EventHandler(this.dtgrid_sp_DoubleClick);
             // 
             // Column1
             // 
@@ -796,7 +783,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptb_themgiohang)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_anhsp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrid_sp)).EndInit();
             this.groupBox3.ResumeLayout(false);
@@ -845,7 +831,6 @@
         private DataGridView dtgrid_giohang;
         private Label label11;
         private Label label10;
-        private PictureBox ptb_themgiohang;
         private Label label12;
         private PictureBox pictureBox6;
         private PictureBox pictureBox8;
