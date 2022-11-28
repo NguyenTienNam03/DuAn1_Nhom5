@@ -41,11 +41,11 @@ namespace B_BUS.Services
                         ID = a.ID ,
                         TenKH = a.Ten ,
                         DiaChi = a.DiaChi ,
-                        Email = a.Email ,
+                        
                         MaKH = a.MaKH ,
-                        MatKhau = a.MatKhau ,
+                      
                         SDT = a.SDT ,
-                        TrangThai = a.TrangThai ,
+                 
                     }).ToList();
             return _lst;
         }
