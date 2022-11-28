@@ -27,19 +27,24 @@ namespace C_PL.Views
         public List<GioHangCT> _lstgiohang;
         public GioHang _giohang;
         public Guid _id;
+        public IHoaDonCTService _ihdcts;
         public IHoaDonService _ihds;
-        public double _tongtien;
-        public double trutien = 0;
+        public INhanVienService _invs;
+        public IGioHangCTService _ighcts;
         public double thanhtien = 0;
+        public double trutien = 0;
 
         public FrmBanHang()
         {
             InitializeComponent();
             _ictsp = new ChiTietSPService();
+            _ighcts = new GioHangCTService();
             _ikhs = new KhachHangService();
             _ihsxs = new HangSanXuatService();
             _isize = new SizeService();
+            _ihdcts = new HoaDonCTService();
             _isps = new SanPhamService();
+            _invs = new NhanVienService();
             _imss = new MauSacService();
             _lstgiohang = new List<GioHangCT>();
             _ihds = new HoaDonService();
@@ -49,12 +54,13 @@ namespace C_PL.Views
             LoadSize();
             Loadhsx();
             LoadKH();
-            lb_tongtien.Text = _tongtien.ToString();
+
             //LoadGioHang();
             _giohang = new GioHang()
             {
                 ID = Guid.NewGuid(),
             };
+
             label1.Text = Login.layEmail; //add thử Email vào label
         }
 
@@ -117,7 +123,7 @@ namespace C_PL.Views
         }
         private void dtgrid_sp_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-           
+
         }
 
         private void dtgrid_giohang_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -141,34 +147,67 @@ namespace C_PL.Views
 
         private void dtgrid_giohang_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //var x = _lstgiohang.FirstOrDefault(c => c.IDSP == Guid.Parse(dtgrid_giohang.Rows[e.RowIndex].Cells[0].Value.ToString()));
-            var x = _lstgiohang.FirstOrDefault(c => c.IDSP == _id);
-            if (e.ColumnIndex == 7)
+            try
             {
-                if (MessageBox.Show("Ban co muon xoa san pham nay khong ?", "Thong bao", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                //var x = _lstgiohang.FirstOrDefault(c => c.IDSP == Guid.Parse(dtgrid_giohang.Rows[e.RowIndex].Cells[0].Value.ToString()));
+                if (e.ColumnIndex == 7)
                 {
-                    _lstgiohang.Remove(x);
-                    LoadGioHang();
-                    foreach (DataGridViewCell onecell in dtgrid_giohang.SelectedCells)
+                    if (MessageBox.Show("Ban co muon xoa san pham nay khong ?", "Thong bao", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        if (onecell.Selected)
+                        //_lstgiohang.Remove(x);
+                        foreach (DataGridViewCell onecell in dtgrid_giohang.SelectedCells)
                         {
-                            dtgrid_giohang.Rows.RemoveAt(onecell.RowIndex);
+                            if (onecell.Selected)
+                            {
+                                dtgrid_giohang.Rows.RemoveAt(onecell.RowIndex);
+                                LoadGioHang();
+                            }
                         }
                     }
                 }
+                thanhtien = thanhtien - trutien;
+                lb_tongtien.Text = thanhtien.ToString();
             }
-            thanhtien = thanhtien - trutien;
-            lb_tongtien.Text = thanhtien.ToString();
+            catch
+            {
+                MessageBox.Show("Giỏ hàng chưa có sản phẩm .");
+            }
 
         }
 
         private void btn_taohd_Click(object sender, EventArgs e)
         {
-            
-        }
+            DialogResult dialogResult = MessageBox.Show("Ban co muon tao hoa don khong ? ", "Thong bao", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                if (lb_tenkh.Text == "")
+                {
+                    MessageBox.Show("Moi ban chon khach hang de tao hoa don.");
+                    return;
+                }
+                else
+                {
+                    HoaDon hd = new HoaDon()
+                    {
+                        ID = Guid.NewGuid(),
+                        //MaHD = "HD" + Convert.ToString(_ihds.GetAllhd().Max(c => Convert.ToInt32(c.Mahd.Substring(2, c.Mahd.Length - 2)) + 1)),
+                        MaHD = "HD" + Convert.ToString(_ihds.GetAllhd().Count + 1),
+                        NgayTao = DateTime.Now.Date,
+                        //IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_mahd.Text)).Select(c => c.ID).FirstOrDefault(),
+                        IDNV = Guid.NewGuid(),
+                        IDKH = _ikhs.GetAllKH().Where(c => c.TenKH == Convert.ToString(lb_tenkh.Text)).Select(c => c.ID).FirstOrDefault(),
+                        TrangThai = "",
+                    };
+                    _ihds.AddHoaDon(hd);
+                    lb_mahd.Text = hd.MaHD;
+                    //var tenkh = _ikhs.GetAllKH().Where(c => c.ID == hd.IDKH).Select(c => c.TenKH).FirstOrDefault().ToString();
+                    //lb_tenkh.Text = tenkh;
+                }
+            }
 
-        private void dtgrid_khachhang_CellClick(object sender, DataGridViewCellEventArgs e)
+}
+
+            private void dtgrid_khachhang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int r = e.RowIndex;
             if (r == -1) return;
@@ -189,13 +228,24 @@ namespace C_PL.Views
             thanhtoan.ShowDialog();
         }
 
-        private void dtgrid_sp_DoubleClick(object sender, EventArgs e)
+        private void dtgrid_sp_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int sll = 1;
             int row = dtgrid_giohang.Rows.Count;
+            DataGridViewRow r = dtgrid_sp.Rows[e.RowIndex];
             DialogResult dialogResult = MessageBox.Show("Ban co muon them san pham nay khong ?", "Thong bao", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
+                var idsp = _ictsp.GetAll().FirstOrDefault(c => c.IDSP == Guid.Parse(r.Cells[0].Value.ToString()));
+
+                //GioHangCT ghct = new GioHangCT()
+                //{
+                //    IDSP = idsp.ID,
+                //    IDGH = Guid.NewGuid(),
+                //    SoLuong = 1,
+                //    DonGia = idsp.GiaBan,
+                //};
+                //_ighcts.AddGHCT(ghct);
 
                 for (int i = 0; i < row - 1; i++)
                 {
@@ -203,7 +253,9 @@ namespace C_PL.Views
 
                 }
                 lb_tongtien.Text = thanhtien.ToString();
-                dtgrid_giohang.Rows.Add(dtgrid_sp.Rows[0].Cells[0].Value.ToString(), dtgrid_sp.Rows[0].Cells[2].Value.ToString(), dtgrid_sp.Rows[0].Cells[4].Value.ToString(), dtgrid_sp.Rows[0].Cells[5].Value.ToString(), sll, dtgrid_sp.Rows[0].Cells[7].Value.ToString(), Convert.ToDouble(sll) * Convert.ToDouble(dtgrid_sp.Rows[0].Cells[7].Value.ToString()));
+
+
+                dtgrid_giohang.Rows.Add(r.Cells[0].Value.ToString(), r.Cells[2].Value.ToString(), r.Cells[4].Value.ToString(), r.Cells[5].Value.ToString(), sll, r.Cells[7].Value.ToString(), Convert.ToDouble(sll) * Convert.ToDouble(r.Cells[7].Value.ToString()));
 
             }
         }

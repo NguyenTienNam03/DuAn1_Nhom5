@@ -45,7 +45,6 @@
             this.Sdt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cbb_nhasx = new System.Windows.Forms.ComboBox();
             this.btn_loc = new System.Windows.Forms.Button();
@@ -94,13 +93,14 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lb_mahd = new System.Windows.Forms.Label();
+            this.lb_tenkh = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrid_khachhang)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_anhsp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrid_sp)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -277,7 +277,6 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Thistle;
-            this.groupBox2.Controls.Add(this.pictureBox1);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.cbb_nhasx);
             this.groupBox2.Controls.Add(this.btn_loc);
@@ -301,16 +300,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông tin sản phẩm";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::C_PL.Properties.Resources.timkiem;
-            this.pictureBox1.Location = new System.Drawing.Point(717, 105);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(43, 46);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 17;
-            this.pictureBox1.TabStop = false;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -332,7 +321,7 @@
             // 
             this.btn_loc.BackColor = System.Drawing.Color.Yellow;
             this.btn_loc.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_loc.Location = new System.Drawing.Point(704, 97);
+            this.btn_loc.Location = new System.Drawing.Point(510, 141);
             this.btn_loc.Name = "btn_loc";
             this.btn_loc.Size = new System.Drawing.Size(163, 62);
             this.btn_loc.TabIndex = 14;
@@ -342,7 +331,7 @@
             // ptb_anhsp
             // 
             this.ptb_anhsp.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ptb_anhsp.Location = new System.Drawing.Point(689, 196);
+            this.ptb_anhsp.Location = new System.Drawing.Point(689, 19);
             this.ptb_anhsp.Name = "ptb_anhsp";
             this.ptb_anhsp.Size = new System.Drawing.Size(193, 159);
             this.ptb_anhsp.TabIndex = 12;
@@ -405,7 +394,7 @@
             // 
             // txt_giamax
             // 
-            this.txt_giamax.Location = new System.Drawing.Point(555, 50);
+            this.txt_giamax.Location = new System.Drawing.Point(539, 55);
             this.txt_giamax.Name = "txt_giamax";
             this.txt_giamax.Size = new System.Drawing.Size(134, 30);
             this.txt_giamax.TabIndex = 4;
@@ -449,11 +438,11 @@
             this.dtgrid_sp.Name = "dtgrid_sp";
             this.dtgrid_sp.RowHeadersWidth = 51;
             this.dtgrid_sp.RowTemplate.Height = 29;
-            this.dtgrid_sp.Size = new System.Drawing.Size(677, 310);
+            this.dtgrid_sp.Size = new System.Drawing.Size(876, 310);
             this.dtgrid_sp.TabIndex = 0;
             this.dtgrid_sp.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgrid_sp_CellClick);
             this.dtgrid_sp.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgrid_sp_CellContentClick);
-            this.dtgrid_sp.DoubleClick += new System.EventHandler(this.dtgrid_sp_DoubleClick);
+            this.dtgrid_sp.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgrid_sp_CellDoubleClick);
             // 
             // Column1
             // 
@@ -514,6 +503,8 @@
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.Color.LightCoral;
+            this.groupBox3.Controls.Add(this.lb_tenkh);
+            this.groupBox3.Controls.Add(this.lb_mahd);
             this.groupBox3.Controls.Add(this.lb_tongtien);
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Controls.Add(this.dtgrid_giohang);
@@ -763,6 +754,24 @@
             this.Column6.Name = "Column6";
             this.Column6.Width = 125;
             // 
+            // lb_mahd
+            // 
+            this.lb_mahd.AutoSize = true;
+            this.lb_mahd.Location = new System.Drawing.Point(120, 43);
+            this.lb_mahd.Name = "lb_mahd";
+            this.lb_mahd.Size = new System.Drawing.Size(80, 22);
+            this.lb_mahd.TabIndex = 15;
+            this.lb_mahd.Text = "Mã HĐ :";
+            // 
+            // lb_tenkh
+            // 
+            this.lb_tenkh.AutoSize = true;
+            this.lb_tenkh.Location = new System.Drawing.Point(406, 43);
+            this.lb_tenkh.Name = "lb_tenkh";
+            this.lb_tenkh.Size = new System.Drawing.Size(117, 22);
+            this.lb_tenkh.TabIndex = 16;
+            this.lb_tenkh.Text = "Khách hàng : ";
+            // 
             // FrmBanHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -782,7 +791,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgrid_khachhang)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_anhsp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrid_sp)).EndInit();
             this.groupBox3.ResumeLayout(false);
@@ -836,7 +844,6 @@
         private PictureBox pictureBox8;
         private PictureBox pictureBox7;
         private Button btn_loc;
-        private PictureBox pictureBox1;
         private Label label2;
         private ComboBox cbb_nhasx;
         private DataGridView dtgrid_sp;
@@ -865,5 +872,7 @@
         private DataGridViewTextBoxColumn Column21;
         private DataGridViewButtonColumn Column16;
         private Label lb_tongtien;
+        private Label lb_mahd;
+        private Label lb_tenkh;
     }
 }
