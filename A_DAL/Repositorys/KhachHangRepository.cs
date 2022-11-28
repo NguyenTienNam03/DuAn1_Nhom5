@@ -56,9 +56,7 @@ namespace A_DAL.Repositorys
             kh1.SDT = kh.SDT;
             kh1.Ten = kh.Ten;
             kh1.DiaChi = kh.DiaChi;
-            kh1.TrangThai = kh.TrangThai;
-            kh1.MatKhau = kh.MatKhau;
-            kh1.Email = kh.Email;
+            
             _context.khachHangs.Update(kh1);
             _context.SaveChanges();
             return true;
