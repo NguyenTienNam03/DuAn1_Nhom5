@@ -13,8 +13,6 @@ namespace A_DAL.Models
         public string? Ten { get; set; }
         public string? DiaChi { get; set; }
         public string? SDT { get; set; }
-        public string? Email { get; set; }
-        public string? MatKhau { get; set; }
-        public string? TrangThai { get; set; }
+     
     }
 }
