@@ -55,7 +55,7 @@ namespace B_BUS.Services
         public string UpdateGioHangChiTiet(Guid id, GioHangCT ghct)
         {
             if (ghct == null) return "Cap nhat that bai.";
-            if (_ighct.UpdateGHCT(ghct)) return "Cap nhat thanh cong ";
+            if (_ighct.UpdateGHCT(id ,ghct)) return "Cap nhat thanh cong ";
             return "Cap nhat that bai.";
         }
     }
