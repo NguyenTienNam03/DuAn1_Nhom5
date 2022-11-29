@@ -10,7 +10,7 @@ namespace B_BUS.IServices
     public interface IHoaDonCTService
     {
         public string AddHDCT(HoaDonCT hdct);
-      
+        public string UpdateHDCT( Guid id , HoaDonCT hdct );
         public string DeleteHDCT(Guid id);
         List<HoaDonCT> GetAllHDCT();
     }

@@ -47,10 +47,10 @@ namespace A_DAL.Repositorys
 
         }
 
-        public bool UpdateGHCT(GioHangCT ghct)
+        public bool UpdateGHCT(Guid id , GioHangCT ghct)
         {
             if(ghct == null) return false;
-            var ghct1 = _context.gioHangCTs.FirstOrDefault(c => c.IDGH == ghct.IDGH);
+            var ghct1 = _context.gioHangCTs.FirstOrDefault(c => c.IDGH == id);
             ghct1.IDSP = ghct.IDSP;
             ghct1.SoLuong = ghct.SoLuong;
             _context.gioHangCTs.Update(ghct1);

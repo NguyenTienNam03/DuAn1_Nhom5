@@ -10,7 +10,8 @@ namespace A_DAL.IRepositorys
     public interface IHoaDonCTRepository
     {
         bool AddHoaDonCT(HoaDonCT hdct);
-        bool DeleteHoaDonCT(HoaDonCT hdct);
+        bool DeleteHoaDonCT(Guid id );
+        bool UpdateHoaDonCT(Guid id , HoaDonCT hdct);
         List<HoaDonCT> GetAll();
         HoaDonCT GetById(Guid id);
 

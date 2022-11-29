@@ -55,5 +55,12 @@ namespace B_BUS.Services
                       }).ToList();
             return _lsthd;
         }
+
+        public string UpdateHoaDon(Guid id, HoaDon hd)
+        {
+            if (hd == null) return "Cập nhật thất bại.";
+            if (_ihds.UpdateHoaDon(id, hd)) return "Cập nhật thành công.";
+            return "Cập nhật thất bại.";
+        }
     }
 }

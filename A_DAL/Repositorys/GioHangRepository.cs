@@ -47,10 +47,10 @@ namespace A_DAL.Repositorys
             return _context.gioHangs.FirstOrDefault(c => c.ID == id);
         }
 
-        public bool UpdateGioHang(GioHang gh)
+        public bool UpdateGioHang(Guid id , GioHang gh)
         {
             if (gh == null) return false;
-            var gh1 = _context.gioHangs.FirstOrDefault(c => c.ID == gh.ID);
+            var gh1 = _context.gioHangs.FirstOrDefault(c => c.ID == id);
             gh1.SoLuong = gh.SoLuong;
             gh1.DonGia = gh.DonGia;
             gh1.IDNV = gh.IDNV;

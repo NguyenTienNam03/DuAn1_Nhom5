@@ -26,10 +26,11 @@ namespace A_DAL.Repositorys
             return true;
         }
 
-        public bool DeleteHoaDonCT(HoaDonCT hdct)
+        public bool DeleteHoaDonCT(Guid id )
         {
-            if(hdct == null ) { return false; }
-            _context.hoaDonCTs.Remove(hdct);
+            if(id == null ) { return false; }
+            var hdct1 = _context.hoaDonCTs.FirstOrDefault(c => c.IDHD == id);
+            _context.hoaDonCTs.Remove(hdct1);
             _context.SaveChanges();
             return true;
         }
@@ -39,10 +40,22 @@ namespace A_DAL.Repositorys
             return _hoaDonCTs = _context.hoaDonCTs.ToList();
         }
 
-        public HoaDonCT GetById(Guid id)
+        public HoaDonCT GetById( Guid id)
         {
             if (id == Guid.Empty) return null;
             return _context.hoaDonCTs.FirstOrDefault(c => c.IDHD == id);
+        }
+
+        public bool UpdateHoaDonCT(Guid id, HoaDonCT hdct)
+        {
+            if(hdct == null ) return false;
+            var hdct1 = _context.hoaDonCTs.FirstOrDefault(c => c.IDHD == id);
+            hdct1.IDSP = hdct.IDSP;
+            hdct1.SoLuong = hdct.SoLuong;
+            hdct1.DonGia = hdct.DonGia;
+            _context.hoaDonCTs.Update(hdct1);
+            _context.SaveChanges();
+            return true;    
         }
     }
 }

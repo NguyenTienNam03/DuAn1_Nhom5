@@ -31,7 +31,7 @@ namespace B_BUS.Services
         public string DeleteHDCT(Guid id)
         {
             if (id == null) return "Xoa that bai.";
-            if (_ihdcts.DeleteHoaDonCT(_ihdcts.GetById(id))) return "Xoa thanh cong.";
+            if (_ihdcts.DeleteHoaDonCT(id)) return "Xoa thanh cong.";
             return "Xoa that bai.";
         }
 
@@ -52,6 +52,11 @@ namespace B_BUS.Services
             return _lsthdct;
         }
 
-        
+        public string UpdateHDCT(Guid id, HoaDonCT hdct)
+        {
+            if (hdct == null) return "Cập nhật thất bại.";
+            if (_ihdcts.UpdateHoaDonCT(id, hdct)) return "Cập nhật thành công .";
+            return "Cập nhật thất bại.";
+        }
     }
 }

@@ -57,7 +57,7 @@ namespace B_BUS.Services
         public string UpdateGioHang(Guid id, GioHang gh)
         {
             if (gh == null) return "Cap nhat that bai.";
-            if (_Ighs.UpdateGioHang(gh)) return "Cap nhat thanh cong.";
+            if (_Ighs.UpdateGioHang( id ,gh)) return "Cap nhat thanh cong.";
             return "Cap nhat that bai.";
         }
     }
