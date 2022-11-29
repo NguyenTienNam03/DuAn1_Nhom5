@@ -134,14 +134,23 @@ namespace C_PL.Views
 
         private void bt_Dangxuat_Click(object sender, EventArgs e)
         {
-            Login lg = new Login();
-            lg.Show();
-            this.Hide();
+         DialogResult dialog= MessageBox.Show("Bạn Có Chắc Muốn Thoát","Thông Báo",MessageBoxButtons.YesNo);
+            if (dialog==DialogResult.Yes)
+            {
+                Login lg = new Login();
+                lg.Show();
+                this.Hide();
+            }
         }
 
         private void bt_DoiMK_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void bt_BanHang_Click(object sender, EventArgs e)
+        {
+            Openchildform(new FrmBanHang());
         }
     }
 }
