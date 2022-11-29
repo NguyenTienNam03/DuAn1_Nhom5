@@ -34,7 +34,7 @@ namespace A_DAL.Context
         }
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptions)
         {
-            base.OnConfiguring(dbContextOptions.UseSqlServer("Data Source=WINDOWS-10;Initial Catalog=QLBG;Persist Security Info=True;User ID=tiennam;Password=12345;trusted_connection=true"));
+            base.OnConfiguring(dbContextOptions.UseSqlServer("Data Source=WINDOWS-10;Initial Catalog=QLBG;User ID=tiennam;Password=12345;trusted_connection=true")); //SQL Nam
             //base.OnConfiguring(dbContextOptions.UseSqlServer("Data Source=DESKTOP-RPFD62E\\TRUONG;Initial Catalog=QLBG;Integrated Security=True")); //SQL Truong
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

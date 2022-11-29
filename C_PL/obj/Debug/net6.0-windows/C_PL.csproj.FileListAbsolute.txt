@@ -236,3 +236,4 @@ C:\Users\Administrator\Desktop\da1\C_PL\obj\Debug\net6.0-windows\ref\C_PL.dll
 C:\Users\Administrator\Desktop\da1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmThanhToan.resources
 C:\Users\Administrator\Desktop\da1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmDoiMk.resources
 C:\Users\Administrator\Desktop\da1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FromLaymk.resources
+C:\Users\Administrator\Desktop\da1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmNhanVien.resources

@@ -15,7 +15,7 @@ namespace A_DAL.Configurations
         {
             builder.HasKey(x => x.ID);
             builder.Property(x => x.IDCV).IsRequired();
-            //builder.Property(x => x.IDBC).IsRequired();
+            
             builder.Property(x => x.MaNV).HasColumnName("MaNV").HasColumnType("varchar(20)");
             builder.Property(x => x.Ten).HasColumnName("Ten").HasColumnType("nvarchar(100)"); ;
             builder.Property(x => x.GioiTinh).HasColumnName("GioiTinh").HasColumnType("varchar(10)"); ;
