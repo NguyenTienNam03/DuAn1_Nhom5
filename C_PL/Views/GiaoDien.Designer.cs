@@ -133,6 +133,7 @@
             this.bt_Dangxuat.TabIndex = 26;
             this.bt_Dangxuat.Text = "        Đăng Xuất";
             this.bt_Dangxuat.UseVisualStyleBackColor = false;
+            this.bt_Dangxuat.Click += new System.EventHandler(this.bt_Dangxuat_Click);
             // 
             // bt_DoiMK
             // 
@@ -147,6 +148,7 @@
             this.bt_DoiMK.Text = "Đổi Mật Khẩu";
             this.bt_DoiMK.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bt_DoiMK.UseVisualStyleBackColor = false;
+            this.bt_DoiMK.Click += new System.EventHandler(this.bt_DoiMK_Click);
             // 
             // bt_ThongKe
             // 
@@ -220,6 +222,7 @@
             this.bt_NhanVien.Text = "Nhân Viên   ";
             this.bt_NhanVien.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bt_NhanVien.UseVisualStyleBackColor = false;
+            this.bt_NhanVien.Click += new System.EventHandler(this.bt_NhanVien_Click);
             // 
             // Column1
             // 

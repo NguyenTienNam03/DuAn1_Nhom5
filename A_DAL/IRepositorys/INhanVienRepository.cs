@@ -11,6 +11,8 @@ namespace A_DAL.IRepositorys
     {
         bool AddNV(NhanVien nv);
         bool UpdateNV(Guid id , NhanVien nv);
+        bool LayEmail(string email, NhanVien nv);
+
         bool DeleteNV(Guid id);
         List<NhanVien> GetNhanVien();
         NhanVien GetByID(Guid id);

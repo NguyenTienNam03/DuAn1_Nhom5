@@ -56,6 +56,13 @@ namespace B_BUS.Services
             return _lstnv;
         }
 
+        public string UpdateMatKhau(string id, NhanVien nv)
+        {
+            if (id == null) return "Cap nhat that bai.";
+            if (_Invs.LayEmail(id, nv)) return "Đổi Mật Khẩu thành công";
+            return "Cap nhat that bai.";
+        }
+
         public string UpdateNV(Guid id, NhanVien nv)
         {
             if (id == null) return "Cập nhật thất bại.";

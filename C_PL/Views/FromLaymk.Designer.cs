@@ -100,6 +100,7 @@
             this.bt_xacnhan.TabIndex = 31;
             this.bt_xacnhan.Text = "Xác Nhận";
             this.bt_xacnhan.UseVisualStyleBackColor = false;
+            this.bt_xacnhan.Click += new System.EventHandler(this.bt_xacnhan_Click);
             // 
             // bt_layma
             // 
@@ -125,6 +126,7 @@
             this.bt_guilai.TabIndex = 28;
             this.bt_guilai.Text = "Gửi Lại";
             this.bt_guilai.UseVisualStyleBackColor = false;
+            this.bt_guilai.Click += new System.EventHandler(this.bt_guilai_Click);
             // 
             // pictureBox4
             // 
@@ -157,6 +159,7 @@
             this.bt_trove.TabIndex = 24;
             this.bt_trove.Text = "Trở Về";
             this.bt_trove.UseVisualStyleBackColor = false;
+            this.bt_trove.Click += new System.EventHandler(this.bt_trove_Click);
             // 
             // text_maxacnhan
             // 
@@ -168,6 +171,7 @@
             this.text_maxacnhan.Size = new System.Drawing.Size(184, 32);
             this.text_maxacnhan.TabIndex = 23;
             this.text_maxacnhan.Text = "Nhập Mã Xác Nhận";
+            this.text_maxacnhan.Click += new System.EventHandler(this.text_maxacnhan_Click);
             // 
             // text_email
             // 
@@ -179,6 +183,8 @@
             this.text_email.Size = new System.Drawing.Size(184, 32);
             this.text_email.TabIndex = 21;
             this.text_email.Text = "Nhập Email Người Dùng";
+            this.text_email.Click += new System.EventHandler(this.text_email_Click);
+            this.text_email.TextChanged += new System.EventHandler(this.text_email_TextChanged);
             // 
             // label4
             // 

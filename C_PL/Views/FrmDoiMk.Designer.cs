@@ -77,6 +77,7 @@
             this.gui.TabIndex = 28;
             this.gui.Text = "Đổi Mật Khẩu";
             this.gui.UseVisualStyleBackColor = false;
+            this.gui.Click += new System.EventHandler(this.gui_Click);
             // 
             // pictureBox4
             // 
@@ -109,6 +110,7 @@
             this.button1.TabIndex = 24;
             this.button1.Text = " Đăng Nhập";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // text_xacnhanmk
             // 
@@ -120,6 +122,8 @@
             this.text_xacnhanmk.Size = new System.Drawing.Size(206, 32);
             this.text_xacnhanmk.TabIndex = 23;
             this.text_xacnhanmk.Text = "Xác Nhận Mật Khẩu";
+            this.text_xacnhanmk.Click += new System.EventHandler(this.text_xacnhanmk_Click);
+            this.text_xacnhanmk.TextChanged += new System.EventHandler(this.text_xacnhanmk_TextChanged);
             // 
             // text_doimk
             // 
@@ -131,6 +135,7 @@
             this.text_doimk.Size = new System.Drawing.Size(206, 32);
             this.text_doimk.TabIndex = 21;
             this.text_doimk.Text = "Nhập Mật Khẩu Mới";
+            this.text_doimk.Click += new System.EventHandler(this.text_doimk_Click);
             // 
             // label4
             // 

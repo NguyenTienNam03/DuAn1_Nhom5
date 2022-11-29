@@ -12,6 +12,7 @@ namespace B_BUS.IServices
     {
         public string AddNV(NhanVien nv);
         public string UpdateNV(Guid id, NhanVien nv);
+        public string UpdateMatKhau(string id, NhanVien nv);
         public string DeleteNV(Guid id);
         List<NhanVienView> GetAllNV();
     }

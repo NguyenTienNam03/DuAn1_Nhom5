@@ -46,6 +46,15 @@ namespace A_DAL.Repositorys
             return _context.nhanViens.ToList();
         }
 
+        public bool LayEmail(string email, NhanVien nv)
+        {
+            var nv1 = _context.nhanViens.FirstOrDefault(c => c.Email == email);
+            nv1.MatKhau = nv.MatKhau;
+            _context.nhanViens.Update(nv1);
+            _context.SaveChanges();
+            return true;
+        }
+
         public bool UpdateNV(Guid id, NhanVien nv)
         {
             if(id == null) return false;

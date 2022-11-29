@@ -1,4 +1,6 @@
-﻿using System;
+﻿using B_BUS.IServices;
+using B_BUS.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,9 +16,13 @@ namespace C_PL.Views
     {
         int x;
         int y = 0;
+        private INhanVienService _IDNhanVien;
+        private IChucVuService _ICVSV;
         public GiaoDien()
         {
             InitializeComponent();
+            _IDNhanVien = new NhanVienService();
+            _ICVSV = new ChucVuService();
         }
 
         private void label15_Click(object sender, EventArgs e)
@@ -99,7 +105,43 @@ namespace C_PL.Views
 
         private void bt_ThongKe_Click(object sender, EventArgs e)
         {
-            Openchildform(new FrmThongKe());
+            var a = _IDNhanVien.GetAllNV().FirstOrDefault(p => p.Email == Login.layEmail);// Lấy ID Chức Vụ
+            var b = _ICVSV.GetAllCV().FirstOrDefault(p => p.IDcv == a.IDCV); // Lấy Tên Chức vụ
+            if (b.TenCV == "Quản Lý")
+            {
+                Openchildform(new FrmThongKe());
+            }
+            else
+            {
+                MessageBox.Show("Bạn Không Được Phép Sử Dụng Chức Năng Này");
+            }
+        
+        }
+
+        private void bt_NhanVien_Click(object sender, EventArgs e)
+        {
+            var a = _IDNhanVien.GetAllNV().FirstOrDefault(p => p.Email == Login.layEmail);// Lấy ID Chức Vụ
+            var b = _ICVSV.GetAllCV().FirstOrDefault(p => p.IDcv == a.IDCV); // Lấy Tên Chức vụ
+            if (b.TenCV == "Quản Lý")
+            {
+                Openchildform(new FrmQLNhanVien());
+            }
+            else
+            {
+                Openchildform(new FrmNhanVien());
+            }
+        }
+
+        private void bt_Dangxuat_Click(object sender, EventArgs e)
+        {
+            Login lg = new Login();
+            lg.Show();
+            this.Hide();
+        }
+
+        private void bt_DoiMK_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
