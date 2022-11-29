@@ -178,6 +178,7 @@
             this.bt_BanHang.Text = "Bán Hàng   ";
             this.bt_BanHang.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bt_BanHang.UseVisualStyleBackColor = false;
+            this.bt_BanHang.Click += new System.EventHandler(this.bt_BanHang_Click);
             // 
             // bt_Sanpham
             // 
