@@ -17,10 +17,7 @@ namespace A_DAL.Configurations
             builder.Property(c => c.Ten).HasColumnName("Ten").HasColumnType("nvarchar(100)");
             builder.Property(c => c.MaKH).HasColumnName("MaKH").HasColumnType("varchar(20)");
             builder.Property(c => c.DiaChi).HasColumnName("DiaChi").HasColumnType("nvarchar(100)");
-            builder.Property(c => c.TrangThai).HasColumnName("TrangThai").HasColumnType("nvarchar(100)");
             builder.Property(c => c.SDT).HasColumnName("SDT").HasColumnType("nvarchar(10)");
-            builder.Property(c => c.MatKhau).HasColumnName("MatKhau").HasColumnType("nvarchar(20)");
-            builder.Property(c => c.Email).HasColumnName("Email").HasColumnType("nvarchar(20)");
         }
     }
 }

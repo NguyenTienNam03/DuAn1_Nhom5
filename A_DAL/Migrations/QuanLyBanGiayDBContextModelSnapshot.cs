@@ -32,11 +32,11 @@ namespace A_DAL.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("Anh");
 
-                    b.Property<decimal>("GiaBan")
+                    b.Property<decimal?>("GiaBan")
                         .HasColumnType("decimal")
                         .HasColumnName("GiaBan");
 
-                    b.Property<decimal>("GiaNhap")
+                    b.Property<decimal?>("GiaNhap")
                         .HasColumnType("decimal")
                         .HasColumnName("GiaNhap");
 
@@ -116,7 +116,7 @@ namespace A_DAL.Migrations
                         .HasColumnType("varchar(20)")
                         .HasColumnName("MaGH");
 
-                    b.Property<int?>("SoLuong")
+                    b.Property<int>("SoLuong")
                         .HasColumnType("Int")
                         .HasColumnName("SoLuong");
 
@@ -141,7 +141,7 @@ namespace A_DAL.Migrations
                         .HasColumnType("decimal")
                         .HasColumnName("DonGia");
 
-                    b.Property<int?>("SoLuong")
+                    b.Property<int>("SoLuong")
                         .HasColumnType("Int")
                         .HasColumnName("SoLuong");
 
@@ -177,7 +177,7 @@ namespace A_DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("DonGia")
+                    b.Property<decimal?>("DonGia")
                         .HasColumnType("decimal")
                         .HasColumnName("DonGia");
 
@@ -188,11 +188,10 @@ namespace A_DAL.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("MaHD")
-                        .IsRequired()
                         .HasColumnType("varchar(30)")
                         .HasColumnName("MaHD");
 
-                    b.Property<DateTime>("NgayTao")
+                    b.Property<DateTime?>("NgayTao")
                         .HasColumnType("Datetime")
                         .HasColumnName("NgayTao");
 
@@ -246,17 +245,9 @@ namespace A_DAL.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("DiaChi");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("Email");
-
                     b.Property<string>("MaKH")
                         .HasColumnType("varchar(20)")
                         .HasColumnName("MaKH");
-
-                    b.Property<string>("MatKhau")
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("MatKhau");
 
                     b.Property<string>("SDT")
                         .HasColumnType("nvarchar(10)")
@@ -265,10 +256,6 @@ namespace A_DAL.Migrations
                     b.Property<string>("Ten")
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("Ten");
-
-                    b.Property<string>("TrangThai")
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("TrangThai");
 
                     b.HasKey("ID");
 
@@ -282,12 +269,10 @@ namespace A_DAL.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("MaMau")
-                        .IsRequired()
                         .HasColumnType("varchar(20)")
                         .HasColumnName("MaMau");
 
                     b.Property<string>("Mau")
-                        .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("Mau");
 
@@ -326,7 +311,7 @@ namespace A_DAL.Migrations
                         .HasColumnType("varchar(Max)")
                         .HasColumnName("MatKhau");
 
-                    b.Property<DateTime>("NgaySinh")
+                    b.Property<DateTime?>("NgaySinh")
                         .HasColumnType("Datetime")
                         .HasColumnName("NgaySinh");
 
