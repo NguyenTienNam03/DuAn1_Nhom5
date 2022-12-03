@@ -116,6 +116,9 @@ namespace A_DAL.Migrations
                         .HasColumnType("varchar(20)")
                         .HasColumnName("MaGH");
 
+                    b.Property<DateTime?>("NgayTao")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("SoLuong")
                         .HasColumnType("Int")
                         .HasColumnName("SoLuong");

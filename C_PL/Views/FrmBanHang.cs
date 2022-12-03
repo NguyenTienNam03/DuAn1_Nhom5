@@ -240,6 +240,7 @@ namespace C_PL.Views
                             ID = Guid.NewGuid(),
                             MaGH = "GH" + Convert.ToString(_ighs.GettAllGH().Count + 1),
                             IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_manv.Text)).Select(c => c.ID).FirstOrDefault(),
+                            NgayTao = DateTime.Now,
                             IDKH = _ikhs.GetAllKH().Where(c => c.TenKH == Convert.ToString(lb_tenkh.Text)).Select(c => c.ID).FirstOrDefault(),
                         };
                         _ighs.AddGioHang(gh);
