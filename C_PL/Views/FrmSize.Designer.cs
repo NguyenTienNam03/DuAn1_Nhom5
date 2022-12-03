@@ -32,14 +32,14 @@
             this.ptb_sua = new System.Windows.Forms.PictureBox();
             this.ptb_them = new System.Windows.Forms.PictureBox();
             this.dtgrid_size = new System.Windows.Forms.DataGridView();
-            this.txt_ssize = new System.Windows.Forms.TextBox();
-            this.txt_masize = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txt_ssize = new System.Windows.Forms.TextBox();
+            this.txt_masize = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_xoa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_sua)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_them)).BeginInit();
@@ -96,6 +96,34 @@
             this.dtgrid_size.TabIndex = 4;
             this.dtgrid_size.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgrid_size_CellClick);
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "STT";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 125;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "ID";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 125;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Ma Size";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 125;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Size";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 125;
+            // 
             // txt_ssize
             // 
             this.txt_ssize.Location = new System.Drawing.Point(312, 282);
@@ -130,34 +158,6 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Size:";
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "STT";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 125;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "ID";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 125;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Ma Size";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 125;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Size";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 125;
-            // 
             // FrmSize
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -172,6 +172,7 @@
             this.Controls.Add(this.ptb_them);
             this.Controls.Add(this.dtgrid_size);
             this.Name = "FrmSize";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmSize";
             ((System.ComponentModel.ISupportInitialize)(this.ptb_xoa)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_sua)).EndInit();

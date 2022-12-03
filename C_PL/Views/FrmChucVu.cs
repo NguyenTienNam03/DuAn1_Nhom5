@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using B_BUS.Utilities;
 
 namespace C_PL.Views
 {
@@ -17,16 +18,23 @@ namespace C_PL.Views
     {
         private IChucVuService _ICVs;
         private Guid ID;
+        public Validate _check;
         public FrmChucVu()
         {
             InitializeComponent();
             _ICVs = new ChucVuService();
             LoadCV();
-            //txt_macv.Enabled = false;
+            _check = new Validate();
+            txt_macv.Enabled = false;
         }
-
-        public void LoadCV()
+        public void Reset()
         {
+            txt_macv.Text = "";
+            txt_tencv.Text = "";
+        }
+        public void LoadCV()
+        { 
+            
             int stt = 1;
             dtgrid_chucvu.ColumnCount = 4;
             dtgrid_chucvu.Columns[0].Name = "STT";
@@ -54,56 +62,101 @@ namespace C_PL.Views
         //}
         private void ptb_add_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Ban co muon add cv nay khong ?", "Thong Bao", MessageBoxButtons.YesNo);
-            if(dialogResult == DialogResult.Yes)
+            try
             {
-                MessageBox.Show(_ICVs.AddChucVu(new ChucVu()
+                if(_check.checkRong(txt_tencv.Text) == false)
                 {
-                    ID = Guid.NewGuid(),
-                    MaCV  = /*CatChuoi*/(txt_macv.Text) ,
-                    TenCV = txt_tencv.Text,
-                }));
-                LoadCV();
+                    MessageBox.Show("Bạn không được bỏ trống chức vụ.");
+                    return;
+                }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Ban co muon add cv nay khong ?", "Thong Bao", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        MessageBox.Show(_ICVs.AddChucVu(new ChucVu()
+                        {
+                            ID = Guid.NewGuid(),
+                            MaCV = "CV" + Convert.ToString(_ICVs.GetAllCV().Count + 1),
+                            TenCV = txt_tencv.Text,
+                        }));
+                        LoadCV();
+                        Reset();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Add that bai.");
+                    }
+                }
                 
             }
-            else
+            catch
             {
-                MessageBox.Show("Add that bai.");
+                MessageBox.Show("Mời bạn thao tác lại.");
+                return;
             }
+           
         }
 
         private void ptb_update_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Ban co muon update chuc vu nay khong ?", "Thong bao",MessageBoxButtons.YesNo) ;
-            if(dialogResult == DialogResult.Yes)
-            { 
-                //var layID = _ICVs.chucVuViews().FirstOrDefault(p=>p.ID)
-                MessageBox.Show(_ICVs.UpdateChucVu(ID, new ChucVu()
-                {
-                    MaCV= txt_macv.Text ,
-                    TenCV= txt_tencv.Text,
-                }));
-                LoadCV();
-            }
-            else
+            try
             {
-                MessageBox.Show("Update that bai.");
+                if (_check.checkRong(txt_tencv.Text) == false)
+                {
+                    MessageBox.Show("Bạn không được bỏ trống chức vụ.");
+                    return;
+                }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Ban co muon update chuc vu nay khong ?", "Thong bao", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        //var layID = _ICVs.chucVuViews().FirstOrDefault(p=>p.ID)
+                        MessageBox.Show(_ICVs.UpdateChucVu(ID, new ChucVu()
+                        {
+                            MaCV = txt_macv.Text,
+                            TenCV = txt_tencv.Text,
+                        }));
+                        LoadCV();
+                        Reset();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Update that bai.");
+                    }
+                }
+            }catch
+            {
+                MessageBox.Show("Mời bạn thao tác lại.");
+                return;
             }
         }
 
         private void ptb_delete_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Ban muon delete chuc vu nay khong ?", "Thong Bao",MessageBoxButtons.YesNo);
-            if(dialogResult == DialogResult.Yes)
+            try
             {
-                MessageBox.Show(_ICVs.DeleteChucVu(ID));
-                LoadCV();
-            }
-            else
-            {
-                MessageBox.Show("Delete That bai.");
-            }
+                DialogResult dialogResult = MessageBox.Show("Ban muon delete chuc vu nay khong ?", "Thong Bao", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    MessageBox.Show(_ICVs.DeleteChucVu(ID));
+                    LoadCV();
+                    Reset();
+                }
+                else
+                {
+                    MessageBox.Show("Delete That bai.");
+                }
 
+            }
+            catch
+            {
+                MessageBox.Show("Mời bạn thao tác lại.");
+                return;
+            }
+            
         }
 
         private void dtgrid_chucvu_CellClick(object sender, DataGridViewCellEventArgs e)

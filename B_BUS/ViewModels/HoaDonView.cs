@@ -14,8 +14,8 @@ namespace B_BUS.ViewModels
         public Guid IDnv { get; set; }
         public string Mahd { get; set; }
         public decimal? DonGia { get; set; }
-        public int SoLuong { get; set; }
+        public int? SoLuong { get; set; }
         public DateTime? NgayTao { get; set; }
-        public string TrangThai { get; set; }
+        public string? TrangThai { get; set; }
     }
 }

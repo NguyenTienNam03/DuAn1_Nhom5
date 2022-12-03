@@ -13,8 +13,9 @@ namespace A_DAL.Models
         public Guid IDNV { get ; set; }
         public string? MaHD { get; set; }
         public decimal? DonGia { get; set; }
-        public int SoLuong { get ; set; }
+        public int? SoLuong { get ; set; }
         public  DateTime? NgayTao { get; set; }
+        public DateTime? NgayThanhToan { get; set; }
         public string? TrangThai { get; set; }
         public virtual KhachHang? KhachHang { get; set; }
         public virtual NhanVien? NhanVien { get; set; }

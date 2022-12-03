@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using B_BUS.Utilities;
 
 namespace C_PL.Views
 {
@@ -18,11 +18,19 @@ namespace C_PL.Views
     {
         public ISizeService _isize;
         private Guid id;
+        public Validate _check;
         public FrmSize()
         {
             InitializeComponent();
             _isize = new SizeService();
+            _check = new Validate();
+            txt_masize.Enabled = false;
             LoadSize();
+        }
+        public void Reset()
+        {
+            txt_masize.Text = "";
+            txt_ssize.Text = "";
         }
         public void LoadSize()
         {
@@ -36,63 +44,114 @@ namespace C_PL.Views
         }
         private void ptb_them_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Ban co muon themu size nay khong ?", "Thong bao", MessageBoxButtons.YesNo);
-            if(dialogResult == DialogResult.Yes)
+            try
             {
-                MessageBox.Show(_isize.AddSize(new A_DAL.Models.Size()
+                if(_check.checkRong(txt_ssize.Text) == false)
                 {
-                    ID = Guid.NewGuid(),
-                    MaSize = txt_masize.Text ,
-                    //MaSize = "S" + Convert.ToString(_isize.GetSizes().Max(c => Convert.ToInt32(c.MaSize.Substring( 1,c.MaSize.Length - 1 )) + 1)),
-                    SoSize = Convert.ToInt32(txt_ssize.Text),
-                }));
-                LoadSize();
-            } else
-            {
-                MessageBox.Show("Them that bai.");
+                    MessageBox.Show("Mời bạn nhập Size.");
+                    return;
+                }
+                else if (_isize.GetSizes().Any(c => c.SoSize == Convert.ToInt32(txt_ssize.Text)) == true)
+                {
+                    MessageBox.Show("Size này đã có mời bạn nhập size khác .");
+                }
+                DialogResult dialogResult = MessageBox.Show("Ban co muon themu size nay khong ?", "Thong bao", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    MessageBox.Show(_isize.AddSize(new A_DAL.Models.Size()
+                    {
+                        ID = Guid.NewGuid(),
+                        MaSize = "SI" + Convert.ToString(_isize.GetSizes().Count + 1),
+
+                        SoSize = Convert.ToInt32(txt_ssize.Text),
+                    }));
+                    LoadSize();
+                    Reset();
+                }
+                else
+                {
+                    MessageBox.Show("Them that bai.");
+                }
             }
+            catch 
+            {
+                MessageBox.Show("Mời bạn thao tác lại.");
+                return;
+            }
+            
         }
 
         private void ptb_sua_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Ban co muon cap nhat size nay khong ?", "Thong bao", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            try
             {
-                MessageBox.Show(_isize.UpdateSize(id  ,new A_DAL.Models.Size()
+                DialogResult dialogResult = MessageBox.Show("Ban co muon cap nhat size nay khong ?", "Thong bao", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
                 {
-                    //ID = Guid.NewGuid(),
-                    MaSize = txt_masize.Text ,
-                    SoSize = Convert.ToInt32(txt_ssize.Text),
-                }));
-                LoadSize();
+                    MessageBox.Show(_isize.UpdateSize(id, new A_DAL.Models.Size()
+                    {
+                        //ID = Guid.NewGuid(),
+                        MaSize = txt_masize.Text,
+                        SoSize = Convert.ToInt32(txt_ssize.Text),
+                    }));
+                    LoadSize();
+                    Reset();
+                }
+                else
+                {
+                    MessageBox.Show("Cap Nhat that bai.");
+                }
             }
-            else
+            catch 
             {
-                MessageBox.Show("Cap Nhat that bai.");
+                MessageBox.Show("Mời bạn thao tác lại.");
+                return;
             }
+            
         }
 
         private void ptb_xoa_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Ban co muon Xoa size nay khong ?", "Thong bao", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            try
             {
-                MessageBox.Show(_isize.DeleteSize(id));
-                LoadSize();
+                DialogResult dialogResult = MessageBox.Show("Ban co muon Xoa size nay khong ?", "Thong bao", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    MessageBox.Show(_isize.DeleteSize(id));
+                    LoadSize();
+                    Reset();
+                }
+                else
+                {
+                    MessageBox.Show("Xoa that bai.");
+                }
             }
-            else
+            catch 
             {
-                MessageBox.Show("Xoa that bai.");
+                MessageBox.Show("Mời bạn thao tác lại.");
+                return;
             }
+
+            
+            
         }
 
         private void dtgrid_size_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int r = e.RowIndex;
-            if (r == -1) return;
-            id = Guid.Parse(Convert.ToString(dtgrid_size.Rows[r].Cells[1].Value));
-            txt_masize.Text = Convert.ToString(dtgrid_size.Rows[r].Cells[2].Value);
-            txt_ssize.Text = Convert.ToString(dtgrid_size.Rows[r].Cells[3].Value );
+            try
+            {
+                int r = e.RowIndex;
+                if (r == -1) return;
+                id = Guid.Parse(Convert.ToString(dtgrid_size.Rows[r].Cells[1].Value));
+                txt_masize.Text = Convert.ToString(dtgrid_size.Rows[r].Cells[2].Value);
+                txt_ssize.Text = Convert.ToString(dtgrid_size.Rows[r].Cells[3].Value);
+            }
+            catch
+            {
+                MessageBox.Show("Mời bạn thao tác lại.");
+                return;
+            }
+           
         }
     }
 }

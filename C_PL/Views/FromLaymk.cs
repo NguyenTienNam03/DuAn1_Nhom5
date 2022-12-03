@@ -170,6 +170,11 @@ namespace C_PL.Views
             this.Hide();
         }
 
+        private void text_maxacnhan_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void text_maxacnhan_Click(object sender, EventArgs e)
         {
             if (b % 2 == 0)

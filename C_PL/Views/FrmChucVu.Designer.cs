@@ -134,6 +134,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtgrid_chucvu);
             this.Name = "FrmChucVu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmChucVu";
             ((System.ComponentModel.ISupportInitialize)(this.dtgrid_chucvu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_add)).EndInit();

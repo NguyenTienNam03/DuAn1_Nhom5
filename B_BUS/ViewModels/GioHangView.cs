@@ -12,7 +12,7 @@ namespace B_BUS.ViewModels
         public Guid IDNV { get; set; }
         public Guid IDKH { get; set; }
         public string? MaGH { get; set; }
-        public int SoLuong { get; set; }
+        public int? SoLuong { get; set; }
         public decimal? DonGia { get; set; }
     }
 }

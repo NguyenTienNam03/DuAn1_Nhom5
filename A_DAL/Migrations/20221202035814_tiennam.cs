@@ -169,7 +169,7 @@ namespace A_DAL.Migrations
                     IDNV = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IDKH = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MaGH = table.Column<string>(type: "varchar(20)", nullable: true),
-                    SoLuong = table.Column<int>(type: "Int", nullable: false),
+                    SoLuong = table.Column<int>(type: "Int", nullable: true),
                     DonGia = table.Column<decimal>(type: "decimal", nullable: true)
                 },
                 constraints: table =>
@@ -198,8 +198,9 @@ namespace A_DAL.Migrations
                     IDNV = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MaHD = table.Column<string>(type: "varchar(30)", nullable: true),
                     DonGia = table.Column<decimal>(type: "decimal", nullable: true),
-                    SoLuong = table.Column<int>(type: "Int", nullable: false),
+                    SoLuong = table.Column<int>(type: "Int", nullable: true),
                     NgayTao = table.Column<DateTime>(type: "Datetime", nullable: true),
+                    NgayThanhToan = table.Column<DateTime>(type: "datetime2", nullable: true),
                     TrangThai = table.Column<string>(type: "nvarchar(100)", nullable: true)
                 },
                 constraints: table =>

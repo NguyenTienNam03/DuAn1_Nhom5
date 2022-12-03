@@ -30,6 +30,7 @@
         {
             this.dtgrid_nhanvien = new System.Windows.Forms.DataGridView();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,6 +82,7 @@
             this.dtgrid_nhanvien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgrid_nhanvien.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column2,
+            this.Column11,
             this.Column1,
             this.Column3,
             this.Column4,
@@ -101,10 +103,17 @@
             // 
             // Column2
             // 
-            this.Column2.HeaderText = "Mã NV";
+            this.Column2.HeaderText = "ID";
             this.Column2.MinimumWidth = 6;
             this.Column2.Name = "Column2";
             this.Column2.Width = 90;
+            // 
+            // Column11
+            // 
+            this.Column11.HeaderText = "Mã NV";
+            this.Column11.MinimumWidth = 6;
+            this.Column11.Name = "Column11";
+            this.Column11.Width = 125;
             // 
             // Column1
             // 
@@ -385,6 +394,7 @@
             this.txt_timkiem.Size = new System.Drawing.Size(381, 27);
             this.txt_timkiem.TabIndex = 24;
             this.txt_timkiem.Text = "Tìm kiếm theo mã nv hoặc tên";
+            this.txt_timkiem.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_timkiem_KeyUp);
             // 
             // label11
             // 
@@ -533,6 +543,7 @@
         private PictureBox ptb_addchucvu;
         private PictureBox ptb_refesh;
         private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column11;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column4;

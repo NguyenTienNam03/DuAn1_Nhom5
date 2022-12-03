@@ -281,9 +281,7 @@ C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Vi
 C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmChucVu.resources
 C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmDoiMk.resources
 C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmHangSX.resources
-C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmNhanVien.resources
 C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmQLNhanVien.resources
-C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmSanPham.resources
 C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmSize.resources
 C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmThanhToan.resources
 C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmThongKe.resources
@@ -301,3 +299,9 @@ C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\refint\
 C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.pdb
 C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.genruntimeconfig.cache
 C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\ref\C_PL.dll
+C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmSoLuong.resources
+C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmQLSPCT.resources
+C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmQLKhachHang.resources
+C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmQLHoaDon.resources
+C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.frmMauSac.resources
+C:\Users\Administrator\Desktop\Test_du_an1\C_PL\obj\Debug\net6.0-windows\C_PL.Views.FrmSanPham.resources

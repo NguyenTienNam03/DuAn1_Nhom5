@@ -100,20 +100,20 @@ namespace C_PL.Views
 
         private void bt_Sanpham_Click(object sender, EventArgs e)
         {
-            Openchildform(new FrmSanPham());
+            Openchildform(new FrmQLSPCT());
         }
 
         private void bt_ThongKe_Click(object sender, EventArgs e)
         {
             var a = _IDNhanVien.GetAllNV().FirstOrDefault(p => p.Email == Login.layEmail);// Lấy ID Chức Vụ
             var b = _ICVSV.GetAllCV().FirstOrDefault(p => p.IDcv == a.IDCV); // Lấy Tên Chức vụ
-            if (b.TenCV == "Quản Lý")
+            if (b.TenCV == "Nhân viên")
             {
-                Openchildform(new FrmThongKe());
+                MessageBox.Show("Bạn Không Được Phép Sử Dụng Chức Năng Này");
             }
             else
             {
-                MessageBox.Show("Bạn Không Được Phép Sử Dụng Chức Năng Này");
+                Openchildform(new FrmThongKe());
             }
         
         }
@@ -128,7 +128,7 @@ namespace C_PL.Views
             }
             else
             {
-                Openchildform(new FrmNhanVien());
+                Openchildform(new FrmQLNhanVien());
             }
         }
 
@@ -151,6 +151,16 @@ namespace C_PL.Views
         private void bt_BanHang_Click(object sender, EventArgs e)
         {
             Openchildform(new FrmBanHang());
+        }
+
+        private void bt_KhachHang_Click(object sender, EventArgs e)
+        {
+            Openchildform(new FrmQLKhachHang());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Openchildform(new FrmQLHoaDon());
         }
     }
 }

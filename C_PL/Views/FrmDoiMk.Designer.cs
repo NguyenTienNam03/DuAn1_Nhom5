@@ -61,9 +61,10 @@
             this.panel3.Controls.Add(this.text_doimk);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.pictureBox2);
-            this.panel3.Location = new System.Drawing.Point(348, 0);
+            this.panel3.Location = new System.Drawing.Point(398, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(372, 385);
+            this.panel3.Size = new System.Drawing.Size(425, 513);
             this.panel3.TabIndex = 9;
             // 
             // gui
@@ -71,9 +72,10 @@
             this.gui.BackColor = System.Drawing.Color.Pink;
             this.gui.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.gui.ForeColor = System.Drawing.Color.Maroon;
-            this.gui.Location = new System.Drawing.Point(227, 267);
+            this.gui.Location = new System.Drawing.Point(259, 356);
+            this.gui.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gui.Name = "gui";
-            this.gui.Size = new System.Drawing.Size(142, 43);
+            this.gui.Size = new System.Drawing.Size(162, 57);
             this.gui.TabIndex = 28;
             this.gui.Text = "Đổi Mật Khẩu";
             this.gui.UseVisualStyleBackColor = false;
@@ -82,9 +84,10 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(20, 49);
+            this.pictureBox4.Location = new System.Drawing.Point(23, 65);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(109, 77);
+            this.pictureBox4.Size = new System.Drawing.Size(125, 103);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 27;
             this.pictureBox4.TabStop = false;
@@ -92,9 +95,10 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(36, 204);
+            this.pictureBox3.Location = new System.Drawing.Point(41, 272);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(42, 32);
+            this.pictureBox3.Size = new System.Drawing.Size(48, 43);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 26;
             this.pictureBox3.TabStop = false;
@@ -104,9 +108,10 @@
             this.button1.BackColor = System.Drawing.Color.Pink;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button1.ForeColor = System.Drawing.Color.Maroon;
-            this.button1.Location = new System.Drawing.Point(3, 267);
+            this.button1.Location = new System.Drawing.Point(3, 356);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(140, 43);
+            this.button1.Size = new System.Drawing.Size(160, 57);
             this.button1.TabIndex = 24;
             this.button1.Text = " Đăng Nhập";
             this.button1.UseVisualStyleBackColor = false;
@@ -116,10 +121,11 @@
             // 
             this.text_xacnhanmk.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.text_xacnhanmk.ForeColor = System.Drawing.Color.Gray;
-            this.text_xacnhanmk.Location = new System.Drawing.Point(101, 204);
+            this.text_xacnhanmk.Location = new System.Drawing.Point(115, 272);
+            this.text_xacnhanmk.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.text_xacnhanmk.Multiline = true;
             this.text_xacnhanmk.Name = "text_xacnhanmk";
-            this.text_xacnhanmk.Size = new System.Drawing.Size(206, 32);
+            this.text_xacnhanmk.Size = new System.Drawing.Size(235, 41);
             this.text_xacnhanmk.TabIndex = 23;
             this.text_xacnhanmk.Text = "Xác Nhận Mật Khẩu";
             this.text_xacnhanmk.Click += new System.EventHandler(this.text_xacnhanmk_Click);
@@ -129,10 +135,11 @@
             // 
             this.text_doimk.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.text_doimk.ForeColor = System.Drawing.Color.Gray;
-            this.text_doimk.Location = new System.Drawing.Point(101, 149);
+            this.text_doimk.Location = new System.Drawing.Point(115, 199);
+            this.text_doimk.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.text_doimk.Multiline = true;
             this.text_doimk.Name = "text_doimk";
-            this.text_doimk.Size = new System.Drawing.Size(206, 32);
+            this.text_doimk.Size = new System.Drawing.Size(235, 41);
             this.text_doimk.TabIndex = 21;
             this.text_doimk.Text = "Nhập Mật Khẩu Mới";
             this.text_doimk.Click += new System.EventHandler(this.text_doimk_Click);
@@ -142,18 +149,19 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.Firebrick;
-            this.label4.Location = new System.Drawing.Point(135, 72);
+            this.label4.Location = new System.Drawing.Point(154, 96);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(193, 37);
+            this.label4.Size = new System.Drawing.Size(239, 46);
             this.label4.TabIndex = 19;
             this.label4.Text = "Đổi Mật Khẩu";
             // 
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(36, 149);
+            this.pictureBox2.Location = new System.Drawing.Point(41, 199);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(42, 32);
+            this.pictureBox2.Size = new System.Drawing.Size(48, 43);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 13;
             this.pictureBox2.TabStop = false;
@@ -162,17 +170,19 @@
             // 
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.panel3);
-            this.panel1.Location = new System.Drawing.Point(40, 35);
+            this.panel1.Location = new System.Drawing.Point(46, 47);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(720, 381);
+            this.panel1.Size = new System.Drawing.Size(823, 508);
             this.panel1.TabIndex = 3;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 1);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(349, 382);
+            this.pictureBox1.Size = new System.Drawing.Size(399, 509);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
@@ -183,12 +193,14 @@
             // 
             // FrmDoiMk
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(914, 600);
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FrmDoiMk";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmDoiMk";
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();

@@ -36,11 +36,6 @@ namespace A_DAL.Repositorys
             return true;
         }
 
-        public bool DeleteHoaDon(Guid id, HoaDon hd)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<HoaDon> GetAll()
         {
             return _lsthd = _context.hoaDons.ToList();
@@ -56,6 +51,10 @@ namespace A_DAL.Repositorys
         {
             if (hd == null) return false;
             var hd1 = _context.hoaDons.FirstOrDefault(c => c.ID ==id);
+            hd1.IDNV = hd.IDNV;
+            hd1.SoLuong = hd.SoLuong;
+            hd1.DonGia = hd.DonGia;
+            hd1.NgayThanhToan = hd.NgayThanhToan;
             hd1.TrangThai = hd.TrangThai;
             _context.hoaDons.Update(hd1);
             _context.SaveChanges();

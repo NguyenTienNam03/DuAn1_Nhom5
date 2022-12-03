@@ -11,7 +11,10 @@ namespace B_BUS.Utilities
     {
         public bool CheckSDT(string sdt)
         {
-            
+            if(Regex.IsMatch(sdt , @"^[0][0-9]{9}$"))
+            {
+                return true;
+            }
 
             return false;
         }

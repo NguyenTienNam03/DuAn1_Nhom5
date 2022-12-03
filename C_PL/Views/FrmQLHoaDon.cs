@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace C_PL.Views
 {
-    public partial class FrmNhanVien : Form
+    public partial class FrmQLHoaDon : Form
     {
-        public FrmNhanVien()
+        public FrmQLHoaDon()
         {
             InitializeComponent();
         }
