@@ -16,6 +16,7 @@ namespace B_BUS.ViewModels
         public decimal? DonGia { get; set; }
         public int? SoLuong { get; set; }
         public DateTime? NgayTao { get; set; }
+        public DateTime? NgayThanhToan{ get; set; }
         public string? TrangThai { get; set; }
     }
 }

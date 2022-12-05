@@ -35,6 +35,15 @@ namespace A_DAL.Repositorys
             return true;
         }
 
+        public bool DeleteSP(Guid id)
+        {
+            if(id == null) { return false; }
+            var hdct1 = _context.hoaDonCTs.FirstOrDefault(c => c.IDSP== id);
+            _context.hoaDonCTs.Remove(hdct1);
+            _context.SaveChanges();
+            return true;
+        }
+
         public List<HoaDonCT> GetAll()
         {
             return _hoaDonCTs = _context.hoaDonCTs.ToList();

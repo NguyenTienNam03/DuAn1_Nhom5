@@ -12,6 +12,7 @@ namespace B_BUS.IServices
         public string AddHDCT(HoaDonCT hdct);
         public string UpdateHDCT( Guid id , HoaDonCT hdct );
         public string DeleteHDCT(Guid id);
+        public string DeleteSP(Guid id);
         List<HoaDonCT> GetAllHDCT();
     }
 }

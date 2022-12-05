@@ -28,6 +28,7 @@ namespace C_PL.Views
         public double tienthua = 0;
         public double Tongtien = 0;
         public double Thue = 0;
+        public double tinhtien = 0;
         public FrmThanhToan()
         {
             InitializeComponent();
@@ -41,28 +42,8 @@ namespace C_PL.Views
             _isps = new SanPhamService();
             laymanv();
             laymahd();
-            Tongtien1();
             loadhdct();
             //txt_tongtien.Enabled= false;
-        }
-        public void Tongtien1()
-        {
-            Thue = Convert.ToDouble(lb_tongtiensp.Text) * 0.1;
-            Tongtien = (Convert.ToDouble(lb_tongtiensp.Text) + Convert.ToDouble(Thue));
-            lb_tongtien.Text = Tongtien.ToString();
-        }
-        
-        public void laymahd()
-        {
-            var a = _ihoadon.GetAllhd().Where(c => c.IDhd == FrmBanHang.laymahd).Select(c => c.Mahd).FirstOrDefault();
-            lb_mahd.Text = a.ToString();
-            var b = _ikhs.GetAllKH().Where(c => c.ID == FrmBanHang.layidkh).Select(c => c.TenKH).FirstOrDefault();
-            lb_tenkh.Text = b.ToString();
-        }
-        public void laymanv()
-        {
-            var a = _invs.GetAllNV().Where(c => c.Email == Login.layEmail).Select(c => c.MaNV).FirstOrDefault();
-            lb_manv.Text = a.ToString();
         }
         public void loadhdct()
         {
@@ -79,9 +60,27 @@ namespace C_PL.Views
             }
 
 
-            var tinhtien = _ihdcts.GetAllHDCT().Where(c => c.IDHD == Guid.Parse(idhd1.ToString())).Sum(c => c.SoLuong * c.DonGia);
+            tinhtien = _ihdcts.GetAllHDCT().Where(c => c.IDHD == Guid.Parse(idhd1.ToString())).Sum(c => Convert.ToDouble(c.SoLuong * c.DonGia));
+           
+            Thue = tinhtien * 0.1;
             lb_tongtiensp.Text = tinhtien.ToString();
+            Tongtien = (Convert.ToDouble(lb_tongtiensp.Text) + Convert.ToDouble(Thue));
+            lb_tongtien.Text = Tongtien.ToString();
+            
         }
+        public void laymahd()
+        {
+            var a = _ihoadon.GetAllhd().Where(c => c.IDhd == FrmBanHang.laymahd).Select(c => c.Mahd).FirstOrDefault();
+            lb_mahd.Text = a.ToString();
+            var b = _ikhs.GetAllKH().Where(c => c.ID == FrmBanHang.layidkh).Select(c => c.TenKH).FirstOrDefault();
+            lb_tenkh.Text = b.ToString();
+        }
+        public void laymanv()
+        {
+            var a = _invs.GetAllNV().Where(c => c.Email == Login.layEmail).Select(c => c.MaNV).FirstOrDefault();
+            lb_manv.Text = a.ToString();
+        }
+       
         private void btn_thanhtoan_Click(object sender, EventArgs e)
         {
             try
@@ -89,6 +88,11 @@ namespace C_PL.Views
                 if (txt_tienkhachdua.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập số tiền khách đưa.");
+                    return;
+                }
+                else if (Convert.ToDouble(lb_tientrakhach.Text) < 0 )
+                {
+                    MessageBox.Show($"Khách hàng còn thiếu {lb_tientrakhach.Text} tiền .");
                     return;
                 }
                 else

@@ -328,7 +328,7 @@ namespace C_PL.Views
 
         private void btn_doianh_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog(); 
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png ";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {

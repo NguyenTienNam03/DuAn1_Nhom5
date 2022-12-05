@@ -2,6 +2,7 @@
 using Accessibility;
 using B_BUS.IServices;
 using B_BUS.Services;
+using B_BUS.Utilities;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using System;
 using System.Collections.Generic;
@@ -34,16 +35,22 @@ namespace C_PL.Views
         public IHoaDonCTService _ihdcts;
         public IHoaDonService _ihds;
         public INhanVienService _invs;
+        public Validate _check;
         public IGioHangService _ighs;
         public IGioHangCTService _ighcts;
         public double thanhtien = 0;
         public double trutien = 0;
+     
+        DateTime now = DateTime.Now;
+
+        
 
 
         public FrmBanHang()
         {
             InitializeComponent();
             _ictsp = new ChiTietSPService();
+            _check = new Validate();
             _ighs = new GioHangService();
             _ighcts = new GioHangCTService();
             _ikhs = new KhachHangService();
@@ -65,13 +72,14 @@ namespace C_PL.Views
             laymanv();
             lb_mahd.Text = "";
             lb_tenkh.Text = "";
+            lb_magh.Visible = false;
             //LoadGioHang();
             _giohang = new GioHang()
             {
                 ID = Guid.NewGuid(),
             };
 
-            label1.Text = Login.layEmail; //add thử Email vào label
+            //label1.Text = Login.layEmail; //add thử Email vào label
         }
 
    
@@ -176,22 +184,28 @@ namespace C_PL.Views
         {
             try
             {
-                var x = _lstgiohang.FirstOrDefault(c => c.IDSP == Guid.Parse(dtgrid_giohang.Rows[e.RowIndex].Cells[0].Value.ToString()));
+                var idhd1 = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
+                var a = _ihdcts.GetAllHDCT().FirstOrDefault(c => c.IDSP == Guid.Parse(dtgrid_giohang.Rows[e.RowIndex].Cells[0].Value.ToString()));
+                _id = a.IDSP;
                 if (e.ColumnIndex == 7)
                 {
                     if (MessageBox.Show("Ban co muon xoa san pham nay khong ?", "Thong bao", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        _lstgiohang.Remove(x);
-                        //foreach (DataGridViewCell onecell in dtgrid_giohang.SelectedCells)
-                        //{
-                        //    if (onecell.Selected)
-                        //    {
-                        //        dtgrid_giohang.Rows.RemoveAt(onecell.RowIndex);
-                        //        LoadGioHang();
-                        //    }
-                        //}
-
+                        MessageBox.Show(_ihdcts.DeleteSP(_id));
                     }
+                    dtgrid_giohang.Rows.Clear();
+                    foreach (var x in _ihdcts.GetAllHDCT().Where(c => c.IDHD == (idhd1)))
+                    {
+                        var idctsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == x.IDSP);
+                        var tensp = _isps.GetAllsp().FirstOrDefault(c => c.IDsp == idctsp.IDSP);
+                        var mausac = _imss.GetAllMS().FirstOrDefault(c => c.IDms == idctsp.IDms);
+                        var size = _isize.GetSizes().FirstOrDefault(c => c.id == idctsp.IDSize);
+
+                        dtgrid_giohang.Rows.Add(idctsp.ID, tensp.TenSp, mausac.Mau, size.SoSize, x.SoLuong, idctsp.GiaBan, x.SoLuong * idctsp.GiaBan); // truyền số lượng từ form số lượng qua 
+                    }
+
+                    var tinhtien = _ihdcts.GetAllHDCT().Where(c => c.IDHD == Guid.Parse(idhd1.ToString())).Sum(c => c.DonGia * c.SoLuong);
+                    lb_tongtien.Text = tinhtien.ToString();
                 }
             }
             catch
@@ -207,6 +221,8 @@ namespace C_PL.Views
         }
         private void btn_taohd_Click(object sender, EventArgs e)
         {
+            string format = "dd/MM/yyyy  HH:mm:ss";
+            //now = DateTime.Parse(format);
             try
             {
                 DialogResult dialogResult = MessageBox.Show("Bạn có muốn tạo hoá đơn không ?", "Thông báo", MessageBoxButtons.YesNo);
@@ -223,7 +239,8 @@ namespace C_PL.Views
                         HoaDon hd = new HoaDon()
                         {
                             ID = Guid.NewGuid(),
-                            MaHD = "HD" + Convert.ToString(_ihds.GetAllhd().Count + 1),
+                            //MaHD = "HD" + Convert.ToString(_ihds.GetAllhd().Count + 1),
+                            MaHD = "HD" + Convert.ToString(_ihds.GetAllhd().Max(c => Convert.ToInt32(c.Mahd.Substring(2 , c.Mahd.Length - 2)) +1)),
                             NgayTao = DateTime.Now,
                             IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_manv.Text)).Select(c => c.ID).FirstOrDefault(),
                             IDKH = _ikhs.GetAllKH().Where(c => c.TenKH == Convert.ToString(lb_tenkh.Text)).Select(c => c.ID).FirstOrDefault(),
@@ -235,16 +252,16 @@ namespace C_PL.Views
                         var tenkh = _ikhs.GetAllKH().Where(c => c.ID == hd.IDKH).Select(c => c.TenKH).FirstOrDefault().ToString();
                         lb_tenkh.Text = tenkh;
 
-                        GioHang gh = new GioHang()
-                        {
-                            ID = Guid.NewGuid(),
-                            MaGH = "GH" + Convert.ToString(_ighs.GettAllGH().Count + 1),
-                            IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_manv.Text)).Select(c => c.ID).FirstOrDefault(),
-                            NgayTao = DateTime.Now,
-                            IDKH = _ikhs.GetAllKH().Where(c => c.TenKH == Convert.ToString(lb_tenkh.Text)).Select(c => c.ID).FirstOrDefault(),
-                        };
-                        _ighs.AddGioHang(gh);
-                        lb_magh.Text = gh.MaGH;
+                        //GioHang gh = new GioHang()
+                        //{
+                        //    ID = Guid.NewGuid(),
+                        //    MaGH = "GH" + Convert.ToString(_ighs.GettAllGH().Count + 1),
+                        //    IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_manv.Text)).Select(c => c.ID).FirstOrDefault(),
+                        //    NgayTao = DateTime.Parse(format),
+                        //    IDKH = _ikhs.GetAllKH().Where(c => c.TenKH == Convert.ToString(lb_tenkh.Text)).Select(c => c.ID).FirstOrDefault(),
+                        //};
+                        //_ighs.AddGioHang(gh);
+                        //lb_magh.Text = gh.MaGH;
                     }
                 }
             }
@@ -291,58 +308,42 @@ namespace C_PL.Views
             //{
             int row = dtgrid_giohang.Rows.Count;
             DataGridViewRow r = dtgrid_sp.Rows[e.RowIndex];
+            
             DialogResult dialogResult = MessageBox.Show("Ban co muon them san pham nay khong ?", "Thong bao", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var a = Guid.Parse(r.Cells[0].Value.ToString());
-                IDspct = a ;
-                FrmSoLuong sl = new FrmSoLuong();
-                sl.ShowDialog();
-                var idspct1 = _ictsp.GetAll().FirstOrDefault(c => c.ID == FrmSoLuong.idspct);
+                    var a = Guid.Parse(r.Cells[0].Value.ToString());
+                    IDspct = a;
+                    FrmSoLuong sl = new FrmSoLuong();
+                    sl.ShowDialog();
+                    var idspct1 = _ictsp.GetAll().FirstOrDefault(c => c.ID == FrmSoLuong.idspct);
+                   
+                    var idsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == Guid.Parse(r.Cells[0].Value.ToString()));
 
-                //Thêm giỏ hàng chi tiết 
-                var idsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == Guid.Parse(r.Cells[0].Value.ToString()));
-                GioHangCT ghct = new GioHangCT()
-                {
-                    IDSP = Guid.Parse(r.Cells[0].Value.ToString()),
-                    IDGH = _ighs.GettAllGH().Where(c => c.MaGH == lb_magh.Text).Select(c => c.ID).FirstOrDefault(),
-                    SoLuong = FrmSoLuong.soluong,
-                    DonGia = idsp.GiaBan,
-                };
-                _ighcts.AddGioHangChiTiet(ghct);
+                        HoaDonCT hdct = new HoaDonCT()
+                        {
+                            IDSP = Guid.Parse(r.Cells[0].Value.ToString()),
+                            IDHD = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault(),
+                            SoLuong = FrmSoLuong.soluong,
+                            DonGia = idsp.GiaBan,
+                        };
+                        _ihdcts.AddHDCT(hdct);
 
-
+                   
                 //Thêm hoá đơn chi tiết
-                HoaDonCT hdct = new HoaDonCT()
-                {
-                    IDSP = Guid.Parse(r.Cells[0].Value.ToString()),
-                    IDHD = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault(),
-                    SoLuong = FrmSoLuong.soluong,
-                    DonGia = idsp.GiaBan,
-                };
-                _ihdcts.AddHDCT(hdct);
 
                 //Update Sô lượng đơn giá hoá đơn
                 var idhd2 = _ihds.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
-                HoaDon hd = new HoaDon()
-                {
-                    SoLuong = _ihdcts.GetAllHDCT().Sum(c => c.SoLuong),
-                    DonGia = _ihdcts.GetAllHDCT().Sum(c => c.SoLuong * c.DonGia),
-                    IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_manv.Text)).Select(c => c.ID).FirstOrDefault(),
-                    TrangThai = "",
-                    NgayThanhToan = null,
-                };
-                _ihds.UpdateHoaDon(idhd2 , hd) ;
+                    HoaDon hd = new HoaDon()
+                    {
+                        SoLuong = _ihdcts.GetAllHDCT().Sum(c => c.SoLuong),
+                        DonGia = _ihdcts.GetAllHDCT().Sum(c => c.SoLuong * c.DonGia),
+                        IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_manv.Text)).Select(c => c.ID).FirstOrDefault(),
+                        TrangThai = "",
+                        NgayThanhToan = null,
+                    };
+                    _ihds.UpdateHoaDon(idhd2, hd);
 
-                //Update số lượng đơn giá giỏ hàng 
-                var gh1 = _ighs.GettAllGH().Where(c => c.MaGH == Convert.ToString(lb_magh.Text)).Select(c => c.ID).FirstOrDefault();
-                GioHang gh = new GioHang()
-                {
-                    SoLuong = _ighcts.GetAllghct().Sum(c => c.SoLuong),
-                    DonGia = _ighcts.GetAllghct().Sum(c => c.SoLuong * c.Dongia),
-                    IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_manv.Text)).Select(c => c.ID).FirstOrDefault(),
-                };
-                _ighs.UpdateGioHang(gh1, gh);
 
 
                 var idhd1 = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
@@ -358,11 +359,8 @@ namespace C_PL.Views
 
                 var tinhtien = _ihdcts.GetAllHDCT().Where(c => c.IDHD == Guid.Parse(idhd2.ToString())).Sum(c => c.DonGia * c.SoLuong);
                 lb_tongtien.Text = tinhtien.ToString();
-                //}
-
-                
-            
-            }
+                    //}
+                }
             //}
             //catch 
             //{
@@ -374,7 +372,23 @@ namespace C_PL.Views
         {
             try
             {
-                if (lb_tenkh.Text != "" && lb_mahd.Text != "")
+                if (_check.checkRong(txt_tenkh.Text) == false)
+                {
+                    MessageBox.Show("Tên khách hàng không được bỏ trống .");
+                    return;
+                }
+                else if (_check.CheckSDT(txt_sdtkh.Text) == false)
+                {
+                    MessageBox.Show("Mời bạn nhập đúng sdt khách hàng.");
+                    return;
+                }
+                else if (_check.checkRong(txt_diachi.Text) == false)
+                {
+                    MessageBox.Show("Địa chỉ khách hàng không được bỏ trống .");
+                    return;
+                }
+
+                else if (lb_tenkh.Text != "" && lb_mahd.Text != "")
                 {
                     MessageBox.Show($"đã tạo hoá đơn cho khách hàng {lb_tenkh.Text}. Mời bạn huỷ hoá đơn hoặc chuyển hoá đơn này vào trong hoá đơn chờ hoặc thanh toán hoá đơn để tạo hoá đơn tiếp.");
                     return;
@@ -412,29 +426,29 @@ namespace C_PL.Views
                 else
                 {
                     DialogResult dialogResult = MessageBox.Show("Ban co muon chon khach hang nay khong ?", "Thong bao", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    var timidkh = _ikhs.GetAllKH().Where(c => c.TenKH == Convert.ToString(txt_tenkh.Text)).Select(c => c.ID).FirstOrDefault();
-                    if (_ikhs.GetAllKH().Any(c => c.ID == timidkh) == true)
+                    if (dialogResult == DialogResult.Yes)
                     {
-
-                    }
-                    else
-                    {
-                        _ikhs.AddKH(new KhachHang()
+                        var timidkh = _ikhs.GetAllKH().Where(c => c.TenKH == Convert.ToString(txt_tenkh.Text)).Select(c => c.ID).FirstOrDefault();
+                        if (_ikhs.GetAllKH().Any(c => c.ID == timidkh) == true)
                         {
-                            ID = Guid.NewGuid(),
-                            MaKH = "KH" + Convert.ToString(_ikhs.GetAllKH().Count + 1),
-                            SDT = Convert.ToString(txt_sdtkh.Text),
-                            DiaChi = Convert.ToString(txt_diachi.Text),
-                            Ten = txt_tenkh.Text,
 
-                        });
-                        LoadKH();
-                            
                         }
-                    lb_tenkh.Text = txt_tenkh.Text;
-                    MessageBox.Show("Khach hang da duoc chon.");
+                        else
+                        {
+                            _ikhs.AddKH(new KhachHang()
+                            {
+                                ID = Guid.NewGuid(),
+                                MaKH = "KH" + Convert.ToString(_ikhs.GetAllKH().Count + 1),
+                                SDT = Convert.ToString(txt_sdtkh.Text),
+                                DiaChi = Convert.ToString(txt_diachi.Text),
+                                Ten = txt_tenkh.Text,
+
+                            });
+                            LoadKH();
+
+                        }
+                        lb_tenkh.Text = txt_tenkh.Text;
+                        MessageBox.Show("Khach hang da duoc chon.");
                         txt_sdtkh.Text = "";
                         txt_tenkh.Text = "";
                         txt_diachi.Text = "";
@@ -469,6 +483,7 @@ namespace C_PL.Views
                     MessageBox.Show($"Hoá đơn {lb_mahd.Text} được đưa vào hoá đơn chờ.");
                     Loadhdc();
                     LoadSpCT();
+                    lb_tongtien.Text = "0";
                     dtgrid_giohang.Rows.Clear();
                 }
                 else
@@ -502,6 +517,7 @@ namespace C_PL.Views
                     _ihds.UpdateHoaDon(idhd, hd);
                     MessageBox.Show($"Huỷ hoá {lb_mahd.Text} đơn thành công.");
                     Loadhdc();
+                    lb_tongtien.Text = "0";
                     dtgrid_giohang.Rows.Clear();
 
                 }
@@ -511,7 +527,6 @@ namespace C_PL.Views
 
             }
         }
-
         private void dtgrid_hdcho_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -529,10 +544,13 @@ namespace C_PL.Views
                 var idnv = _invs.GetAllNV().Where(c => c.MaNV == lb_manv.Text).Select(c => c.ID).FirstOrDefault();
 
 
-                var idgh = _ighs.GettAllGH().Where(c => c.IDNV == Guid.Parse(idnv.ToString())).Select(c => c.MaGH).FirstOrDefault();
+                var IDhd = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
+                //var ngaytaohd = _ihds.GetAllhd().Where(c => c.IDhd == Guid.Parse(IDhd.ToString())).Select(c => c.NgayTao).FirstOrDefault();
+                ////var ngaytaogh = _ihds.GetAllhd().Where(c => c.IDnv == Guid.Parse(idnv.ToString())).Select(c => c.NgayTao).FirstOrDefault();
+                //var idgh = _ighs.GettAllGH().Where(c => c.NgayTao == ngaytaohd).Select(c => c.ID).FirstOrDefault();
+                //var magh = _ighs.GettAllGH().Where(c => c.ID == idgh).Select(c => c.MaGH).FirstOrDefault();
                 
-                
-                lb_magh.Text = idgh.ToString();
+                //lb_magh.Text = magh.ToString();
 
 
                 var idhd1 = _ihds.GetAllhd().Where(c => c.IDhd == Guid.Parse(r.Cells[0].Value.ToString())).Select(c => c.IDhd).FirstOrDefault();
@@ -551,6 +569,64 @@ namespace C_PL.Views
                 var tinhtien = _ihdcts.GetAllHDCT().Where(c => c.IDHD == Guid.Parse(idhd1.ToString())).Sum(c => c.SoLuong * c.DonGia);
                 lb_tongtien.Text = tinhtien.ToString();
             }
+        }
+        public void Locmausac()
+        {
+            dtgrid_sp.Rows.Clear();
+            dtgrid_sp.Columns[0].Visible = false;
+            var ms = _imss.GetAllMS().Where(c => c.MaMau == cbb_mausac.Text).Select(c => c.IDms).FirstOrDefault();
+            foreach (var x in _ictsp.GetAll().Where(c => c.IDms == ms))
+            {
+                var y = _isps.GetAllsp().Find(c => c.IDsp == x.IDSP);
+                var z = _imss.GetAllMS().Find(c => c.IDms == x.IDms);
+                var a = _isize.GetSizes().Find(c => c.id == x.IDSize);
+                var b = _ihsxs.GetAllHSX().Find(c => c.ID == x.IDHSX);
+                dtgrid_sp.Rows.Add(x.ID, x.MaCTSP, y.TenSp, b.TenHSX, z.Mau, a.SoSize, x.SoLuong, x.GiaBan);
+            }
+        }
+        public void Locsize()
+        {
+
+        }
+        public void LocHangsx()
+        {
+
+        }
+        private void btn_loc_Click(object sender, EventArgs e)
+        {
+            Locmausac();
+            Locsize();
+            LocHangsx();
+        }
+        public void Timkiemkh(string sdt)
+        {
+            dtgrid_khachhang.Rows.Clear();
+            dtgrid_khachhang.Columns[0].Visible = false;
+            foreach (var x in _ikhs.GetAllKH().Where(c => c.SDT.Contains(sdt)))
+            {
+                dtgrid_khachhang.Rows.Add(x.ID, x.TenKH, x.SDT, x.DiaChi);
+            }
+        }
+        private void txt_timkiemkh_KeyUp(object sender, KeyEventArgs e)
+        {
+            Timkiemkh(txt_timkiemkh.Text);
+        }
+        public void TimKiemSP(string name)
+        {
+            //dtgrid_sp.Rows.Clear();
+            //dtgrid_sp.Columns[0].Visible = false;
+            //foreach (var x in _ictsp.GetAll().Where(c => c.MaCTSP.Contains(name)));
+            //{
+            //    var y = _isps.GetAllsp().Find(c => c.IDsp == x.IDSP);
+            //    var z = _imss.GetAllMS().Find(c => c.IDms == x.IDms);
+            //    var a = _isize.GetSizes().Find(c => c.id == x.IDSize);
+            //    var b = _ihsxs.GetAllHSX().Find(c => c.ID == x.IDHSX);
+            //    dtgrid_sp.Rows.Add(x.ID, x.MaCTSP, y.TenSp, b.TenHSX, z.Mau, a.SoSize, x.SoLuong, x.GiaBan);
+            //}
+        }
+        private void txt_timkiemsp_KeyUp(object sender, KeyEventArgs e)
+        {
+            TimKiemSP(txt_timkiemsp.Text);
         }
     }
 }

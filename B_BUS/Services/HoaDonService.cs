@@ -36,6 +36,8 @@ namespace B_BUS.Services
             return "Xoa hoa don that bai.";
         }
 
+
+
         public List<HoaDonView> GetAllhd()
         {
             List<HoaDonView> _lsthd = new List<HoaDonView>();
@@ -49,6 +51,7 @@ namespace B_BUS.Services
                           IDnv= c.ID,
                           Mahd = a.MaHD ,
                           NgayTao = a.NgayTao,
+                          NgayThanhToan = a.NgayThanhToan,
                           SoLuong = a.SoLuong,
                           DonGia = a.DonGia,
                           TrangThai = a.TrangThai

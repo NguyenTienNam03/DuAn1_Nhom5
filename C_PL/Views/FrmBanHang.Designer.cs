@@ -219,7 +219,8 @@
             this.txt_timkiemkh.Name = "txt_timkiemkh";
             this.txt_timkiemkh.Size = new System.Drawing.Size(359, 30);
             this.txt_timkiemkh.TabIndex = 2;
-            this.txt_timkiemkh.Text = "Tên khách hàng ";
+            this.txt_timkiemkh.Text = "SĐT khách hàng";
+            this.txt_timkiemkh.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_timkiemkh_KeyUp);
             // 
             // label1
             // 
@@ -327,6 +328,7 @@
             this.btn_loc.TabIndex = 14;
             this.btn_loc.Text = "      Lọc";
             this.btn_loc.UseVisualStyleBackColor = false;
+            this.btn_loc.Click += new System.EventHandler(this.btn_loc_Click);
             // 
             // ptb_anhsp
             // 
@@ -347,6 +349,7 @@
             this.txt_timkiemsp.Size = new System.Drawing.Size(359, 30);
             this.txt_timkiemsp.TabIndex = 11;
             this.txt_timkiemsp.Text = "Mã hoặc tên sản phẩm ";
+            this.txt_timkiemsp.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_timkiemsp_KeyUp);
             // 
             // label9
             // 
@@ -402,7 +405,7 @@
             // 
             // txt_giamin
             // 
-            this.txt_giamin.Location = new System.Drawing.Point(361, 29);
+            this.txt_giamin.Location = new System.Drawing.Point(361, 37);
             this.txt_giamin.Name = "txt_giamin";
             this.txt_giamin.Size = new System.Drawing.Size(134, 30);
             this.txt_giamin.TabIndex = 3;

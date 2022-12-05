@@ -68,7 +68,7 @@
             this.text_gio.AutoSize = true;
             this.text_gio.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.text_gio.ForeColor = System.Drawing.Color.DarkRed;
-            this.text_gio.Location = new System.Drawing.Point(1633, 94);
+            this.text_gio.Location = new System.Drawing.Point(1660, 48);
             this.text_gio.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.text_gio.Name = "text_gio";
             this.text_gio.Size = new System.Drawing.Size(88, 26);
@@ -286,7 +286,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1851, 124);
+            this.panel3.Size = new System.Drawing.Size(1899, 124);
             this.panel3.TabIndex = 106;
             // 
             // label11
@@ -294,7 +294,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label11.ForeColor = System.Drawing.Color.DarkRed;
-            this.label11.Location = new System.Drawing.Point(1749, 94);
+            this.label11.Location = new System.Drawing.Point(1660, 94);
             this.label11.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(82, 26);
@@ -305,7 +305,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1907, 1040);
+            this.ClientSize = new System.Drawing.Size(1924, 1040);
             this.Controls.Add(this.pain_main);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel3);

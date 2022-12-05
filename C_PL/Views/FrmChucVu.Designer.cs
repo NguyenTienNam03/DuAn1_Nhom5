@@ -45,11 +45,12 @@
             // dtgrid_chucvu
             // 
             this.dtgrid_chucvu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgrid_chucvu.Location = new System.Drawing.Point(41, 134);
+            this.dtgrid_chucvu.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dtgrid_chucvu.Location = new System.Drawing.Point(0, 0);
             this.dtgrid_chucvu.Name = "dtgrid_chucvu";
             this.dtgrid_chucvu.RowHeadersWidth = 51;
             this.dtgrid_chucvu.RowTemplate.Height = 29;
-            this.dtgrid_chucvu.Size = new System.Drawing.Size(507, 188);
+            this.dtgrid_chucvu.Size = new System.Drawing.Size(557, 188);
             this.dtgrid_chucvu.TabIndex = 0;
             this.dtgrid_chucvu.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgrid_chucvu_CellClick);
             // 
@@ -57,7 +58,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(41, 55);
+            this.label1.Location = new System.Drawing.Point(21, 225);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 26);
             this.label1.TabIndex = 1;
@@ -67,7 +68,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(425, 55);
+            this.label2.Location = new System.Drawing.Point(289, 225);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(95, 26);
             this.label2.TabIndex = 2;
@@ -75,14 +76,14 @@
             // 
             // txt_macv
             // 
-            this.txt_macv.Location = new System.Drawing.Point(132, 58);
+            this.txt_macv.Location = new System.Drawing.Point(21, 264);
             this.txt_macv.Name = "txt_macv";
             this.txt_macv.Size = new System.Drawing.Size(252, 27);
             this.txt_macv.TabIndex = 3;
             // 
             // txt_tencv
             // 
-            this.txt_tencv.Location = new System.Drawing.Point(526, 58);
+            this.txt_tencv.Location = new System.Drawing.Point(289, 264);
             this.txt_tencv.Name = "txt_tencv";
             this.txt_tencv.Size = new System.Drawing.Size(252, 27);
             this.txt_tencv.TabIndex = 4;
@@ -90,7 +91,7 @@
             // ptb_add
             // 
             this.ptb_add.Image = global::C_PL.Properties.Resources.plus;
-            this.ptb_add.Location = new System.Drawing.Point(52, 354);
+            this.ptb_add.Location = new System.Drawing.Point(52, 324);
             this.ptb_add.Name = "ptb_add";
             this.ptb_add.Size = new System.Drawing.Size(59, 52);
             this.ptb_add.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -101,7 +102,7 @@
             // ptb_update
             // 
             this.ptb_update.Image = global::C_PL.Properties.Resources.update;
-            this.ptb_update.Location = new System.Drawing.Point(155, 354);
+            this.ptb_update.Location = new System.Drawing.Point(154, 324);
             this.ptb_update.Name = "ptb_update";
             this.ptb_update.Size = new System.Drawing.Size(59, 52);
             this.ptb_update.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -112,7 +113,7 @@
             // ptb_delete
             // 
             this.ptb_delete.Image = global::C_PL.Properties.Resources.delete;
-            this.ptb_delete.Location = new System.Drawing.Point(270, 354);
+            this.ptb_delete.Location = new System.Drawing.Point(263, 324);
             this.ptb_delete.Name = "ptb_delete";
             this.ptb_delete.Size = new System.Drawing.Size(59, 52);
             this.ptb_delete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -124,7 +125,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(557, 412);
             this.Controls.Add(this.ptb_delete);
             this.Controls.Add(this.ptb_update);
             this.Controls.Add(this.ptb_add);

@@ -31,20 +31,26 @@
             this.label10 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.check_tuan = new System.Windows.Forms.RadioButton();
+            this.check_all = new System.Windows.Forms.RadioButton();
+            this.lb_tongsp = new System.Windows.Forms.Label();
             this.check_homnay = new System.Windows.Forms.RadioButton();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lb_tonghdcho = new System.Windows.Forms.Label();
+            this.lb_tonghoadatt = new System.Windows.Forms.Label();
+            this.lb_tongdoanhthu = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dtgridview_theongay = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -62,16 +68,9 @@
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label16 = new System.Windows.Forms.Label();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgridview_theongay)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrid_thongkesp)).BeginInit();
             this.SuspendLayout();
@@ -97,21 +96,19 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.label16);
-            this.tabPage1.Controls.Add(this.check_tuan);
+            this.tabPage1.Controls.Add(this.check_all);
+            this.tabPage1.Controls.Add(this.lb_tongsp);
             this.tabPage1.Controls.Add(this.check_homnay);
-            this.tabPage1.Controls.Add(this.label9);
-            this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.label7);
+            this.tabPage1.Controls.Add(this.lb_tonghdcho);
+            this.tabPage1.Controls.Add(this.lb_tonghoadatt);
+            this.tabPage1.Controls.Add(this.lb_tongdoanhthu);
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.dateTimePicker2);
             this.tabPage1.Controls.Add(this.dateTimePicker1);
-            this.tabPage1.Controls.Add(this.dataGridView1);
+            this.tabPage1.Controls.Add(this.dtgridview_theongay);
             this.tabPage1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
@@ -121,56 +118,67 @@
             this.tabPage1.Text = "Thông kê doanh thu";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // check_tuan
+            // check_all
             // 
-            this.check_tuan.AutoSize = true;
-            this.check_tuan.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.check_tuan.Location = new System.Drawing.Point(153, 507);
-            this.check_tuan.Name = "check_tuan";
-            this.check_tuan.Size = new System.Drawing.Size(74, 26);
-            this.check_tuan.TabIndex = 27;
-            this.check_tuan.TabStop = true;
-            this.check_tuan.Text = "Tuần ";
-            this.check_tuan.UseVisualStyleBackColor = true;
+            this.check_all.AutoSize = true;
+            this.check_all.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.check_all.Location = new System.Drawing.Point(46, 505);
+            this.check_all.Name = "check_all";
+            this.check_all.Size = new System.Drawing.Size(121, 26);
+            this.check_all.TabIndex = 29;
+            this.check_all.TabStop = true;
+            this.check_all.Text = "Tất cả ngày";
+            this.check_all.UseVisualStyleBackColor = true;
+            this.check_all.Click += new System.EventHandler(this.check_all_Click);
+            // 
+            // lb_tongsp
+            // 
+            this.lb_tongsp.AutoSize = true;
+            this.lb_tongsp.Location = new System.Drawing.Point(1036, 570);
+            this.lb_tongsp.Name = "lb_tongsp";
+            this.lb_tongsp.Size = new System.Drawing.Size(20, 22);
+            this.lb_tongsp.TabIndex = 28;
+            this.lb_tongsp.Text = "0";
             // 
             // check_homnay
             // 
             this.check_homnay.AutoSize = true;
             this.check_homnay.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.check_homnay.Location = new System.Drawing.Point(46, 505);
+            this.check_homnay.Location = new System.Drawing.Point(194, 505);
             this.check_homnay.Name = "check_homnay";
             this.check_homnay.Size = new System.Drawing.Size(101, 26);
             this.check_homnay.TabIndex = 26;
             this.check_homnay.TabStop = true;
             this.check_homnay.Text = "Hôm nay";
             this.check_homnay.UseVisualStyleBackColor = true;
+            this.check_homnay.Click += new System.EventHandler(this.check_homnay_Click);
             // 
-            // label9
+            // lb_tonghdcho
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1052, 511);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(20, 22);
-            this.label9.TabIndex = 25;
-            this.label9.Text = "0";
+            this.lb_tonghdcho.AutoSize = true;
+            this.lb_tonghdcho.Location = new System.Drawing.Point(1052, 511);
+            this.lb_tonghdcho.Name = "lb_tonghdcho";
+            this.lb_tonghdcho.Size = new System.Drawing.Size(20, 22);
+            this.lb_tonghdcho.TabIndex = 25;
+            this.lb_tonghdcho.Text = "0";
             // 
-            // label8
+            // lb_tonghoadatt
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(722, 568);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(20, 22);
-            this.label8.TabIndex = 24;
-            this.label8.Text = "0";
+            this.lb_tonghoadatt.AutoSize = true;
+            this.lb_tonghoadatt.Location = new System.Drawing.Point(722, 568);
+            this.lb_tonghoadatt.Name = "lb_tonghoadatt";
+            this.lb_tonghoadatt.Size = new System.Drawing.Size(20, 22);
+            this.lb_tonghoadatt.TabIndex = 24;
+            this.lb_tonghoadatt.Text = "0";
             // 
-            // label7
+            // lb_tongdoanhthu
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(616, 511);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(20, 22);
-            this.label7.TabIndex = 23;
-            this.label7.Text = "0";
+            this.lb_tongdoanhthu.AutoSize = true;
+            this.lb_tongdoanhthu.Location = new System.Drawing.Point(616, 511);
+            this.lb_tongdoanhthu.Name = "lb_tongdoanhthu";
+            this.lb_tongdoanhthu.Size = new System.Drawing.Size(20, 22);
+            this.lb_tongdoanhthu.TabIndex = 23;
+            this.lb_tongdoanhthu.Text = "0";
             // 
             // label6
             // 
@@ -212,56 +220,90 @@
             this.label3.TabIndex = 19;
             this.label3.Text = "Tổng doanh thu :";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(46, 618);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 22);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Đến ";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(46, 562);
+            this.label1.Location = new System.Drawing.Point(46, 556);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 22);
+            this.label1.Size = new System.Drawing.Size(160, 22);
             this.label1.TabIndex = 17;
-            this.label1.Text = "Từ ";
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(109, 618);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(250, 30);
-            this.dateTimePicker2.TabIndex = 16;
+            this.label1.Text = "Mời bạn chọn ngày";
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(109, 562);
+            this.dateTimePicker1.Location = new System.Drawing.Point(46, 581);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(250, 30);
             this.dateTimePicker1.TabIndex = 15;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
-            // dataGridView1
+            // dtgridview_theongay
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dtgridview_theongay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgridview_theongay.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3,
             this.Column4,
+            this.Column12,
             this.Column5,
             this.Column6});
-            this.dataGridView1.Location = new System.Drawing.Point(46, 35);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(1077, 450);
-            this.dataGridView1.TabIndex = 14;
+            this.dtgridview_theongay.Location = new System.Drawing.Point(46, 35);
+            this.dtgridview_theongay.Name = "dtgridview_theongay";
+            this.dtgridview_theongay.RowHeadersWidth = 51;
+            this.dtgridview_theongay.RowTemplate.Height = 29;
+            this.dtgridview_theongay.Size = new System.Drawing.Size(1077, 450);
+            this.dtgridview_theongay.TabIndex = 14;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Ngày ";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 125;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Tổng số lượng sản phẩm";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 250;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Tổng hoá đơn thành công";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 150;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Tổng hoá đơn chưa thanh toán  ";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 200;
+            // 
+            // Column12
+            // 
+            this.Column12.HeaderText = "Hoá đơn bị huỷ";
+            this.Column12.MinimumWidth = 6;
+            this.Column12.Name = "Column12";
+            this.Column12.Width = 125;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Tổng hoá đơn ";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 125;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Tổng doanh thu";
+            this.Column6.MinimumWidth = 6;
+            this.Column6.Name = "Column6";
+            this.Column6.Width = 125;
             // 
             // tabPage2
             // 
@@ -443,57 +485,6 @@
             this.Column11.Name = "Column11";
             this.Column11.Width = 125;
             // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(1036, 570);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(20, 22);
-            this.label16.TabIndex = 28;
-            this.label16.Text = "0";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Ngày ";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 125;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Tổng số lượng sản phẩm";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 250;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Tổng hoá đơn thành công";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 150;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Tổng hoá đơn chưa thanh toán  ";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 200;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Tổng hoá đơn ";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 125;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Tổng doanh thu";
-            this.Column6.MinimumWidth = 6;
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 125;
-            // 
             // FrmThongKe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -507,7 +498,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgridview_theongay)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrid_thongkesp)).EndInit();
@@ -521,20 +512,17 @@
         private Label label10;
         private TabControl tabControl1;
         private TabPage tabPage1;
-        private RadioButton check_tuan;
         private RadioButton check_homnay;
-        private Label label9;
-        private Label label8;
-        private Label label7;
+        private Label lb_tonghdcho;
+        private Label lb_tonghoadatt;
+        private Label lb_tongdoanhthu;
         private Label label6;
         private Label label5;
         private Label label4;
         private Label label3;
-        private Label label2;
         private Label label1;
-        private DateTimePicker dateTimePicker2;
         private DateTimePicker dateTimePicker1;
-        private DataGridView dataGridView1;
+        private DataGridView dtgridview_theongay;
         private TabPage tabPage2;
         private Label label15;
         private Label label14;
@@ -552,12 +540,14 @@
         private DataGridViewTextBoxColumn Column9;
         private DataGridViewTextBoxColumn Column10;
         private DataGridViewTextBoxColumn Column11;
-        private Label label16;
+        private Label lb_tongsp;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn Column12;
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewTextBoxColumn Column6;
+        private RadioButton check_all;
     }
 }

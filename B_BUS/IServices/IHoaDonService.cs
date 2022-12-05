@@ -13,6 +13,7 @@ namespace B_BUS.IServices
         public string AddHoaDon(HoaDon hd);
         public string UpdateHoaDon(Guid id , HoaDon hd);
         public string DeleteHoaDon(Guid id);
+        
         List<HoaDonView> GetAllhd();
     }
 }

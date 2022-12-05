@@ -35,6 +35,13 @@ namespace B_BUS.Services
             return "Xoa that bai.";
         }
 
+        public string DeleteSP(Guid id)
+        {
+            if (id == null) return "Xoa that bai.";
+            if (_ihdcts.DeleteSP(id)) return "Sản phẩm được xoá khỏi giỏ hàng .";
+            return "Xoa that bai.";
+        }
+
         public List<HoaDonCT> GetAllHDCT()
         {
             List<HoaDonCT> _lsthdct = new List<HoaDonCT>();
