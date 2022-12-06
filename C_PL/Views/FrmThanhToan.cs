@@ -1,6 +1,7 @@
 ﻿using A_DAL.Models;
 using B_BUS.IServices;
 using B_BUS.Services;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -85,6 +86,7 @@ namespace C_PL.Views
         {
             try
             {
+                var idhd = _ihoadon.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
                 if (txt_tienkhachdua.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập số tiền khách đưa.");
@@ -97,16 +99,6 @@ namespace C_PL.Views
                 }
                 else
                 {
-                    DialogResult dialogResult = MessageBox.Show("Bạn có muốn in hoá đơn không ?", "Thông báo", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        MessageBox.Show("In hoá đơn thành công .");
-                    }
-                    else
-                    {
-
-                    }
-                    var idhd = _ihoadon.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
                     HoaDon hd = new HoaDon()
                     {
                         IDNV = _invs.GetAllNV().Where(c => c.MaNV == lb_manv.Text).Select(c => c.ID).FirstOrDefault(),

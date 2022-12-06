@@ -71,7 +71,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lb_manv = new System.Windows.Forms.Label();
-            this.lb_magh = new System.Windows.Forms.Label();
             this.lb_tenkh = new System.Windows.Forms.Label();
             this.lb_mahd = new System.Windows.Forms.Label();
             this.lb_tongtien = new System.Windows.Forms.Label();
@@ -509,7 +508,6 @@
             this.groupBox3.BackColor = System.Drawing.Color.LightCoral;
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.lb_manv);
-            this.groupBox3.Controls.Add(this.lb_magh);
             this.groupBox3.Controls.Add(this.lb_tenkh);
             this.groupBox3.Controls.Add(this.lb_mahd);
             this.groupBox3.Controls.Add(this.lb_tongtien);
@@ -546,15 +544,6 @@
             this.lb_manv.Size = new System.Drawing.Size(60, 22);
             this.lb_manv.TabIndex = 21;
             this.lb_manv.Text = "Mã nv";
-            // 
-            // lb_magh
-            // 
-            this.lb_magh.AutoSize = true;
-            this.lb_magh.Location = new System.Drawing.Point(25, 472);
-            this.lb_magh.Name = "lb_magh";
-            this.lb_magh.Size = new System.Drawing.Size(51, 22);
-            this.lb_magh.TabIndex = 19;
-            this.lb_magh.Text = "magh";
             // 
             // lb_tenkh
             // 
@@ -891,7 +880,6 @@
         private Label lb_tongtien;
         private Label lb_mahd;
         private Label lb_tenkh;
-        private Label lb_magh;
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewTextBoxColumn Column19;
         private DataGridViewTextBoxColumn Column23;

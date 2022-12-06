@@ -15,6 +15,7 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace C_PL.Views
 {
@@ -35,6 +36,7 @@ namespace C_PL.Views
         public IHoaDonCTService _ihdcts;
         public IHoaDonService _ihds;
         public INhanVienService _invs;
+        public List<HoaDonCT> _lsthoadonchitiet;
         public Validate _check;
         public IGioHangService _ighs;
         public IGioHangCTService _ighcts;
@@ -60,6 +62,7 @@ namespace C_PL.Views
             _isps = new SanPhamService();
             _invs = new NhanVienService();
             _imss = new MauSacService();
+            _lsthoadonchitiet = new List<HoaDonCT>();
             _lstgiohang = new List<GioHangCT>();
             _ihds = new HoaDonService();
             dtgrid_giohang.Columns[0].Visible = false;
@@ -72,7 +75,6 @@ namespace C_PL.Views
             laymanv();
             lb_mahd.Text = "";
             lb_tenkh.Text = "";
-            lb_magh.Visible = false;
             //LoadGioHang();
             _giohang = new GioHang()
             {
@@ -157,8 +159,16 @@ namespace C_PL.Views
         }
         private void dtgrid_sp_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            var layanh = _ictsp.GetAll().FirstOrDefault(p => p.ID == Guid.Parse(dtgrid_sp.Rows[e.RowIndex].Cells[0].Value.ToString()));
-            ptb_anhsp.Image = Image.FromFile(layanh.anh);
+            try
+            {
+                var layanh = _ictsp.GetAll().FirstOrDefault(p => p.ID == Guid.Parse(dtgrid_sp.Rows[e.RowIndex].Cells[0].Value.ToString()));
+                ptb_anhsp.Image = Image.FromFile(layanh.anh);
+            }
+            catch
+            {
+                MessageBox.Show("Mời bạn thao tác lại.");
+            }
+            
         }
 
         private void dtgrid_giohang_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -221,7 +231,7 @@ namespace C_PL.Views
         }
         private void btn_taohd_Click(object sender, EventArgs e)
         {
-            string format = "dd/MM/yyyy  HH:mm:ss";
+
             //now = DateTime.Parse(format);
             try
             {
@@ -251,17 +261,6 @@ namespace C_PL.Views
                         lb_mahd.Text = hd.MaHD;
                         var tenkh = _ikhs.GetAllKH().Where(c => c.ID == hd.IDKH).Select(c => c.TenKH).FirstOrDefault().ToString();
                         lb_tenkh.Text = tenkh;
-
-                        //GioHang gh = new GioHang()
-                        //{
-                        //    ID = Guid.NewGuid(),
-                        //    MaGH = "GH" + Convert.ToString(_ighs.GettAllGH().Count + 1),
-                        //    IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_manv.Text)).Select(c => c.ID).FirstOrDefault(),
-                        //    NgayTao = DateTime.Parse(format),
-                        //    IDKH = _ikhs.GetAllKH().Where(c => c.TenKH == Convert.ToString(lb_tenkh.Text)).Select(c => c.ID).FirstOrDefault(),
-                        //};
-                        //_ighs.AddGioHang(gh);
-                        //lb_magh.Text = gh.MaGH;
                     }
                 }
             }
@@ -275,14 +274,22 @@ namespace C_PL.Views
 
 
 
-            private void dtgrid_khachhang_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dtgrid_khachhang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int r = e.RowIndex;
-            if (r == -1) return;
-            _id = Guid.Parse(Convert.ToString(dtgrid_khachhang.Rows[r].Cells[0].Value));
-            txt_tenkh.Text = Convert.ToString(dtgrid_khachhang.Rows[r].Cells[1].Value);
-            txt_sdtkh.Text = Convert.ToString(dtgrid_khachhang.Rows[r].Cells[2].Value);
-            txt_diachi.Text = Convert.ToString(dtgrid_khachhang.Rows[r].Cells[3].Value);
+            try
+            {
+                int r = e.RowIndex;
+                if (r == -1) return;
+                _id = Guid.Parse(Convert.ToString(dtgrid_khachhang.Rows[r].Cells[0].Value));
+                txt_tenkh.Text = Convert.ToString(dtgrid_khachhang.Rows[r].Cells[1].Value);
+                txt_sdtkh.Text = Convert.ToString(dtgrid_khachhang.Rows[r].Cells[2].Value);
+                txt_diachi.Text = Convert.ToString(dtgrid_khachhang.Rows[r].Cells[3].Value);
+            }
+            catch
+            {
+                MessageBox.Show("Mời bạn thao tác lại.");
+            }
+           
         }
 
         private void dtgrid_sp_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -304,9 +311,9 @@ namespace C_PL.Views
 
         private void dtgrid_sp_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //try
-            //{
-            int row = dtgrid_giohang.Rows.Count;
+            try
+            {
+                int row = dtgrid_giohang.Rows.Count;
             DataGridViewRow r = dtgrid_sp.Rows[e.RowIndex];
             
             DialogResult dialogResult = MessageBox.Show("Ban co muon them san pham nay khong ?", "Thong bao", MessageBoxButtons.YesNo);
@@ -320,20 +327,22 @@ namespace C_PL.Views
                    
                     var idsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == Guid.Parse(r.Cells[0].Value.ToString()));
 
-                        HoaDonCT hdct = new HoaDonCT()
-                        {
-                            IDSP = Guid.Parse(r.Cells[0].Value.ToString()),
-                            IDHD = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault(),
-                            SoLuong = FrmSoLuong.soluong,
-                            DonGia = idsp.GiaBan,
-                        };
-                        _ihdcts.AddHDCT(hdct);
+                    var idhd2 = _ihds.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
 
-                   
+
                 //Thêm hoá đơn chi tiết
 
                 //Update Sô lượng đơn giá hoá đơn
-                var idhd2 = _ihds.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
+                
+                    HoaDonCT hdct = new HoaDonCT()
+                    {
+                        IDSP = Guid.Parse(r.Cells[0].Value.ToString()),
+                        IDHD = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault(),
+                        SoLuong = FrmSoLuong.soluong,
+                        DonGia = idsp.GiaBan,
+                    };
+                    _ihdcts.AddHDCT(hdct);
+              
                     HoaDon hd = new HoaDon()
                     {
                         SoLuong = _ihdcts.GetAllHDCT().Sum(c => c.SoLuong),
@@ -361,11 +370,11 @@ namespace C_PL.Views
                 lb_tongtien.Text = tinhtien.ToString();
                     //}
                 }
-            //}
-            //catch 
-            //{
-            //    MessageBox.Show("Bạn nên chọn vào ô có dữ liệu .");
-            //}
+            }
+            catch
+            {
+                MessageBox.Show("Bạn nên chọn vào ô có dữ liệu .");
+            }
         }
 
         private void btn_chonkh_Click(object sender, EventArgs e)
@@ -481,10 +490,7 @@ namespace C_PL.Views
                     };
                     _ihds.UpdateHoaDon(idhd, hd);
                     MessageBox.Show($"Hoá đơn {lb_mahd.Text} được đưa vào hoá đơn chờ.");
-                    Loadhdc();
-                    LoadSpCT();
-                    lb_tongtien.Text = "0";
-                    dtgrid_giohang.Rows.Clear();
+                    Reset();
                 }
                 else
                 {
@@ -516,87 +522,105 @@ namespace C_PL.Views
                     };
                     _ihds.UpdateHoaDon(idhd, hd);
                     MessageBox.Show($"Huỷ hoá {lb_mahd.Text} đơn thành công.");
-                    Loadhdc();
-                    lb_tongtien.Text = "0";
-                    dtgrid_giohang.Rows.Clear();
+                    Reset();
 
                 }
             }
             catch
             {
-
+                MessageBox.Show($"Hoá đơn {lb_mahd.Text} huỷ thất bại.");
             }
         }
         private void dtgrid_hdcho_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            try
             {
-                DataGridViewRow r = dtgrid_hdcho.Rows[e.RowIndex];
-
-                DialogResult dialogResult = MessageBox.Show($"Bạn có muốn tiếp tục thực hiện hoá đơn {r.Cells[1].Value.ToString()} không ?", "Thông báo", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                if (e.RowIndex >= 0)
                 {
-                    _id = Guid.Parse(r.Cells[0].Value.ToString());
-                    lb_mahd.Text = r.Cells[1].Value.ToString();
-                    lb_tenkh.Text = r.Cells[2].Value.ToString();
-                    lb_manv.Text = r.Cells[3].Value.ToString();
+                    DataGridViewRow r = dtgrid_hdcho.Rows[e.RowIndex];
+
+                    DialogResult dialogResult = MessageBox.Show($"Bạn có muốn tiếp tục thực hiện hoá đơn {r.Cells[1].Value.ToString()} không ?", "Thông báo", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        _id = Guid.Parse(r.Cells[0].Value.ToString());
+                        lb_mahd.Text = r.Cells[1].Value.ToString();
+                        lb_tenkh.Text = r.Cells[2].Value.ToString();
+                        lb_manv.Text = r.Cells[3].Value.ToString();
+                    }
+                    var idnv = _invs.GetAllNV().Where(c => c.MaNV == lb_manv.Text).Select(c => c.ID).FirstOrDefault();
+
+
+                    var IDhd = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
+                    //var ngaytaohd = _ihds.GetAllhd().Where(c => c.IDhd == Guid.Parse(IDhd.ToString())).Select(c => c.NgayTao).FirstOrDefault();
+                    ////var ngaytaogh = _ihds.GetAllhd().Where(c => c.IDnv == Guid.Parse(idnv.ToString())).Select(c => c.NgayTao).FirstOrDefault();
+                    //var idgh = _ighs.GettAllGH().Where(c => c.NgayTao == ngaytaohd).Select(c => c.ID).FirstOrDefault();
+                    //var magh = _ighs.GettAllGH().Where(c => c.ID == idgh).Select(c => c.MaGH).FirstOrDefault();
+
+                    //lb_magh.Text = magh.ToString();
+
+
+                    var idhd1 = _ihds.GetAllhd().Where(c => c.IDhd == Guid.Parse(r.Cells[0].Value.ToString())).Select(c => c.IDhd).FirstOrDefault();
+                    dtgrid_giohang.Rows.Clear();
+                    foreach (var x in _ihdcts.GetAllHDCT().Where(c => c.IDHD == (idhd1)))
+                    {
+                        var idctsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == x.IDSP);
+                        var tensp = _isps.GetAllsp().FirstOrDefault(c => c.IDsp == idctsp.IDSP);
+                        var mausac = _imss.GetAllMS().FirstOrDefault(c => c.IDms == idctsp.IDms);
+                        var size = _isize.GetSizes().FirstOrDefault(c => c.id == idctsp.IDSize);
+
+                        dtgrid_giohang.Rows.Add(idctsp.ID, tensp.TenSp, mausac.Mau, size.SoSize, x.SoLuong, idctsp.GiaBan, x.SoLuong * idctsp.GiaBan); // truyền số lượng từ form số lượng qua 
+                    }
+
+
+                    var tinhtien = _ihdcts.GetAllHDCT().Where(c => c.IDHD == Guid.Parse(idhd1.ToString())).Sum(c => c.SoLuong * c.DonGia);
+                    lb_tongtien.Text = tinhtien.ToString();
                 }
-                var idnv = _invs.GetAllNV().Where(c => c.MaNV == lb_manv.Text).Select(c => c.ID).FirstOrDefault();
-
-
-                var IDhd = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
-                //var ngaytaohd = _ihds.GetAllhd().Where(c => c.IDhd == Guid.Parse(IDhd.ToString())).Select(c => c.NgayTao).FirstOrDefault();
-                ////var ngaytaogh = _ihds.GetAllhd().Where(c => c.IDnv == Guid.Parse(idnv.ToString())).Select(c => c.NgayTao).FirstOrDefault();
-                //var idgh = _ighs.GettAllGH().Where(c => c.NgayTao == ngaytaohd).Select(c => c.ID).FirstOrDefault();
-                //var magh = _ighs.GettAllGH().Where(c => c.ID == idgh).Select(c => c.MaGH).FirstOrDefault();
-                
-                //lb_magh.Text = magh.ToString();
-
-
-                var idhd1 = _ihds.GetAllhd().Where(c => c.IDhd == Guid.Parse(r.Cells[0].Value.ToString())).Select(c => c.IDhd).FirstOrDefault();
-                dtgrid_giohang.Rows.Clear();
-                foreach (var x in _ihdcts.GetAllHDCT().Where(c => c.IDHD == (idhd1)))
-                {
-                    var idctsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == x.IDSP);
-                    var tensp = _isps.GetAllsp().FirstOrDefault(c => c.IDsp == idctsp.IDSP);
-                    var mausac = _imss.GetAllMS().FirstOrDefault(c => c.IDms == idctsp.IDms);
-                    var size = _isize.GetSizes().FirstOrDefault(c => c.id == idctsp.IDSize);
-
-                    dtgrid_giohang.Rows.Add(idctsp.ID, tensp.TenSp, mausac.Mau, size.SoSize, x.SoLuong , idctsp.GiaBan, x.SoLuong * idctsp.GiaBan); // truyền số lượng từ form số lượng qua 
-                }
-                
-
-                var tinhtien = _ihdcts.GetAllHDCT().Where(c => c.IDHD == Guid.Parse(idhd1.ToString())).Sum(c => c.SoLuong * c.DonGia);
-                lb_tongtien.Text = tinhtien.ToString();
             }
+            catch
+            {
+                MessageBox.Show("Mời bạn thao tác lại.");
+            }
+            
         }
-        public void Locmausac()
+        public void Reset()
+        {
+            Loadhdc();
+            LoadSpCT();
+            lb_mahd.Text = "";
+            lb_tenkh.Text = "";
+            lb_tongtien.Text = "0";
+            dtgrid_giohang.Rows.Clear();
+            cbb_nhasx.Text = "";
+            cbb_size.Text = "";
+            cbb_mausac.Text = "";
+        }
+        public void LocSP()
         {
             dtgrid_sp.Rows.Clear();
             dtgrid_sp.Columns[0].Visible = false;
-            var ms = _imss.GetAllMS().Where(c => c.MaMau == cbb_mausac.Text).Select(c => c.IDms).FirstOrDefault();
-            foreach (var x in _ictsp.GetAll().Where(c => c.IDms == ms))
+            var x = (from a in _ictsp.GetAll()
+                     join b in _imss.GetAllMS() on a.IDms equals b.IDms
+                     join c in _isize.GetSizes() on a.IDSize equals c.id
+                     join d in _isps.GetAllsp() on a.IDSP equals d.IDsp
+                     join e in _ihsxs.GetAllHSX() on a.IDHSX equals e.ID
+                     where e.TenHSX.Contains(cbb_nhasx.Text) || b.Mau.Contains(cbb_mausac.Text) || c.SoSize.ToString().Contains(cbb_size.Text)
+                     select new
+                     {
+                         a,
+                         b,
+                         c,
+                         d,
+                         e
+                     }) ;
+            foreach (var y in x)
             {
-                var y = _isps.GetAllsp().Find(c => c.IDsp == x.IDSP);
-                var z = _imss.GetAllMS().Find(c => c.IDms == x.IDms);
-                var a = _isize.GetSizes().Find(c => c.id == x.IDSize);
-                var b = _ihsxs.GetAllHSX().Find(c => c.ID == x.IDHSX);
-                dtgrid_sp.Rows.Add(x.ID, x.MaCTSP, y.TenSp, b.TenHSX, z.Mau, a.SoSize, x.SoLuong, x.GiaBan);
+                dtgrid_sp.Rows.Add(y.a.ID, y.a.MaCTSP, y.d.TenSp, y.e.TenHSX, y.b.Mau, y.c.SoSize, y.a.SoLuong, y.a.GiaBan);
             }
-        }
-        public void Locsize()
-        {
-
-        }
-        public void LocHangsx()
-        {
-
         }
         private void btn_loc_Click(object sender, EventArgs e)
         {
-            Locmausac();
-            Locsize();
-            LocHangsx();
+
+            LocSP();
         }
         public void Timkiemkh(string sdt)
         {
@@ -613,16 +637,26 @@ namespace C_PL.Views
         }
         public void TimKiemSP(string name)
         {
-            //dtgrid_sp.Rows.Clear();
-            //dtgrid_sp.Columns[0].Visible = false;
-            //foreach (var x in _ictsp.GetAll().Where(c => c.MaCTSP.Contains(name)));
-            //{
-            //    var y = _isps.GetAllsp().Find(c => c.IDsp == x.IDSP);
-            //    var z = _imss.GetAllMS().Find(c => c.IDms == x.IDms);
-            //    var a = _isize.GetSizes().Find(c => c.id == x.IDSize);
-            //    var b = _ihsxs.GetAllHSX().Find(c => c.ID == x.IDHSX);
-            //    dtgrid_sp.Rows.Add(x.ID, x.MaCTSP, y.TenSp, b.TenHSX, z.Mau, a.SoSize, x.SoLuong, x.GiaBan);
-            //}
+            dtgrid_sp.Rows.Clear();
+            dtgrid_sp.Columns[0].Visible = false;
+            var x = (from a in _ictsp.GetAll()
+                     join b in _imss.GetAllMS() on a.IDms equals b.IDms
+                     join c in _isize.GetSizes() on a.IDSize equals c.id
+                     join d in _isps.GetAllsp() on a.IDSP equals d.IDsp
+                     join e in _ihsxs.GetAllHSX() on a.IDHSX equals e.ID
+                     where d.TenSp.Contains(name) || a.MaCTSP.Contains(name)
+                     select new
+                     {
+                         a,
+                         b,
+                         c,
+                         d,
+                         e
+                     });
+           foreach(var y in x)
+            {
+                dtgrid_sp.Rows.Add(y.a.ID, y.a.MaCTSP, y.d.TenSp, y.e.TenHSX, y.b.Mau, y.c.SoSize, y.a.SoLuong, y.a.GiaBan);
+            }
         }
         private void txt_timkiemsp_KeyUp(object sender, KeyEventArgs e)
         {

@@ -58,13 +58,14 @@ namespace C_PL.Views
         private void check_homnay_Click(object sender, EventArgs e)
         {
             dtgridview_theongay.Rows.Clear();
-            foreach (var x in _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == DateTime.Now.Date).Distinct())
+            var ngay = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == DateTime.Now.Date).Distinct();
+            foreach (var x in ngay)
             {
-                var sp = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == DateTime.Now.Date).Sum(c => c.SoLuong);
+                var sp = ngay.Sum(c => c.SoLuong);
                 var hdc = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == DateTime.Now.Date && c.TrangThai == "Chờ thanh toán").Count();
                 var hdtc = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == DateTime.Now.Date && c.TrangThai == "Đã thanh toán").Count();
                 var huy = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == DateTime.Now.Date && c.TrangThai == "Huỷ").Count();
-                var dt = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == DateTime.Now.Date).Sum(c => c.DonGia);
+                var dt = ngay.Sum(c => c.DonGia);
                 var t = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == DateTime.Now.Date).Count();
                 tong = t;
                 doanhthu = Convert.ToDouble(dt);
@@ -86,12 +87,12 @@ namespace C_PL.Views
             var ngay = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date.ToString("dd//MM/yyyy") == dateTimePicker1.Value.Date.ToString("dd//MM/yyyy"));
             foreach (var x in ngay.Distinct())
             {
-                var sp = _ihdds.GetAllhd().Sum(c => c.SoLuong);
-                var hdc = _ihdds.GetAllhd().Where(c =>  c.TrangThai == "Chờ thanh toán").Count();
-                var hdtc = _ihdds.GetAllhd().Where(c =>  c.TrangThai == "Đã thanh toán").Count();
-                var huy = _ihdds.GetAllhd().Where(c =>  c.TrangThai == "Huỷ").Count();
-                var dt = _ihdds.GetAllhd().Sum(c => c.DonGia);
-                var t = _ihdds.GetAllhd().Count();
+                var sp = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == dateTimePicker1.Value.Date).Sum(c => c.SoLuong);
+                var hdc = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == dateTimePicker1.Value.Date && c.TrangThai == "Chờ thanh toán").Count();
+                var hdtc = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == dateTimePicker1.Value.Date && c.TrangThai == "Đã thanh toán").Count();
+                var huy = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == dateTimePicker1.Value.Date && c.TrangThai == "Huỷ").Count();
+                var dt = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == dateTimePicker1.Value.Date).Sum(c => c.DonGia);
+                var t = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == dateTimePicker1.Value.Date).Count();
                 tong = t;
                 doanhthu = Convert.ToDouble(dt);
                 hoadoncho = hdc;
