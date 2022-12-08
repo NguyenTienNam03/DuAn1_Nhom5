@@ -52,8 +52,8 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.lb_tongdt = new System.Windows.Forms.Label();
+            this.lb_tongsanpham = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.txt_timkiem = new System.Windows.Forms.TextBox();
@@ -307,8 +307,8 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.label15);
-            this.tabPage2.Controls.Add(this.label14);
+            this.tabPage2.Controls.Add(this.lb_tongdt);
+            this.tabPage2.Controls.Add(this.lb_tongsanpham);
             this.tabPage2.Controls.Add(this.label13);
             this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.txt_timkiem);
@@ -326,25 +326,25 @@
             this.tabPage2.Text = "Thông kê sản phẩm ";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label15
+            // lb_tongdt
             // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label15.Location = new System.Drawing.Point(184, 87);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(20, 22);
-            this.label15.TabIndex = 11;
-            this.label15.Text = "0";
+            this.lb_tongdt.AutoSize = true;
+            this.lb_tongdt.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lb_tongdt.Location = new System.Drawing.Point(184, 87);
+            this.lb_tongdt.Name = "lb_tongdt";
+            this.lb_tongdt.Size = new System.Drawing.Size(20, 22);
+            this.lb_tongdt.TabIndex = 11;
+            this.lb_tongdt.Text = "0";
             // 
-            // label14
+            // lb_tongsanpham
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label14.Location = new System.Drawing.Point(283, 41);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(20, 22);
-            this.label14.TabIndex = 10;
-            this.label14.Text = "0";
+            this.lb_tongsanpham.AutoSize = true;
+            this.lb_tongsanpham.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lb_tongsanpham.Location = new System.Drawing.Point(283, 41);
+            this.lb_tongsanpham.Name = "lb_tongsanpham";
+            this.lb_tongsanpham.Size = new System.Drawing.Size(20, 22);
+            this.lb_tongsanpham.TabIndex = 10;
+            this.lb_tongsanpham.Text = "0";
             // 
             // label13
             // 
@@ -375,6 +375,7 @@
             this.txt_timkiem.Size = new System.Drawing.Size(504, 30);
             this.txt_timkiem.TabIndex = 7;
             this.txt_timkiem.Text = "Tìm kiếm theo mã hoặc tên sp";
+            this.txt_timkiem.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_timkiem_KeyUp);
             // 
             // label11
             // 
@@ -524,8 +525,8 @@
         private DateTimePicker dateTimePicker1;
         private DataGridView dtgridview_theongay;
         private TabPage tabPage2;
-        private Label label15;
-        private Label label14;
+        private Label lb_tongdt;
+        private Label lb_tongsanpham;
         private Label label13;
         private Label label12;
         private TextBox txt_timkiem;

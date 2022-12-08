@@ -65,5 +65,12 @@ namespace B_BUS.Services
             if (_ihdcts.UpdateHoaDonCT(id, hdct)) return "Cập nhật thành công .";
             return "Cập nhật thất bại.";
         }
+
+        public string UpdateSP(HoaDonCT hoaDonCT)
+        {
+            if (hoaDonCT == null) return "Cập nhật thất bại.";
+            if (_ihdcts.UpdateSP(hoaDonCT)) return "Cập nhật thành công.";
+            return "Cập nhật thất bại.";
+        }
     }
 }

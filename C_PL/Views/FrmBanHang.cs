@@ -30,7 +30,6 @@ namespace C_PL.Views
         public IMauSacService _imss;
         public IHangSanXuatService _ihsxs;
         public ISizeService _isize;
-        public List<GioHangCT> _lstgiohang;
         public GioHang _giohang;
         public Guid _id;
         public IHoaDonCTService _ihdcts;
@@ -63,7 +62,6 @@ namespace C_PL.Views
             _invs = new NhanVienService();
             _imss = new MauSacService();
             _lsthoadonchitiet = new List<HoaDonCT>();
-            _lstgiohang = new List<GioHangCT>();
             _ihds = new HoaDonService();
             dtgrid_giohang.Columns[0].Visible = false;
             LoadSpCT();
@@ -231,8 +229,6 @@ namespace C_PL.Views
         }
         private void btn_taohd_Click(object sender, EventArgs e)
         {
-
-            //now = DateTime.Parse(format);
             try
             {
                 DialogResult dialogResult = MessageBox.Show("Bạn có muốn tạo hoá đơn không ?", "Thông báo", MessageBoxButtons.YesNo);
@@ -311,8 +307,8 @@ namespace C_PL.Views
 
         private void dtgrid_sp_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 int row = dtgrid_giohang.Rows.Count;
             DataGridViewRow r = dtgrid_sp.Rows[e.RowIndex];
             
@@ -323,8 +319,6 @@ namespace C_PL.Views
                     IDspct = a;
                     FrmSoLuong sl = new FrmSoLuong();
                     sl.ShowDialog();
-                    var idspct1 = _ictsp.GetAll().FirstOrDefault(c => c.ID == FrmSoLuong.idspct);
-                   
                     var idsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == Guid.Parse(r.Cells[0].Value.ToString()));
 
                     var idhd2 = _ihds.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
@@ -333,17 +327,33 @@ namespace C_PL.Views
                 //Thêm hoá đơn chi tiết
 
                 //Update Sô lượng đơn giá hoá đơn
-                
+
+                var idsp1 = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd2).Select(c => c.IDSP).FirstOrDefault(); // lỗi lấy idsp
+           
+                if (idsp1 != idsp.ID)
+                {
                     HoaDonCT hdct = new HoaDonCT()
                     {
-                        IDSP = Guid.Parse(r.Cells[0].Value.ToString()),
+                        IDSP = idsp.ID,
                         IDHD = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault(),
                         SoLuong = FrmSoLuong.soluong,
                         DonGia = idsp.GiaBan,
                     };
-                    _ihdcts.AddHDCT(hdct);
-              
-                    HoaDon hd = new HoaDon()
+                     _ihdcts.AddHDCT(hdct);
+                }
+                else
+                {
+                    HoaDonCT hoa = new HoaDonCT()
+                    {
+                        IDSP = idsp.ID,
+                        //IDHD = idhd2 ,
+                        SoLuong = FrmSoLuong.soluong,
+                        DonGia = idsp.GiaBan
+                    };
+                    _ihdcts.UpdateHDCT(idhd2, hoa);
+                }
+
+                HoaDon hd = new HoaDon()
                     {
                         SoLuong = _ihdcts.GetAllHDCT().Sum(c => c.SoLuong),
                         DonGia = _ihdcts.GetAllHDCT().Sum(c => c.SoLuong * c.DonGia),
@@ -352,7 +362,7 @@ namespace C_PL.Views
                         NgayThanhToan = null,
                     };
                     _ihds.UpdateHoaDon(idhd2, hd);
-
+                dtgrid_giohang.Rows.Clear();
 
 
                 var idhd1 = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
@@ -370,11 +380,11 @@ namespace C_PL.Views
                 lb_tongtien.Text = tinhtien.ToString();
                     //}
                 }
-            }
-            catch
-            {
-                MessageBox.Show("Bạn nên chọn vào ô có dữ liệu .");
-            }
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("Bạn nên chọn vào ô có dữ liệu .");
+            //}
         }
 
         private void btn_chonkh_Click(object sender, EventArgs e)
@@ -551,14 +561,6 @@ namespace C_PL.Views
 
 
                     var IDhd = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
-                    //var ngaytaohd = _ihds.GetAllhd().Where(c => c.IDhd == Guid.Parse(IDhd.ToString())).Select(c => c.NgayTao).FirstOrDefault();
-                    ////var ngaytaogh = _ihds.GetAllhd().Where(c => c.IDnv == Guid.Parse(idnv.ToString())).Select(c => c.NgayTao).FirstOrDefault();
-                    //var idgh = _ighs.GettAllGH().Where(c => c.NgayTao == ngaytaohd).Select(c => c.ID).FirstOrDefault();
-                    //var magh = _ighs.GettAllGH().Where(c => c.ID == idgh).Select(c => c.MaGH).FirstOrDefault();
-
-                    //lb_magh.Text = magh.ToString();
-
-
                     var idhd1 = _ihds.GetAllhd().Where(c => c.IDhd == Guid.Parse(r.Cells[0].Value.ToString())).Select(c => c.IDhd).FirstOrDefault();
                     dtgrid_giohang.Rows.Clear();
                     foreach (var x in _ihdcts.GetAllHDCT().Where(c => c.IDHD == (idhd1)))

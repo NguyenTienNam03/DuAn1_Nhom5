@@ -12,6 +12,7 @@ namespace A_DAL.IRepositorys
         bool AddHoaDonCT(HoaDonCT hdct);
         bool DeleteHoaDonCT(Guid id );
         bool DeleteSP(Guid id );
+        bool UpdateSP(HoaDonCT hoaDonCT);
         bool UpdateHoaDonCT(Guid id , HoaDonCT hdct);
         List<HoaDonCT> GetAll();
         HoaDonCT GetById(Guid id);

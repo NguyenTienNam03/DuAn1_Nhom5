@@ -54,7 +54,9 @@ namespace C_PL.Views
             foreach(var x in _ihds.GetAllhd().OrderByDescending(c => c.NgayTao))
             {
                 var kh = _ikhs.GetAllKH().Find(c => c.ID == x.IDkh);
-                dtgridview_hoadon.Rows.Add(x.IDhd, x.Mahd, kh.TenKH, x.NgayTao , x.SoLuong , x.DonGia ,x.NgayThanhToan , x.TrangThai);
+                var soluong = _Ihoadoncts.GetAllHDCT().Where(c => c.IDHD == x.IDhd).Sum(c => c.SoLuong);
+                var thanhtien = _Ihoadoncts.GetAllHDCT().Where(c => c.IDHD == x.IDhd).Sum(c => c.SoLuong * c.DonGia);
+                dtgridview_hoadon.Rows.Add(x.IDhd, x.Mahd, kh.TenKH, x.NgayTao , soluong , thanhtien ,x.NgayThanhToan , x.TrangThai);
             }
         }
         public void LoadHDhuy()
@@ -149,12 +151,12 @@ namespace C_PL.Views
         {
             try
             {
-                if(_ihds.GetAllhd().Any(c => c.TrangThai == "Huỷ") == false)
+                if(_ihds.GetAllhd().Any(c => c.TrangThai != "Huỷ") == true)
                 {
                     MessageBox.Show("Sử dụng cho xoá đơn bị huỷ.");
                     return;
                 } else 
-                if(_ihds.GetAllhd().Any(c => c.TrangThai == "Huỷ") == true)
+                if(_ihds.GetAllhd().Any(c => c.TrangThai == "Huỷ" ) == true)
                 {
                     DialogResult dialogResult = MessageBox.Show("Bạn có muốn xoá hoá đơn này không ? .", "Thông báo", MessageBoxButtons.YesNo);
                     if(dialogResult == DialogResult.Yes)

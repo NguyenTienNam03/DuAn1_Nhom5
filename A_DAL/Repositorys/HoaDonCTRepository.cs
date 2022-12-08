@@ -66,5 +66,16 @@ namespace A_DAL.Repositorys
             _context.SaveChanges();
             return true;    
         }
+
+        public bool UpdateSP(HoaDonCT hoaDonCT)
+        {
+            if(hoaDonCT == null ) return false;
+            var hdct1 = _context.hoaDonCTs.FirstOrDefault(c => c.IDSP == hoaDonCT.IDSP);
+            hdct1.SoLuong = hoaDonCT.SoLuong;
+            _context.hoaDonCTs.Update(hdct1);
+            _context.SaveChanges();
+            return true;
+
+        }
     }
 }
