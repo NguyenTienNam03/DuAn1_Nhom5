@@ -46,6 +46,10 @@ namespace C_PL.Views
                 {
                     MessageBox.Show("Mời bạn nhập đúng số.");
                     return;
+                } else if (id.SoLuong == 0)
+                {
+                    MessageBox.Show("Sản phẩm này đã hết , Mời bạn chọn sản phẩm khác.");
+                    return;
                 }
                 else
                 if (Convert.ToInt32(txt_nhapsoluong.Text) > id.SoLuong)
@@ -58,22 +62,22 @@ namespace C_PL.Views
                 {
                     
                     soluong = Convert.ToInt32(txt_nhapsoluong.Text);
-                    //soluongconlai = Convert.ToInt32(id.SoLuong) - Convert.ToInt32(txt_nhapsoluong.Text);
-                    //ChiTietSanPham spct = new ChiTietSanPham()
-                    //{
-                    //    Id = id.ID,
-                    //    IDHSX = id.IDHSX,
-                    //    IDMauSac = id.IDms ,
-                    //    IDSize= id.IDSize,
-                    //    IDSP = id.IDSP,
-                    //    MaSPCT = id.MaCTSP ,
-                    //    GiaBan = id.GiaBan,
-                    //    GiaNhap= id.GiaNhap,
-                    //    TrangThai = id.Trangthai,
-                    //    Anh = id.anh,
-                    //    SoLuong = soluongconlai,
-                    //};
-                    //_ictsp.UpdateCRSP(id.ID, spct);
+                    soluongconlai = Convert.ToInt32(id.SoLuong) - Convert.ToInt32(txt_nhapsoluong.Text);
+                    ChiTietSanPham spct = new ChiTietSanPham()
+                    {
+                        Id = id.ID,
+                        IDHSX = id.IDHSX,
+                        IDMauSac = id.IDms,
+                        IDSize = id.IDSize,
+                        IDSP = id.IDSP,
+                        MaSPCT = id.MaCTSP,
+                        GiaBan = id.GiaBan,
+                        GiaNhap = id.GiaNhap,
+                        TrangThai = id.Trangthai,
+                        Anh = id.anh,
+                        SoLuong = soluongconlai,
+                    };
+                    _ictsp.UpdateCRSP(id.ID, spct);
 
                     this.Close();
                 }

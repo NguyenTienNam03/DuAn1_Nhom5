@@ -67,7 +67,7 @@ namespace C_PL.Views
         private void check_homnay_Click(object sender, EventArgs e)
         {
             dtgridview_theongay.Rows.Clear();
-            foreach (var x in _ihdds.GetAllhd().Select(c => c.NgayTao.Value.Date == DateTime.Now.Date).Distinct())
+            foreach (var x in _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == DateTime.Now.Date).Distinct())
             {
                 var sp = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == DateTime.Now.Date).Sum(c => c.SoLuong);
                 var hdc = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == DateTime.Now.Date && c.TrangThai == "Chờ thanh toán").Count();
@@ -80,7 +80,7 @@ namespace C_PL.Views
                 hoadoncho = hdc;
                 hoadonthanhcong = hdtc;
                 soluong = Convert.ToInt32(sp);
-                dtgridview_theongay.Rows.Add(x.ToString(), soluong, hoadonthanhcong, hoadoncho, huy, tong, doanhthu);
+                dtgridview_theongay.Rows.Add(x.NgayTao.Value.Date.ToString("dd//MM/yyyy"), soluong, hoadonthanhcong, hoadoncho, huy, tong, doanhthu);
             }
         }
         private void check_all_Click(object sender, EventArgs e)

@@ -163,7 +163,7 @@ namespace C_PL.Views
             try
             {
                 int row = e.RowIndex;
-                if(row > 0)
+                if(row >= 0)
                 {
                     var layanh = _ictsp.GetAll().FirstOrDefault(p => p.ID == Guid.Parse(dtgrid_sp.Rows[row].Cells[0].Value.ToString()));
                     ptb_anhsp.Image = Image.FromFile(layanh.anh);
@@ -201,13 +201,35 @@ namespace C_PL.Views
             try
             {
                 DataGridViewRow r = dtgrid_giohang.Rows[e.RowIndex];
+                var idhd = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
+                var idhdct = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd).Select(c => c.IDSP).FirstOrDefault();
                 var id = _ihdcts.GetAllHDCT().Where(c => c.IDSP == Guid.Parse(r.Cells[0].Value.ToString())).Select(c => c.IDSP).FirstOrDefault();
+                var soluong = _ighcts.GetAllghct().Where(c => c.IdSP == idhdct).Select(c => c.SoLuong).FirstOrDefault();
+                var idsp1 = _ictsp.GetAll().FirstOrDefault(c => c.ID == id);
+                ChiTietSanPham ctsp = new ChiTietSanPham()
+                {
+                    Id = idsp1.ID,
+                    IDHSX = idsp1.IDHSX,
+                    IDMauSac = idsp1.IDms,
+                    IDSize = idsp1.IDSize,
+                    MaSPCT = idsp1.MaCTSP,
+                    IDSP = idsp1.IDSP,
+                    Anh = idsp1.anh,
+                    GiaBan = idsp1.GiaBan,
+                    GiaNhap = idsp1.GiaNhap,
+                    TrangThai = idsp1.Trangthai,
+                    SoLuong = soluong + idsp1.SoLuong,
+                };
+                _ictsp.UpdateCRSP(idsp1.ID, ctsp);
                 if (e.ColumnIndex == 7)
                 {
                     if (MessageBox.Show("Ban co muon xoa san pham nay khong ?", "Thong bao", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
+
                         MessageBox.Show(_ihdcts.DeleteSP(id));
                         LoadGioHang();
+                        LoadSpCT();
+
                     }   
                 }
             }
@@ -358,9 +380,10 @@ namespace C_PL.Views
                     _ihds.UpdateHoaDon(idhd2, hd);
                 // Loà lại giỏ hàng 
                 LoadGioHang();
-                }
+                LoadSpCT();
+            }
             // load lại sản phẩm 
-            LoadSpCT();
+            
             //}
             //catch
             //{
