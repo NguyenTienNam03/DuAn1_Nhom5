@@ -83,7 +83,6 @@ namespace C_PL.Views
                 dtgridview_theongay.Rows.Add(x.ToString(), soluong, hoadonthanhcong, hoadoncho, huy, tong, doanhthu);
             }
         }
-
         private void check_all_Click(object sender, EventArgs e)
         {
             LoadHoaDonTheoNgay();
@@ -112,17 +111,23 @@ namespace C_PL.Views
         {
             // load lên thông kê sản phẩm
             int stt = 1;
+            dtgrid_thongkesp.Rows.Clear();
 
             var layidhd = _ihdds.GetAllhd().Where(c => c.TrangThai == "Đã thanh toán").Select(c => c.IDhd).FirstOrDefault();
             var layidhdct = _ihdcts.GetAllHDCT().Where(c => c.IDHD == Guid.Parse(layidhd.ToString())).Select(c => c.IDSP).FirstOrDefault();
             var layidsp = _ictsp.GetAll().Select(c => c.ID == layidhdct);
 
 
-            dtgrid_thongkesp.Rows.Clear();
+            var soluong1 = _ihdds.GetAllhd().Where(c => c.TrangThai == "Đã thanh toán").Sum(c => c.SoLuong);
+            lb_tongsanpham.Text = soluong1.ToString();
+            var doanhso = _ihdds.GetAllhd().Where(c => c.TrangThai == "Đã thanh toán").Sum(c => c.DonGia);
+            lb_tongdt.Text = doanhso.ToString();
+
+
             var soluong = (from n in _ihdcts.GetAllHDCT()
                            join m in _ihdds.GetAllhd() on n.IDHD equals m.IDhd
                            join h in _ictsp.GetAll() on n.IDSP equals h.ID
-                           where m.TrangThai == "Đã thanh toán"
+                           where m.TrangThai == "Đã thanh toán" 
                            select new
                            {
                                n,
@@ -140,14 +145,9 @@ namespace C_PL.Views
             {
                 foreach (var l in soluong)
                 {
-                    dtgrid_thongkesp.Rows.Add(stt++, x.z.MaCTSP , x.y.TenSp /*, l.m.SoLuong, l.m.DonGia*/);
+                    dtgrid_thongkesp.Rows.Add(stt++, x.z.MaCTSP , x.y.TenSp, l.m.SoLuong, l.m.DonGia);
                 }
-
             }
-            var soluong1 = _ihdds.GetAllhd().Where(c => c.TrangThai == "Đã thanh toán").Sum(c => c.SoLuong);
-            lb_tongsanpham.Text = soluong1.ToString();
-            var doanhso = _ihdds.GetAllhd().Where(c => c.TrangThai == "Đã thanh toán").Sum(c => c.DonGia);
-            lb_tongdt.Text = doanhso.ToString();
         }
         private void txt_timkiem_KeyUp(object sender, KeyEventArgs e)
         {

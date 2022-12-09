@@ -87,6 +87,7 @@ namespace C_PL.Views
             try
             {
                 var idhd = _ihoadon.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
+                var idspinhdct = _ihdcts.GetAllHDCT().FirstOrDefault(c => c.IDHD == idhd);
                 if (txt_tienkhachdua.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập số tiền khách đưa.");
@@ -109,6 +110,26 @@ namespace C_PL.Views
                     };
                     _ihoadon.UpdateHoaDon(idhd, hd);
                     MessageBox.Show("Thanh toán thành công .");
+
+                    var idsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == idspinhdct.IDSP);
+                    var soluong1 = idsp.SoLuong;
+                    var soluong = _ihdcts.GetAllHDCT().Where(c => c.IDSP == idsp.ID).Select(c => c.SoLuong).FirstOrDefault();
+                    ChiTietSanPham ctsp = new ChiTietSanPham()
+                    {
+                        Id = idsp.ID,
+                        IDSP = idsp.IDSP,
+                        IDHSX = idsp.IDHSX,
+                        IDMauSac = idsp.IDms,
+                        IDSize = idsp.IDSize,
+                        MaSPCT = idsp.MaCTSP,
+                        Anh = idsp.anh,
+                        GiaBan = idsp.GiaBan,
+                        GiaNhap = idsp.GiaNhap,
+                        TrangThai = idsp.Trangthai,
+                        SoLuong = Convert.ToInt32(idsp.SoLuong - soluong),
+                    };
+                    _ictsp.UpdateCRSP(idsp.ID, ctsp);
+
                     this.Close();
                 }
             }

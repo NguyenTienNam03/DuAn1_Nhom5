@@ -40,7 +40,7 @@ namespace C_PL.Views
         {
             try
             {
-                var a = _ictsp.GetAll().FirstOrDefault(c => c.ID == Guid.Parse(lb_idsp.Text));
+                var id = _ictsp.GetAll().FirstOrDefault(c => c.ID == Guid.Parse(lb_idsp.Text));
 
                 if (_check.CheckSoNguyenduong(txt_nhapsoluong.Text) == false)
                 {
@@ -48,21 +48,32 @@ namespace C_PL.Views
                     return;
                 }
                 else
-                if (Convert.ToInt32(txt_nhapsoluong.Text) > a.SoLuong)
+                if (Convert.ToInt32(txt_nhapsoluong.Text) > id.SoLuong)
                 {
-                    MessageBox.Show($"Số lượng của sản phẩm còn {a.SoLuong} . Mời bạn nhập số lượng lại .");
+                    MessageBox.Show($"Số lượng của sản phẩm còn {id.SoLuong} . Mời bạn nhập số lượng lại .");
                     return;
 
                 }
                 else
                 {
+                    
                     soluong = Convert.ToInt32(txt_nhapsoluong.Text);
-                    //soluongconlai = Convert.ToInt32(a.SoLuong) - Convert.ToInt32(txt_nhapsoluong.Text);
+                    //soluongconlai = Convert.ToInt32(id.SoLuong) - Convert.ToInt32(txt_nhapsoluong.Text);
                     //ChiTietSanPham spct = new ChiTietSanPham()
                     //{
+                    //    Id = id.ID,
+                    //    IDHSX = id.IDHSX,
+                    //    IDMauSac = id.IDms ,
+                    //    IDSize= id.IDSize,
+                    //    IDSP = id.IDSP,
+                    //    MaSPCT = id.MaCTSP ,
+                    //    GiaBan = id.GiaBan,
+                    //    GiaNhap= id.GiaNhap,
+                    //    TrangThai = id.Trangthai,
+                    //    Anh = id.anh,
                     //    SoLuong = soluongconlai,
                     //};
-                    //_ictsp.UpdateCRSP(Guid.Parse(a.ToString()), spct);
+                    //_ictsp.UpdateCRSP(id.ID, spct);
 
                     this.Close();
                 }
