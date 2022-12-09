@@ -232,7 +232,7 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(46, 581);
+            this.dateTimePicker1.Location = new System.Drawing.Point(45, 593);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(250, 30);
             this.dateTimePicker1.TabIndex = 15;
@@ -249,11 +249,11 @@
             this.Column12,
             this.Column5,
             this.Column6});
-            this.dtgridview_theongay.Location = new System.Drawing.Point(46, 35);
+            this.dtgridview_theongay.Location = new System.Drawing.Point(24, 35);
             this.dtgridview_theongay.Name = "dtgridview_theongay";
             this.dtgridview_theongay.RowHeadersWidth = 51;
             this.dtgridview_theongay.RowTemplate.Height = 29;
-            this.dtgridview_theongay.Size = new System.Drawing.Size(1077, 450);
+            this.dtgridview_theongay.Size = new System.Drawing.Size(1136, 450);
             this.dtgridview_theongay.TabIndex = 14;
             // 
             // Column1

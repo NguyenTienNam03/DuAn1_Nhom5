@@ -102,7 +102,7 @@
             // 
             this.text_tieude.AutoSize = true;
             this.text_tieude.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.text_tieude.Location = new System.Drawing.Point(422, 33);
+            this.text_tieude.Location = new System.Drawing.Point(663, 48);
             this.text_tieude.Name = "text_tieude";
             this.text_tieude.Size = new System.Drawing.Size(630, 41);
             this.text_tieude.TabIndex = 0;

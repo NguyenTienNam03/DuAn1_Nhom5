@@ -41,24 +41,24 @@ namespace C_PL.Views
            // Chữ Động
             try
             {
-                x = text_tieude.Location.X;
-                x--;
-                y++;
-                text_tieude.Location = new Point(x, text_tieude.Location.Y);
-                if (x <= 165)
-                {
-                    GiaoDien giao = new GiaoDien();
-                    x = 850;
-                    text_tieude.Location = new Point(x, text_tieude.Location.Y);
-                }
-                if (y % 2 == 0)
-                {
-                    text_tieude.ForeColor = Color.BlueViolet;
-                }
-                if (y % 2 != 0)
-                {
-                    text_tieude.ForeColor = Color.Red;
-                }
+                //x = text_tieude.Location.X;
+                //x--;
+                //y++;
+                //text_tieude.Location = new Point(x, text_tieude.Location.Y);
+                //if (x <= 165)
+                //{
+                //    GiaoDien giao = new GiaoDien();
+                //    x = 850;
+                //    text_tieude.Location = new Point(x, text_tieude.Location.Y);
+                //}
+                //if (y % 2 == 0)
+                //{
+                //    text_tieude.ForeColor = Color.BlueViolet;
+                //}
+                //if (y % 2 != 0)
+                //{
+                //    text_tieude.ForeColor = Color.Red;
+                //}
             }
             catch (Exception)
             {
