@@ -129,6 +129,7 @@ namespace C_PL.Views
         }
         public void LoadGioHang()
         {
+            
             var idhd1 = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
             dtgrid_giohang.Rows.Clear();
             foreach (var x in _ihdcts.GetAllHDCT().Where(c => c.IDHD == (idhd1)))
@@ -147,8 +148,9 @@ namespace C_PL.Views
         }
         public void LoadSpCT()
         {
-            dtgrid_sp.Rows.Clear();
+            
             dtgrid_sp.Columns[0].Visible = false;
+            dtgrid_sp.Rows.Clear();
             foreach (var x in _ictsp.GetAll())
             {
                 var y = _isps.GetAllsp().Find(c => c.IDsp == x.IDSP);
@@ -168,7 +170,6 @@ namespace C_PL.Views
                     var layanh = _ictsp.GetAll().FirstOrDefault(p => p.ID == Guid.Parse(dtgrid_sp.Rows[row].Cells[0].Value.ToString()));
                     ptb_anhsp.Image = Image.FromFile(layanh.anh);
                 }
-               
             }
             catch
             {
@@ -201,37 +202,40 @@ namespace C_PL.Views
             try
             {
                 DataGridViewRow r = dtgrid_giohang.Rows[e.RowIndex];
-                var idhd = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
-                var idhdct = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd).Select(c => c.IDSP).FirstOrDefault();
-                var id = _ihdcts.GetAllHDCT().Where(c => c.IDSP == Guid.Parse(r.Cells[0].Value.ToString())).Select(c => c.IDSP).FirstOrDefault();
-                var soluong = _ighcts.GetAllghct().Where(c => c.IdSP == idhdct).Select(c => c.SoLuong).FirstOrDefault();
-                var idsp1 = _ictsp.GetAll().FirstOrDefault(c => c.ID == id);
-                ChiTietSanPham ctsp = new ChiTietSanPham()
-                {
-                    Id = idsp1.ID,
-                    IDHSX = idsp1.IDHSX,
-                    IDMauSac = idsp1.IDms,
-                    IDSize = idsp1.IDSize,
-                    MaSPCT = idsp1.MaCTSP,
-                    IDSP = idsp1.IDSP,
-                    Anh = idsp1.anh,
-                    GiaBan = idsp1.GiaBan,
-                    GiaNhap = idsp1.GiaNhap,
-                    TrangThai = idsp1.Trangthai,
-                    SoLuong = soluong + idsp1.SoLuong,
-                };
-                _ictsp.UpdateCRSP(idsp1.ID, ctsp);
-                if (e.ColumnIndex == 7)
-                {
-                    if (MessageBox.Show("Ban co muon xoa san pham nay khong ?", "Thong bao", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+               //if(e.RowIndex >= 0)
+               // {
+                    var idhd = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
+                    var idhdct = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd).Select(c => c.IDSP).FirstOrDefault();
+                    var id = _ihdcts.GetAllHDCT().Where(c => c.IDSP == Guid.Parse(r.Cells[0].Value.ToString())).Select(c => c.IDSP).FirstOrDefault();
+                    var soluong = _ighcts.GetAllghct().Where(c => c.IdSP == idhdct).Select(c => c.SoLuong).FirstOrDefault();
+                    var idsp1 = _ictsp.GetAll().FirstOrDefault(c => c.ID == id);
+                    ChiTietSanPham ctsp = new ChiTietSanPham()
                     {
-
-                        MessageBox.Show(_ihdcts.DeleteSP(id));
-                        LoadGioHang();
-                        LoadSpCT();
-
-                    }   
-                }
+                        Id = idsp1.ID,
+                        IDHSX = idsp1.IDHSX,
+                        IDMauSac = idsp1.IDms,
+                        IDSize = idsp1.IDSize,
+                        MaSPCT = idsp1.MaCTSP,
+                        IDSP = idsp1.IDSP,
+                        Anh = idsp1.anh,
+                        GiaBan = idsp1.GiaBan,
+                        GiaNhap = idsp1.GiaNhap,
+                        TrangThai = idsp1.Trangthai,
+                        SoLuong = soluong + idsp1.SoLuong,
+                    };
+                    _ictsp.UpdateCRSP(idsp1.ID, ctsp);
+                    if (e.ColumnIndex == 7)
+                    {
+                        if (MessageBox.Show("Ban co muon xoa san pham nay khong ?", "Thong bao", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            MessageBox.Show(_ihdcts.DeleteSP(id));
+                            //dtgrid_giohang.Rows.Clear();
+                            LoadGioHang();
+                            LoadSpCT();
+                        }
+                    }
+                //}
+               
             }
             catch
             {
@@ -324,14 +328,19 @@ namespace C_PL.Views
 
         private void dtgrid_sp_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //try
-            //{
-                int row = dtgrid_giohang.Rows.Count;
-            DataGridViewRow r = dtgrid_sp.Rows[e.RowIndex];
-            
-            DialogResult dialogResult = MessageBox.Show("Ban co muon them san pham nay khong ?", "Thong bao", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            try
             {
+            int row = dtgrid_giohang.Rows.Count;
+            DataGridViewRow r = dtgrid_sp.Rows[e.RowIndex];
+            if(lb_mahd.Text == "")
+            {
+                MessageBox.Show("Bạn chưa tạo hoá đơn .");
+                return;
+            } else
+            {
+                DialogResult dialogResult = MessageBox.Show("Ban co muon them san pham nay khong ?", "Thong bao", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
                     var a = Guid.Parse(r.Cells[0].Value.ToString());
                     IDspct = a;
                     FrmSoLuong sl = new FrmSoLuong();
@@ -340,34 +349,34 @@ namespace C_PL.Views
 
                     var idhd2 = _ihds.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
 
-                var idsp1 = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd2).Select(c => c.IDSP).FirstOrDefault(); // lỗi lấy idsp
-           
-                if (idsp1 != idsp.ID)
-                {
-                    //Thêm hoá đơn chi tiết
-                    HoaDonCT hdct = new HoaDonCT()
-                    { 
-                        IDSP = idsp.ID,
-                        IDHD = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault(),
-                        SoLuong = FrmSoLuong.soluong,
-                        DonGia = idsp.GiaBan,
-                    };
-                     _ihdcts.AddHDCT(hdct);
-                }
-                else
-                {
-                    // Update hoá đơn chi tiết
-                    HoaDonCT hoa = new HoaDonCT()
+                    var idsp1 = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd2).Select(c => c.IDSP).FirstOrDefault(); // lỗi lấy idsp
+
+                    if (idsp1 != idsp.ID)
                     {
-                        IDSP = idsp.ID,
-                        //IDHD = idhd2 ,
-                        SoLuong = FrmSoLuong.soluong,
-                        DonGia = idsp.GiaBan
-                    };
-                    _ihdcts.UpdateHDCT(idhd2, hoa);
-                }
-                // update hoá đơn 
-                HoaDon hd = new HoaDon()
+                        //Thêm hoá đơn chi tiết
+                        HoaDonCT hdct = new HoaDonCT()
+                        {
+                            IDSP = idsp.ID,
+                            IDHD = idhd2,
+                            SoLuong = FrmSoLuong.soluong,
+                            DonGia = idsp.GiaBan,
+                        };
+                        _ihdcts.AddHDCT(hdct);
+                    }
+                    else
+                    {
+                        // Update hoá đơn chi tiết
+                        HoaDonCT hoa = new HoaDonCT()
+                        {
+                            IDSP = idsp.ID,
+                            //IDHD = idhd2 ,
+                            SoLuong = FrmSoLuong.soluong,
+                            DonGia = idsp.GiaBan
+                        };
+                        _ihdcts.UpdateHDCT(idhd2, hoa);
+                    }
+                    // update hoá đơn 
+                    HoaDon hd = new HoaDon()
                     {
                         ID = idhd2,
                         IDKH = _ikhs.GetAllKH().Where(c => c.TenKH == Convert.ToString(lb_tenkh.Text)).Select(c => c.ID).FirstOrDefault(),
@@ -378,17 +387,19 @@ namespace C_PL.Views
                         NgayThanhToan = null,
                     };
                     _ihds.UpdateHoaDon(idhd2, hd);
-                // Loà lại giỏ hàng 
-                LoadGioHang();
-                LoadSpCT();
+                        // Loà lại giỏ hàng 
+                        dtgrid_giohang.Rows.Clear();
+                        LoadGioHang();
+                        // load lại sản phẩm 
+                        dtgrid_sp.Rows.Clear();
+                    LoadSpCT();
+                }
             }
-            // load lại sản phẩm 
-            
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Bạn nên chọn vào ô có dữ liệu .");
-            //}
+            }
+            catch
+            {
+                MessageBox.Show("Bạn nên chọn vào ô có dữ liệu .");
+            }
         }
 
         private void btn_chonkh_Click(object sender, EventArgs e)

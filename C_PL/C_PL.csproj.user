@@ -4,6 +4,9 @@
     <Compile Update="Views\FrmBanHang.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\frmChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\FrmChucVu.cs">
       <SubType>Form</SubType>
     </Compile>

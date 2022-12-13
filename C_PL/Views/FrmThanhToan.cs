@@ -110,26 +110,7 @@ namespace C_PL.Views
                     };
                     _ihoadon.UpdateHoaDon(idhd, hd);
                     MessageBox.Show("Thanh toán thành công .");
-
-                    //var idsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == idspinhdct.IDSP);
-                    //var soluong1 = idsp.SoLuong;
-                    //var soluong = _ihdcts.GetAllHDCT().Where(c => c.IDSP == idsp.ID).Select(c => c.SoLuong).FirstOrDefault();
-                    //ChiTietSanPham ctsp = new ChiTietSanPham()
-                    //{
-                    //    Id = idsp.ID,
-                    //    IDSP = idsp.IDSP,
-                    //    IDHSX = idsp.IDHSX,
-                    //    IDMauSac = idsp.IDms,
-                    //    IDSize = idsp.IDSize,
-                    //    MaSPCT = idsp.MaCTSP,
-                    //    Anh = idsp.anh,
-                    //    GiaBan = idsp.GiaBan,
-                    //    GiaNhap = idsp.GiaNhap,
-                    //    TrangThai = idsp.Trangthai,
-                    //    SoLuong = Convert.ToInt32(idsp.SoLuong - soluong),
-                    //};
-                    //_ictsp.UpdateCRSP(idsp.ID, ctsp);
-
+                    IN();
                     this.Close();
                 }
             }
@@ -144,21 +125,108 @@ namespace C_PL.Views
 
         private void txt_tienkhachdua_TextChanged(object sender, EventArgs e)
         {
-            lb_tientrakhach.Text = Convert.ToString(Convert.ToDouble(txt_tienkhachdua.Text) - Convert.ToDouble(lb_tongtien.Text));
-            if (Convert.ToDouble(lb_tientrakhach.Text) < 0)
+            try
             {
-                lb_tientrakhach.ForeColor = Color.Red;
+                lb_tientrakhach.Text = Convert.ToString(Convert.ToDouble(txt_tienkhachdua.Text) - Convert.ToDouble(lb_tongtien.Text));
+                if (Convert.ToDouble(lb_tientrakhach.Text) < 0)
+                {
+                    lb_tientrakhach.ForeColor = Color.Red;
 
+                }
+                else
+                {
+                    lb_tientrakhach.ForeColor = Color.Blue;
+                }
             }
-            else
+            catch
             {
-                lb_tientrakhach.ForeColor = Color.Blue;
+                
             }
+            
         }
-
+        public void IN()
+        {
+            printhd.Document = PrintHoaDon;
+            printhd.ShowDialog();
+        }
         private void btn_huy_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        private void PrintHoaDon_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            var w = PrintHoaDon.DefaultPageSettings.PaperSize.Width;
+            // Lay ten cua hang
+            var idhd = _ihoadon.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
+            e.Graphics.DrawString("twinsneaker".ToUpper(), new Font("Courier New", 12, FontStyle.Bold), Brushes.Black, new PointF(100, 20));
+            
+            // lay ma hd
+            e.Graphics.DrawString(String.Format("{0}", _ihoadon.GetAllhd().Where(c => c.IDhd == idhd).Select(c => c.Mahd).FirstOrDefault()), new Font("Courier New", 14, FontStyle.Bold), Brushes.Black, new PointF(w / 2 + 200, 20));
+
+            // Ngay gio xuat hoa don 
+            e.Graphics.DrawString(String.Format("{0}", DateTime.Now.ToString("dd/MM/yyyy HH:mm")), new Font("Courier New", 14, FontStyle.Bold), Brushes.Black, new PointF(w / 2 + 200, 45));
+            Pen blackpen = new Pen(Color.Black, 1);
+            var y = 70;
+            Point p1 = new Point(10, y);
+            Point p2 = new Point(w - 10, y);
+            e.Graphics.DrawLine(blackpen, p1, p2);
+            y += 30;
+            e.Graphics.DrawString("Phieu Thanh Toan".ToUpper(), new Font("Courier New", 30, FontStyle.Bold), Brushes.Black, new PointF(190, y));
+
+            y += 80;
+            // Xem lai font chu cho to len
+            e.Graphics.DrawString("STT", new Font("Varial", 10, FontStyle.Bold), Brushes.Black, new PointF(10, y));
+
+            e.Graphics.DrawString("Ten SP", new Font("Varial", 10, FontStyle.Bold), Brushes.Black, new PointF(50, y));
+
+            e.Graphics.DrawString("So luong", new Font("Varial", 10, FontStyle.Bold), Brushes.Black, new PointF(w / 2, y));
+
+            e.Graphics.DrawString("Don gia", new Font("Varial", 10, FontStyle.Bold), Brushes.Black, new PointF(w / 2 + 100, y));
+
+            e.Graphics.DrawString("Thanh tien", new Font("Varial", 10, FontStyle.Bold), Brushes.Black, new PointF(w - 200, y));
+
+            var tensp = (from d in _isps.GetAllsp()
+                         join f in _ictsp.GetAll() on d.IDsp equals f.IDSP
+                         select new
+                         {
+                             d,
+                             f
+                         }).ToList();
+            int i = 1;
+            y += 20;
+            foreach (var n in _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd))
+            {
+                // in bi de sp len
+                foreach (var m in tensp)
+                {
+                    e.Graphics.DrawString(string.Format("{0}", i++), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(10, y));
+                    e.Graphics.DrawString(m.d.TenSp, new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(50, y));
+                    e.Graphics.DrawString(string.Format("{0}", n.SoLuong), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(w / 2, y));
+                    e.Graphics.DrawString(string.Format("{0}",n.DonGia), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(w / 2 + 100, y));
+                    e.Graphics.DrawString(string.Format("{0}", n.SoLuong * n.DonGia), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(w - 200, y));
+                }
+            }
+            y += 40;
+            p1 = new Point(10, y);
+            p2 = new Point(w - 10, y);
+            e.Graphics.DrawLine(blackpen, p1, p2);
+
+            y += 20;
+            e.Graphics.DrawString(string.Format("Tong tien : "), new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w / 2, y));
+            e.Graphics.DrawString(lb_tongtien.Text + "VND", new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w - 150, y));
+
+            y += 20;
+            e.Graphics.DrawString(string.Format("Tien khach dua : "), new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w / 2, y));
+            e.Graphics.DrawString(txt_tienkhachdua.Text + "VND", new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w - 150, y));
+
+            y += 20;
+            e.Graphics.DrawString(string.Format("Tien tra khach : "), new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w / 2, y));
+            e.Graphics.DrawString(lb_tientrakhach.Text + "VND", new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w - 150, y));
+
+
+        }
+
+
     }
 }

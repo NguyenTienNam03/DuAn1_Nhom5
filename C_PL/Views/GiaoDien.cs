@@ -145,7 +145,7 @@ namespace C_PL.Views
 
         private void bt_DoiMK_Click(object sender, EventArgs e)
         {
-            Openchildform(new FrmDoiMk());
+            Openchildform(new frmChangePassword());
         }
 
         private void bt_BanHang_Click(object sender, EventArgs e)

@@ -65,7 +65,7 @@ namespace C_PL.Views
                     soluongconlai = Convert.ToInt32(id.SoLuong) - Convert.ToInt32(txt_nhapsoluong.Text);
                     ChiTietSanPham spct = new ChiTietSanPham()
                     {
-                        Id = id.ID,
+                        //Id = id.ID,
                         IDHSX = id.IDHSX,
                         IDMauSac = id.IDms,
                         IDSize = id.IDSize,
@@ -81,7 +81,6 @@ namespace C_PL.Views
 
                     this.Close();
                 }
-
             }
             catch
             {

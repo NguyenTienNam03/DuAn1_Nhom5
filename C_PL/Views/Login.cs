@@ -79,5 +79,16 @@ namespace C_PL.Views
             laymk.Show();
             this.Hide();
         }
+
+        private void check_show_CheckedChanged(object sender, EventArgs e)
+        {
+            if(check_show.Checked)
+            {
+                text_pass.UseSystemPasswordChar = true;
+            }else
+            {
+                text_pass.UseSystemPasswordChar = false;
+            }
+        }
     }
 }

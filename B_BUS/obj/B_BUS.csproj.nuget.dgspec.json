@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Administrator\\Desktop\\Test_du_an1\\B_BUS\\B_BUS.csproj": {}
+    "E:\\C fake\\Desktop\\Test_du_an1\\B_BUS\\B_BUS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Administrator\\Desktop\\Test_du_an1\\A_DAL\\A_DAL.csproj": {
+    "E:\\C fake\\Desktop\\Test_du_an1\\A_DAL\\A_DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Test_du_an1\\A_DAL\\A_DAL.csproj",
+        "projectUniqueName": "E:\\C fake\\Desktop\\Test_du_an1\\A_DAL\\A_DAL.csproj",
         "projectName": "A_DAL",
-        "projectPath": "C:\\Users\\Administrator\\Desktop\\Test_du_an1\\A_DAL\\A_DAL.csproj",
+        "projectPath": "E:\\C fake\\Desktop\\Test_du_an1\\A_DAL\\A_DAL.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Desktop\\Test_du_an1\\A_DAL\\obj\\",
+        "outputPath": "E:\\C fake\\Desktop\\Test_du_an1\\A_DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -85,14 +85,14 @@
         }
       }
     },
-    "C:\\Users\\Administrator\\Desktop\\Test_du_an1\\B_BUS\\B_BUS.csproj": {
+    "E:\\C fake\\Desktop\\Test_du_an1\\B_BUS\\B_BUS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Test_du_an1\\B_BUS\\B_BUS.csproj",
+        "projectUniqueName": "E:\\C fake\\Desktop\\Test_du_an1\\B_BUS\\B_BUS.csproj",
         "projectName": "B_BUS",
-        "projectPath": "C:\\Users\\Administrator\\Desktop\\Test_du_an1\\B_BUS\\B_BUS.csproj",
+        "projectPath": "E:\\C fake\\Desktop\\Test_du_an1\\B_BUS\\B_BUS.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Desktop\\Test_du_an1\\B_BUS\\obj\\",
+        "outputPath": "E:\\C fake\\Desktop\\Test_du_an1\\B_BUS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -113,8 +113,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Administrator\\Desktop\\Test_du_an1\\A_DAL\\A_DAL.csproj": {
-                "projectPath": "C:\\Users\\Administrator\\Desktop\\Test_du_an1\\A_DAL\\A_DAL.csproj"
+              "E:\\C fake\\Desktop\\Test_du_an1\\A_DAL\\A_DAL.csproj": {
+                "projectPath": "E:\\C fake\\Desktop\\Test_du_an1\\A_DAL\\A_DAL.csproj"
               }
             }
           }

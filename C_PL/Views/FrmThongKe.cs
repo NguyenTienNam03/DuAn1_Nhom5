@@ -67,7 +67,7 @@ namespace C_PL.Views
         private void check_homnay_Click(object sender, EventArgs e)
         {
             dtgridview_theongay.Rows.Clear();
-            foreach (var x in _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == DateTime.Now.Date).Distinct())
+            foreach (var x in _ihdds.GetAllhd().Select(c => c.NgayTao.Value.Date == DateTime.Now.Date).Distinct())
             {
                 var sp = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == DateTime.Now.Date).Sum(c => c.SoLuong);
                 var hdc = _ihdds.GetAllhd().Where(c => c.NgayTao.Value.Date == DateTime.Now.Date && c.TrangThai == "Chờ thanh toán").Count();
@@ -80,7 +80,7 @@ namespace C_PL.Views
                 hoadoncho = hdc;
                 hoadonthanhcong = hdtc;
                 soluong = Convert.ToInt32(sp);
-                dtgridview_theongay.Rows.Add(x.NgayTao.Value.Date.ToString("dd//MM/yyyy"), soluong, hoadonthanhcong, hoadoncho, huy, tong, doanhthu);
+                dtgridview_theongay.Rows.Add(DateTime.Now.Date, soluong, hoadonthanhcong, hoadoncho, huy, tong, doanhthu);
             }
         }
         private void check_all_Click(object sender, EventArgs e)
@@ -104,50 +104,30 @@ namespace C_PL.Views
                 hoadoncho = hdc;
                 hoadonthanhcong = hdtc;
                 soluong = Convert.ToInt32(sp);
-                dtgridview_theongay.Rows.Add(x, soluong, hoadonthanhcong, hoadoncho, huy, tong, doanhthu);
+                dtgridview_theongay.Rows.Add(dateTimePicker1.Value.Date, soluong, hoadonthanhcong, hoadoncho, huy, tong, doanhthu);
             }
         }
         public void Loadthongkesp()
         {
-            // load lên thông kê sản phẩm
             int stt = 1;
+            // load lên thông kê sản phẩm
             dtgrid_thongkesp.Rows.Clear();
-
-            var layidhd = _ihdds.GetAllhd().Where(c => c.TrangThai == "Đã thanh toán").Select(c => c.IDhd).FirstOrDefault();
-            var layidhdct = _ihdcts.GetAllHDCT().Where(c => c.IDHD == Guid.Parse(layidhd.ToString())).Select(c => c.IDSP).FirstOrDefault();
-            var layidsp = _ictsp.GetAll().Select(c => c.ID == layidhdct);
-
-
-            var soluong1 = _ihdds.GetAllhd().Where(c => c.TrangThai == "Đã thanh toán").Sum(c => c.SoLuong);
-            lb_tongsanpham.Text = soluong1.ToString();
-            var doanhso = _ihdds.GetAllhd().Where(c => c.TrangThai == "Đã thanh toán").Sum(c => c.DonGia);
-            lb_tongdt.Text = doanhso.ToString();
-
-
-            var soluong = (from n in _ihdcts.GetAllHDCT()
-                           join m in _ihdds.GetAllhd() on n.IDHD equals m.IDhd
-                           join h in _ictsp.GetAll() on n.IDSP equals h.ID
-                           where m.TrangThai == "Đã thanh toán" 
-                           select new
-                           {
-                               n,
-                               m,
-                               h,
-                           }).ToList();
-            var a = (from y in _isps.GetAllsp()
-                     join z in _ictsp.GetAll() on y.IDsp equals z.IDSP
-                     select new
-                     {
-                         y,
-                         z,
-                     }).ToList();
-            foreach (var x in a)
+            foreach(var x in _ictsp.GetAll())
             {
-                foreach (var l in soluong)
+                var tensp = _isps.GetAllsp().Where(c => c.IDsp == x.IDSP).Select(c => c.TenSp).Distinct().FirstOrDefault();
+                var idhd = _ihdds.GetAllhd().FirstOrDefault(c => c.TrangThai == "Đã thanh toán");
+                //var idhd = _ihdds.GetAllhd().Where(c => c.IDhd == )
+                if(idhd.TrangThai == "Đã thanh toán")
                 {
-                    dtgrid_thongkesp.Rows.Add(stt++, x.z.MaCTSP , x.y.TenSp, l.m.SoLuong, l.m.DonGia);
+                    var soluongsp = _ihdcts.GetAllHDCT().Where(c => c.IDSP == x.ID).Sum(c => c.SoLuong);
+                    var doanhthu = _ihdcts.GetAllHDCT().Where(c => c.IDSP == x.ID).Sum(c => c.SoLuong * c.DonGia);
+                    dtgrid_thongkesp.Rows.Add(stt++, x.MaCTSP, tensp, soluongsp, doanhthu);
                 }
             }
+            var tongsoluong = _ihdds.GetAllhd().Where(c => c.TrangThai == "Đã thanh toán").Sum(c => c.SoLuong);
+            var tongdt = _ihdds.GetAllhd().Where(c => c.TrangThai == "Đã thanh toán").Sum(c => c.DonGia);
+            lb_tongsanpham.Text = tongsoluong.ToString();
+            lb_tongdt.Text = tongdt.ToString();
         }
         private void txt_timkiem_KeyUp(object sender, KeyEventArgs e)
         {

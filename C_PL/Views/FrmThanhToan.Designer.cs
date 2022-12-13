@@ -28,7 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmThanhToan));
             this.dt_hdct = new System.Windows.Forms.DataGridView();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -48,13 +56,8 @@
             this.lb_tongtien = new System.Windows.Forms.Label();
             this.lb_tongtiensp = new System.Windows.Forms.Label();
             this.lb_thue = new System.Windows.Forms.Label();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrintHoaDon = new System.Drawing.Printing.PrintDocument();
+            this.printhd = new System.Windows.Forms.PrintPreviewDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dt_hdct)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,12 +72,61 @@
             this.Column5,
             this.Column6,
             this.Column7});
-            this.dt_hdct.Location = new System.Drawing.Point(12, 91);
+            this.dt_hdct.Location = new System.Drawing.Point(11, 87);
             this.dt_hdct.Name = "dt_hdct";
             this.dt_hdct.RowHeadersWidth = 51;
             this.dt_hdct.RowTemplate.Height = 29;
             this.dt_hdct.Size = new System.Drawing.Size(728, 314);
             this.dt_hdct.TabIndex = 0;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "ID";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 125;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Tên SP";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 125;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Màu sắc ";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 125;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Size";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 80;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Số lượng ";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 110;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Đơn giá ";
+            this.Column6.MinimumWidth = 6;
+            this.Column6.Name = "Column6";
+            this.Column6.Width = 125;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Thành tiền";
+            this.Column7.MinimumWidth = 6;
+            this.Column7.Name = "Column7";
+            this.Column7.Width = 125;
             // 
             // label1
             // 
@@ -267,54 +319,19 @@
             this.lb_thue.TabIndex = 22;
             this.lb_thue.Text = "10%";
             // 
-            // Column2
+            // PrintHoaDon
             // 
-            this.Column2.HeaderText = "ID";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 125;
+            this.PrintHoaDon.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintHoaDon_PrintPage);
             // 
-            // Column1
+            // printhd
             // 
-            this.Column1.HeaderText = "Tên SP";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 125;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Màu sắc ";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 125;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Size";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 80;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Số lượng ";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 110;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Đơn giá ";
-            this.Column6.MinimumWidth = 6;
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 125;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "Thành tiền";
-            this.Column7.MinimumWidth = 6;
-            this.Column7.Name = "Column7";
-            this.Column7.Width = 125;
+            this.printhd.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printhd.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printhd.ClientSize = new System.Drawing.Size(400, 300);
+            this.printhd.Enabled = true;
+            this.printhd.Icon = ((System.Drawing.Icon)(resources.GetObject("printhd.Icon")));
+            this.printhd.Name = "printPreviewDialog1";
+            this.printhd.Visible = false;
             // 
             // FrmThanhToan
             // 
@@ -379,5 +396,7 @@
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewTextBoxColumn Column6;
         private DataGridViewTextBoxColumn Column7;
+        private System.Drawing.Printing.PrintDocument PrintHoaDon;
+        private PrintPreviewDialog printhd;
     }
 }
