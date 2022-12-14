@@ -122,9 +122,9 @@ namespace C_PL.Views
         {
             var a = _IDNhanVien.GetAllNV().FirstOrDefault(p => p.Email == Login.layEmail);// Lấy ID Chức Vụ
             var b = _ICVSV.GetAllCV().FirstOrDefault(p => p.IDcv == a.IDCV); // Lấy Tên Chức vụ
-            if (b.TenCV == "Quản Lý")
+            if (b.TenCV == "Nhân viên")
             {
-                Openchildform(new FrmQLNhanVien());
+                MessageBox.Show("Bạn Không Được Phép Sử Dụng Chức Năng Này");
             }
             else
             {
@@ -155,12 +155,30 @@ namespace C_PL.Views
 
         private void bt_KhachHang_Click(object sender, EventArgs e)
         {
-            Openchildform(new FrmQLKhachHang());
+            var a = _IDNhanVien.GetAllNV().FirstOrDefault(p => p.Email == Login.layEmail);// Lấy ID Chức Vụ
+            var b = _ICVSV.GetAllCV().FirstOrDefault(p => p.IDcv == a.IDCV); // Lấy Tên Chức vụ
+            if (b.TenCV == "Nhân viên")
+            {
+                MessageBox.Show("Bạn Không Được Phép Sử Dụng Chức Năng Này");
+            }
+            else
+            {
+                Openchildform(new FrmQLKhachHang());
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Openchildform(new FrmQLHoaDon());
+            var a = _IDNhanVien.GetAllNV().FirstOrDefault(p => p.Email == Login.layEmail);// Lấy ID Chức Vụ
+            var b = _ICVSV.GetAllCV().FirstOrDefault(p => p.IDcv == a.IDCV); // Lấy Tên Chức vụ
+            if (b.TenCV == "Nhân viên")
+            {
+                MessageBox.Show("Bạn Không Được Phép Sử Dụng Chức Năng Này");
+            }
+            else
+            {
+                Openchildform(new FrmQLHoaDon());
+            }
         }
     }
 }

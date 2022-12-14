@@ -193,18 +193,18 @@ namespace C_PL.Views
                              d,
                              f
                          }).ToList();
-            int i = 1;
-            y += 20;
+            int stt = 1;
+            y += 30;
             foreach (var n in _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd))
             {
-                // in bi de sp len
+                // in bi de ten sp len
                 foreach (var m in tensp)
                 {
-                    e.Graphics.DrawString(string.Format("{0}", i++), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(10, y));
+                    e.Graphics.DrawString(string.Format("{0}", stt++), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(10, y));
                     e.Graphics.DrawString(m.d.TenSp, new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(50, y));
-                    e.Graphics.DrawString(string.Format("{0}", n.SoLuong), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(w / 2, y));
-                    e.Graphics.DrawString(string.Format("{0}",n.DonGia), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(w / 2 + 100, y));
-                    e.Graphics.DrawString(string.Format("{0}", n.SoLuong * n.DonGia), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(w - 200, y));
+                    e.Graphics.DrawString(string.Format("{0:N0}", n.SoLuong), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(w / 2, y));
+                    e.Graphics.DrawString(string.Format("{0:N0}", n.DonGia), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(w / 2 + 100, y));
+                    e.Graphics.DrawString(string.Format("{0:N0}", n.SoLuong * n.DonGia), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(w - 200, y));
                 }
             }
             y += 40;
@@ -212,15 +212,23 @@ namespace C_PL.Views
             p2 = new Point(w - 10, y);
             e.Graphics.DrawLine(blackpen, p1, p2);
 
-            y += 20;
+            y += 30;
+            e.Graphics.DrawString(string.Format("Thanh tien : "), new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w / 2, y));
+            e.Graphics.DrawString(lb_tongtiensp.Text + "VND", new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w - 150, y));
+
+            y += 30;
+            e.Graphics.DrawString(string.Format("Thue : "), new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w / 2, y));
+            e.Graphics.DrawString(lb_thue.Text , new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w - 150, y));
+
+            y += 30;
             e.Graphics.DrawString(string.Format("Tong tien : "), new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w / 2, y));
             e.Graphics.DrawString(lb_tongtien.Text + "VND", new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w - 150, y));
 
-            y += 20;
+            y += 30;
             e.Graphics.DrawString(string.Format("Tien khach dua : "), new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w / 2, y));
             e.Graphics.DrawString(txt_tienkhachdua.Text + "VND", new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w - 150, y));
 
-            y += 20;
+            y += 30;
             e.Graphics.DrawString(string.Format("Tien tra khach : "), new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w / 2, y));
             e.Graphics.DrawString(lb_tientrakhach.Text + "VND", new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w - 150, y));
 

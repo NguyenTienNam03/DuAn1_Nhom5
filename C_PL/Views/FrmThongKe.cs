@@ -117,12 +117,32 @@ namespace C_PL.Views
                 var tensp = _isps.GetAllsp().Where(c => c.IDsp == x.IDSP).Select(c => c.TenSp).Distinct().FirstOrDefault();
                 var idhd = _ihdds.GetAllhd().FirstOrDefault(c => c.TrangThai == "Đã thanh toán");
                 //var idhd = _ihdds.GetAllhd().Where(c => c.IDhd == )
-                if(idhd.TrangThai == "Đã thanh toán")
-                {
+                
                     var soluongsp = _ihdcts.GetAllHDCT().Where(c => c.IDSP == x.ID).Sum(c => c.SoLuong);
                     var doanhthu = _ihdcts.GetAllHDCT().Where(c => c.IDSP == x.ID).Sum(c => c.SoLuong * c.DonGia);
                     dtgrid_thongkesp.Rows.Add(stt++, x.MaCTSP, tensp, soluongsp, doanhthu);
-                }
+                
+            }
+            var tongsoluong = _ihdds.GetAllhd().Where(c => c.TrangThai == "Đã thanh toán").Sum(c => c.SoLuong);
+            var tongdt = _ihdds.GetAllhd().Where(c => c.TrangThai == "Đã thanh toán").Sum(c => c.DonGia);
+            lb_tongsanpham.Text = tongsoluong.ToString();
+            lb_tongdt.Text = tongdt.ToString();
+        }
+        public void Timkiem(string name)
+        {
+            int stt = 1;
+            // load lên thông kê sản phẩm
+            dtgrid_thongkesp.Rows.Clear();
+            foreach (var x in _ictsp.GetAll().Where(c => c.MaCTSP.Contains(name)))
+            {
+                var tensp = _isps.GetAllsp().Where(c => c.IDsp == x.IDSP).Select(c => c.TenSp).Distinct().FirstOrDefault();
+                var idhd = _ihdds.GetAllhd().FirstOrDefault(c => c.TrangThai == "Đã thanh toán");
+                //var idhd = _ihdds.GetAllhd().Where(c => c.IDhd == )
+
+                var soluongsp = _ihdcts.GetAllHDCT().Where(c => c.IDSP == x.ID).Sum(c => c.SoLuong);
+                var doanhthu = _ihdcts.GetAllHDCT().Where(c => c.IDSP == x.ID).Sum(c => c.SoLuong * c.DonGia);
+                dtgrid_thongkesp.Rows.Add(stt++, x.MaCTSP, tensp, soluongsp, doanhthu);
+
             }
             var tongsoluong = _ihdds.GetAllhd().Where(c => c.TrangThai == "Đã thanh toán").Sum(c => c.SoLuong);
             var tongdt = _ihdds.GetAllhd().Where(c => c.TrangThai == "Đã thanh toán").Sum(c => c.DonGia);
@@ -131,7 +151,7 @@ namespace C_PL.Views
         }
         private void txt_timkiem_KeyUp(object sender, KeyEventArgs e)
         {
-
+            Timkiem(txt_timkiem.Text);
         }
     }
 }

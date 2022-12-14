@@ -33,6 +33,17 @@ namespace C_PL.Views
             //txt_MaNV.Enabled= false;
             LoadNV(); 
             check_hd.Checked = true ;
+            rbtn_Nam.Checked = true ;
+        }
+        public void Reset()
+        {
+            txt_DiaChi.Text = "";
+            txt_Email.Text = "";
+            txt_MaNV.Text = "";
+            txt_matkhau.Text = "";
+            txt_sdt.Text = "";
+            txt_TenNV.Text = "";
+            cbb_chucvu.Text = "";
         }
         public void LoadNV()
         {
@@ -118,6 +129,7 @@ namespace C_PL.Views
                             TrangThai = (check_hd.Checked == true ? "Hoat Dong" : "Khong Hoat Dong"),
                         }));
                         LoadNV();
+                        Reset();
                     }
                     else
                     {
@@ -151,6 +163,7 @@ namespace C_PL.Views
                     TrangThai = (check_hd.Checked == true ? "Hoạt động" : "Không hoạt động"),
                 }));
                 LoadNV();
+                Reset();
             }
             else
             {
@@ -166,6 +179,7 @@ namespace C_PL.Views
 
                 MessageBox.Show(_Invs.DeleteNV(id));
                 LoadNV();
+                Reset();
             }
             else
             {
@@ -187,21 +201,37 @@ namespace C_PL.Views
 
         private void dtgrid_nhanvien_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
                 DataGridViewRow r = dtgrid_nhanvien.Rows[e.RowIndex];
-                id = Guid.Parse(r.Cells[0].Value.ToString());
-                txt_MaNV.Text = Convert.ToString(r.Cells[1].Value);
-                txt_TenNV.Text = Convert.ToString(r.Cells[2].Value);
-                rbtn_Nam.Checked = r.Cells[3].Value.ToString() == "Nam";
-                rbtn_Nữ.Checked = r.Cells[3].Value.ToString() == "Nữ";
-                dtp_NgaySinh.Text = r.Cells[4].Value.ToString();
-                txt_DiaChi.Text = Convert.ToString(r.Cells[5].Value);
-                txt_sdt.Text = Convert.ToString(r.Cells[6].Value);
-                txt_Email.Text = Convert.ToString(r.Cells[7].Value);
-                txt_matkhau.Text = Convert.ToString(r.Cells[8].Value);
-                cbb_chucvu.Text = Convert.ToString(r.Cells[9].Value);
-                check_hd.Checked = (r.Cells[10].Value.ToString()) == "Hoạt động";
-                check_khd.Checked = (r.Cells[10].Value.ToString()) == "Không hoạt động";
+                if (r.Cells[0].Value == null)
+                {
+                    return;     
+                } else
+                {
+                    id = Guid.Parse(r.Cells[0].Value.ToString());
+                    txt_MaNV.Text = Convert.ToString(r.Cells[1].Value);
+                    txt_TenNV.Text = Convert.ToString(r.Cells[2].Value);
+                    rbtn_Nam.Checked = r.Cells[3].Value.ToString() == "Nam";
+                    rbtn_Nữ.Checked = r.Cells[3].Value.ToString() == "Nữ";
+                    dtp_NgaySinh.Text = r.Cells[4].Value.ToString();
+                    txt_DiaChi.Text = Convert.ToString(r.Cells[5].Value);
+                    txt_sdt.Text = Convert.ToString(r.Cells[6].Value);
+                    txt_Email.Text = Convert.ToString(r.Cells[7].Value);
+                    txt_matkhau.Text = Convert.ToString(r.Cells[8].Value);
+                    cbb_chucvu.Text = Convert.ToString(r.Cells[9].Value);
+                    check_hd.Checked = (r.Cells[10].Value.ToString()) == "Hoạt động";
+                    check_khd.Checked = (r.Cells[10].Value.ToString()) == "Không hoạt động";
 
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Mời bạn thao tác lại.");
+                return;
+            }
+               
         }
 
         private void check_hd_CheckedChanged(object sender, EventArgs e)
@@ -228,10 +258,20 @@ namespace C_PL.Views
                 check_hd.Checked = true;
             }
         }
+        public void TimKiem(string name)
+        {
+            dtgrid_nhanvien.Rows.Clear();
+            dtgrid_nhanvien.Columns[0].Visible = false;
+            foreach (var x in _Invs.GetAllNV().OrderBy(c => c.MaNV).Where(c => c.MaNV.Contains(name) || c.Ten.Contains(name)))
+            {
+                var y = _Icvs.GetAllCV().FirstOrDefault(c => c.IDcv == x.IDCV);
+                dtgrid_nhanvien.Rows.Add(x.ID, x.MaNV, x.Ten, x.GioiTinh, x.NgaySinh, x.DiaChi, x.SDT, x.Email, x.MatKhau, y.TenCV, x.TrangThai);
+            }
 
+        }
         private void txt_timkiem_KeyUp(object sender, KeyEventArgs e)
         {
-
+            TimKiem(txt_timkiem.Text);
         }
     }
 }

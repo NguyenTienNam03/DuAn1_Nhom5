@@ -370,22 +370,21 @@
             // 
             this.txt_timkiem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.txt_timkiem.ForeColor = System.Drawing.Color.Gray;
-            this.txt_timkiem.Location = new System.Drawing.Point(171, 189);
+            this.txt_timkiem.Location = new System.Drawing.Point(207, 197);
             this.txt_timkiem.Name = "txt_timkiem";
             this.txt_timkiem.Size = new System.Drawing.Size(504, 30);
             this.txt_timkiem.TabIndex = 7;
-            this.txt_timkiem.Text = "Tìm kiếm theo mã hoặc tên sp";
             this.txt_timkiem.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_timkiem_KeyUp);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(37, 197);
+            this.label11.Location = new System.Drawing.Point(24, 205);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(90, 22);
+            this.label11.Size = new System.Drawing.Size(189, 22);
             this.label11.TabIndex = 6;
-            this.label11.Text = "Tìm kiếm ";
+            this.label11.Text = "Tìm kiếm theo mã SP: ";
             // 
             // rbtn_doanhthumin
             // 

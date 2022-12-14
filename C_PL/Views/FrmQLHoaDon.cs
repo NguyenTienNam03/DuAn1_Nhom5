@@ -114,24 +114,27 @@ namespace C_PL.Views
         {
             try
             {
-                
-                DataGridViewRow r = dtgridview_hoadon.Rows[e.RowIndex];
-                var idhd1 = _ihds.GetAllhd().Where(c => c.IDhd == Guid.Parse(r.Cells[0].Value.ToString())).Select(c => c.IDhd).FirstOrDefault();
-                lb_mahoadon.Text = r.Cells[1].Value.ToString();
-                dtview_hdct.Columns[0].Visible = false;
-                // xem hoá đơn chi tiết của một hoá đơn 
-                dtview_hdct.Rows.Clear();
-                foreach (var x in _Ihoadoncts.GetAllHDCT().Where(c => c.IDHD == (idhd1)))
+                if (dtgridview_hoadon.Rows[e.RowIndex].Cells[0].Value == null)
                 {
-                    var idctsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == x.IDSP);
-                    var tensp = _isps.GetAllsp().FirstOrDefault(c => c.IDsp == idctsp.IDSP);
-                    var mausac = _imss.GetAllMS().FirstOrDefault(c => c.IDms == idctsp.IDms);
-                    var size = _isize.GetSizes().FirstOrDefault(c => c.id == idctsp.IDSize);
+                    return;
+                } else
+                {
+                    DataGridViewRow r = dtgridview_hoadon.Rows[e.RowIndex];
+                    var idhd1 = _ihds.GetAllhd().Where(c => c.IDhd == Guid.Parse(r.Cells[0].Value.ToString())).Select(c => c.IDhd).FirstOrDefault();
+                    lb_mahoadon.Text = r.Cells[1].Value.ToString();
+                    dtview_hdct.Columns[0].Visible = false;
+                    // xem hoá đơn chi tiết của một hoá đơn 
+                    dtview_hdct.Rows.Clear();
+                    foreach (var x in _Ihoadoncts.GetAllHDCT().Where(c => c.IDHD == (idhd1)))
+                    {
+                        var idctsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == x.IDSP);
+                        var tensp = _isps.GetAllsp().FirstOrDefault(c => c.IDsp == idctsp.IDSP);
+                        var mausac = _imss.GetAllMS().FirstOrDefault(c => c.IDms == idctsp.IDms);
+                        var size = _isize.GetSizes().FirstOrDefault(c => c.id == idctsp.IDSize);
 
-                    dtview_hdct.Rows.Add(idctsp.ID, tensp.TenSp, mausac.Mau, size.SoSize, x.SoLuong, idctsp.GiaBan, x.SoLuong * idctsp.GiaBan); 
+                        dtview_hdct.Rows.Add(idctsp.ID, tensp.TenSp, mausac.Mau, size.SoSize, x.SoLuong, idctsp.GiaBan, x.SoLuong * idctsp.GiaBan);
+                    }
                 }
-
-
             }
             catch
             {
@@ -151,12 +154,12 @@ namespace C_PL.Views
         {
             try
             {
-                if(_ihds.GetAllhd().Any(c => c.TrangThai != "Huỷ") == true)
+                if(_ihds.GetAllhd().Any(c => c.TrangThai != "Huỷ" ) == true)
                 {
                     MessageBox.Show("Sử dụng cho xoá đơn bị huỷ.");
                     return;
                 } else 
-                if(_ihds.GetAllhd().Any(c => c.TrangThai == "Huỷ" ) == true)
+                if(_ihds.GetAllhd().Any(c => c.TrangThai == "Huỷ") == true)
                 {
                     DialogResult dialogResult = MessageBox.Show("Bạn có muốn xoá hoá đơn này không ? .", "Thông báo", MessageBoxButtons.YesNo);
                     if(dialogResult == DialogResult.Yes)
@@ -197,7 +200,14 @@ namespace C_PL.Views
         {
             try
             {
-               id = Guid.Parse(dtgridview_hoadon.Rows[e.RowIndex].Cells[0].Value.ToString());
+                if (dtgridview_hoadon.Rows[e.RowIndex].Cells[0].Value == null)
+                {
+                    return;
+                }else
+                {
+                    id = Guid.Parse(dtgridview_hoadon.Rows[e.RowIndex].Cells[0].Value.ToString());
+                }
+               
             }catch
             {
                 MessageBox.Show("Mời bạn thao tác lại.");

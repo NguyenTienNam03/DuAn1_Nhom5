@@ -304,26 +304,27 @@ namespace C_PL.Views
         private void dtgridview_sanpham_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow r = dtgridview_sanpham.Rows[e.RowIndex];
-            
-            _id = Guid.Parse(r.Cells[0].Value.ToString());
-            cbb_tensp.Text = Convert.ToString(r.Cells[2].Value.ToString());
-            cbb_mausac.Text = Convert.ToString(r.Cells[3].Value);
-            cbb_hsx.Text = Convert.ToString(r.Cells[4].Value.ToString());
-            cbb_size.Text = Convert.ToString(Convert.ToInt32(r.Cells[5].Value));
-            txt_linkanh.Text = Convert.ToString(r.Cells[6].Value);
+            if (r.Cells[0].Value == null)
+            {
+                return;
+            }else
+            {
+                _id = Guid.Parse(r.Cells[0].Value.ToString());
+                cbb_tensp.Text = Convert.ToString(r.Cells[2].Value.ToString());
+                cbb_mausac.Text = Convert.ToString(r.Cells[3].Value);
+                cbb_hsx.Text = Convert.ToString(r.Cells[4].Value.ToString());
+                cbb_size.Text = Convert.ToString(Convert.ToInt32(r.Cells[5].Value));
+                txt_linkanh.Text = Convert.ToString(r.Cells[6].Value);
 
-            var layanh = _ictsps.GetAll().FirstOrDefault(p => p.anh == txt_linkanh.Text);
-            ptb_anh.Image = Image.FromFile(layanh.anh);
+                var layanh = _ictsps.GetAll().FirstOrDefault(p => p.anh == txt_linkanh.Text);
+                ptb_anh.Image = Image.FromFile(layanh.anh);
 
-            txt_soluong.Text = Convert.ToString(Convert.ToInt32(r.Cells[7].Value));
-            txt_gianhap.Text = Convert.ToString((decimal)r.Cells[8].Value);
-            txt_giaban.Text = Convert.ToString((decimal)r.Cells[9].Value);
-            check_con.Checked = (r.Cells[10].Value.ToString()) ==  "Còn hàng" ? true : false ;
-            check_hethang.Checked = r.Cells[10].Value.ToString() == "Hết hàng" ? true : false ;
-    
-           
-   
-           
+                txt_soluong.Text = Convert.ToString(Convert.ToInt32(r.Cells[7].Value));
+                txt_gianhap.Text = Convert.ToString((decimal)r.Cells[8].Value);
+                txt_giaban.Text = Convert.ToString((decimal)r.Cells[9].Value);
+                check_con.Checked = (r.Cells[10].Value.ToString()) == "Còn hàng" ? true : false;
+                check_hethang.Checked = r.Cells[10].Value.ToString() == "Hết hàng" ? true : false;
+            }
         }
 
         private void btn_doianh_Click(object sender, EventArgs e)

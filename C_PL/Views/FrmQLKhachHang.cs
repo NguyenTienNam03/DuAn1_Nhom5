@@ -157,11 +157,18 @@ namespace C_PL.Views
             try
             {
                 DataGridViewRow r = dtgrid_khachhang.Rows[e.RowIndex];
-                id = Guid.Parse(r.Cells[0].Value.ToString());
-                txt_makh.Text = Convert.ToString(r.Cells[1].Value);
-                txt_tenkh.Text = Convert.ToString(r.Cells[2].Value);
-                txt_DiaChi.Text = Convert.ToString(r.Cells[3].Value);
-                txt_sdt.Text = Convert.ToString(r.Cells[4].Value);
+                if (r.Cells[0].Value == null)
+                {
+                    return;
+                }else
+                {
+                    id = Guid.Parse(r.Cells[0].Value.ToString());
+                    txt_makh.Text = Convert.ToString(r.Cells[1].Value);
+                    txt_tenkh.Text = Convert.ToString(r.Cells[2].Value);
+                    txt_DiaChi.Text = Convert.ToString(r.Cells[3].Value);
+                    txt_sdt.Text = Convert.ToString(r.Cells[4].Value);
+                }
+              
             }catch
             {
                 MessageBox.Show("Mời bạn thao tác lại.");
