@@ -45,6 +45,7 @@
             this.Sdt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ptb_reset = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cbb_nhasx = new System.Windows.Forms.ComboBox();
             this.btn_loc = new System.Windows.Forms.Button();
@@ -102,6 +103,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrid_khachhang)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptb_reset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_anhsp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrid_sp)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -277,6 +279,7 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Thistle;
+            this.groupBox2.Controls.Add(this.ptb_reset);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.cbb_nhasx);
             this.groupBox2.Controls.Add(this.btn_loc);
@@ -300,10 +303,21 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông tin sản phẩm";
             // 
+            // ptb_reset
+            // 
+            this.ptb_reset.Image = global::C_PL.Properties.Resources.people1;
+            this.ptb_reset.Location = new System.Drawing.Point(487, 141);
+            this.ptb_reset.Name = "ptb_reset";
+            this.ptb_reset.Size = new System.Drawing.Size(36, 37);
+            this.ptb_reset.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ptb_reset.TabIndex = 19;
+            this.ptb_reset.TabStop = false;
+            this.ptb_reset.Click += new System.EventHandler(this.ptb_reset_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(514, 32);
+            this.label2.Location = new System.Drawing.Point(501, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 22);
             this.label2.TabIndex = 16;
@@ -312,7 +326,7 @@
             // cbb_nhasx
             // 
             this.cbb_nhasx.FormattingEnabled = true;
-            this.cbb_nhasx.Location = new System.Drawing.Point(514, 57);
+            this.cbb_nhasx.Location = new System.Drawing.Point(501, 51);
             this.cbb_nhasx.Name = "cbb_nhasx";
             this.cbb_nhasx.Size = new System.Drawing.Size(158, 30);
             this.cbb_nhasx.TabIndex = 15;
@@ -321,9 +335,9 @@
             // 
             this.btn_loc.BackColor = System.Drawing.Color.Yellow;
             this.btn_loc.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_loc.Location = new System.Drawing.Point(514, 122);
+            this.btn_loc.Location = new System.Drawing.Point(554, 116);
             this.btn_loc.Name = "btn_loc";
-            this.btn_loc.Size = new System.Drawing.Size(158, 62);
+            this.btn_loc.Size = new System.Drawing.Size(118, 62);
             this.btn_loc.TabIndex = 14;
             this.btn_loc.Text = "      Lọc";
             this.btn_loc.UseVisualStyleBackColor = false;
@@ -595,14 +609,14 @@
             this.Column15,
             this.Column21,
             this.Column16});
-            this.dtgrid_giohang.Location = new System.Drawing.Point(2, 97);
+            this.dtgrid_giohang.Location = new System.Drawing.Point(2, 102);
             this.dtgrid_giohang.Name = "dtgrid_giohang";
             this.dtgrid_giohang.RowHeadersWidth = 51;
             this.dtgrid_giohang.RowTemplate.Height = 29;
             this.dtgrid_giohang.Size = new System.Drawing.Size(731, 361);
             this.dtgrid_giohang.TabIndex = 12;
-            this.dtgrid_giohang.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgrid_giohang_CellClick);
             this.dtgrid_giohang.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgrid_giohang_CellContentClick);
+            this.dtgrid_giohang.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgrid_giohang_CellValueChanged);
             // 
             // Column2
             // 
@@ -806,6 +820,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgrid_khachhang)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptb_reset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_anhsp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrid_sp)).EndInit();
             this.groupBox3.ResumeLayout(false);
@@ -887,5 +902,6 @@
         private DataGridViewTextBoxColumn Column6;
         private Label lb_manv;
         private Label label3;
+        private PictureBox ptb_reset;
     }
 }

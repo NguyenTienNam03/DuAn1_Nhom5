@@ -58,6 +58,11 @@ namespace C_PL.Views
                     return;
 
                 }
+                else if(Convert.ToInt32(txt_nhapsoluong.Text) <= 0)
+                {
+                    MessageBox.Show("Nhap sai so luong.");
+                    return;
+                }
                 else
                 {
                     
@@ -65,7 +70,7 @@ namespace C_PL.Views
                     soluongconlai = Convert.ToInt32(id.SoLuong) - Convert.ToInt32(txt_nhapsoluong.Text);
                     ChiTietSanPham spct = new ChiTietSanPham()
                     {
-                        //Id = id.ID,
+                        Id = id.ID,
                         IDHSX = id.IDHSX,
                         IDMauSac = id.IDms,
                         IDSize = id.IDSize,
@@ -78,8 +83,8 @@ namespace C_PL.Views
                         SoLuong = soluongconlai,
                     };
                     _ictsp.UpdateCRSP(id.ID, spct);
-
                     this.Close();
+                    
                 }
             }
             catch

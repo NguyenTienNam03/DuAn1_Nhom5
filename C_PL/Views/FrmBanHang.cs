@@ -41,6 +41,7 @@ namespace C_PL.Views
         public IGioHangCTService _ighcts;
         public double thanhtien = 0;
         public double trutien = 0;
+        
      
         DateTime now = DateTime.Now;
 
@@ -64,6 +65,7 @@ namespace C_PL.Views
             _lsthoadonchitiet = new List<HoaDonCT>();
             _ihds = new HoaDonService();
             dtgrid_giohang.Columns[0].Visible = false;
+            
             LoadSpCT();
             LoadMS();
             LoadSize();
@@ -132,7 +134,7 @@ namespace C_PL.Views
             
             var idhd1 = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
             dtgrid_giohang.Rows.Clear();
-            foreach (var x in _ihdcts.GetAllHDCT().Where(c => c.IDHD == (idhd1)))
+            foreach (var x in _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd1))
             {
                 var idctsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == x.IDSP);
                 var tensp = _isps.GetAllsp().FirstOrDefault(c => c.IDsp == idctsp.IDSP);
@@ -182,25 +184,7 @@ namespace C_PL.Views
             
         }
 
-        private void dtgrid_giohang_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //try
-            //{
-            //    DataGridViewRow r = dtgrid_giohang.Rows[e.RowIndex];
-            //    _id = Guid.Parse(r.Cells[0].Value.ToString());
-            //    if (e.RowIndex > 0)
-            //    {
-            //        trutien = Convert.ToDouble(dtgrid_giohang.Rows[e.RowIndex].Cells[6].Value.ToString());
-            //    }
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Giỏ hàng chưa có sản phẩm .");
-            //}
-
-
-        }
-
+       
         private void dtgrid_giohang_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -211,11 +195,10 @@ namespace C_PL.Views
                     return;
                 } else
                 { 
-                    var idhd = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
-                    var idhdct = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd).Select(c => c.IDSP).FirstOrDefault();
                     var id = _ihdcts.GetAllHDCT().Where(c => c.IDSP == Guid.Parse(r.Cells[0].Value.ToString())).Select(c => c.IDSP).FirstOrDefault();
-                    var soluong = _ighcts.GetAllghct().Where(c => c.IdSP == idhdct).Select(c => c.SoLuong).FirstOrDefault();
+                    var soluong = _ighcts.GetAllghct().Where(c => c.IdSP == id).Select(c => c.SoLuong).FirstOrDefault();
                     var idsp1 = _ictsp.GetAll().FirstOrDefault(c => c.ID == id);
+                    //cập nhật lại số lượng
                     ChiTietSanPham ctsp = new ChiTietSanPham()
                     {
                         Id = idsp1.ID,
@@ -236,16 +219,18 @@ namespace C_PL.Views
                         if (MessageBox.Show("Ban co muon xoa san pham nay khong ?", "Thong bao", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             MessageBox.Show(_ihdcts.DeleteSP(id));
-                            //dtgrid_giohang.Rows.Clear();
+                            dtgrid_giohang.Rows.Clear();
                             LoadGioHang();
+                            dtgrid_sp.Rows.Clear();
                             LoadSpCT();
                         }
                     }
+                    
                 }
             }
             catch
             {
-                MessageBox.Show("Giỏ hàng chưa có sản phẩm .");
+                MessageBox.Show("Mời bạn thao tác lại .");
             }
 
         }
@@ -261,13 +246,8 @@ namespace C_PL.Views
                 DialogResult dialogResult = MessageBox.Show("Bạn có muốn tạo hoá đơn không ?", "Thông báo", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    if (lb_tenkh.Text == "")
-                    {
-                        MessageBox.Show("Mời bạn chọn khách hàng trước khi tạo hoá đơn.");
-                        return;
-                    }
-                    else
-                    {
+                    
+                    
 
                         HoaDon hd = new HoaDon()
                         {
@@ -284,7 +264,7 @@ namespace C_PL.Views
                         lb_mahd.Text = hd.MaHD;
                         var tenkh = _ikhs.GetAllKH().Where(c => c.ID == hd.IDKH).Select(c => c.TenKH).FirstOrDefault().ToString();
                         lb_tenkh.Text = tenkh;
-                    }
+                    
                 }
             }
             catch
@@ -329,14 +309,16 @@ namespace C_PL.Views
             LoadSpCT();
             FrmThanhToan thanhtoan = new FrmThanhToan();
             thanhtoan.ShowDialog();
-            
+            LoadSpCT();
+
+
         }
 
         private void dtgrid_sp_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-            int row = dtgrid_giohang.Rows.Count;
+                int row = dtgrid_giohang.Rows.Count;
             DataGridViewRow r = dtgrid_sp.Rows[e.RowIndex];
                 if (r.Cells[0].Value == null)
                 {
@@ -357,11 +339,15 @@ namespace C_PL.Views
                             IDspct = a;
                             FrmSoLuong sl = new FrmSoLuong();
                             sl.ShowDialog();
+                            dtgrid_giohang.Rows.Clear();
+                            LoadGioHang();
+                            dtgrid_sp.Rows.Clear();
+                            LoadSpCT();
                             var idsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == Guid.Parse(r.Cells[0].Value.ToString()));
 
                             var idhd2 = _ihds.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
-
-                            var idsp1 = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd2).Select(c => c.IDSP).FirstOrDefault(); // lỗi lấy idsp
+                            
+                            var idsp1 = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd2).Select(c => c.IDSP).FirstOrDefault(); 
 
                             if (idsp1 != idsp.ID)
                             {
@@ -374,18 +360,27 @@ namespace C_PL.Views
                                     DonGia = idsp.GiaBan,
                                 };
                                 _ihdcts.AddHDCT(hdct);
+                                //dtgrid_giohang.Rows.Clear();
+                                //LoadGioHang();
+                                //dtgrid_sp.Rows.Clear();
+                                //LoadSpCT();
                             }
                             else
                             {
+                                var soluong = _ihdcts.GetAllHDCT().Where(c => c.IDSP == idsp1).Select(c => c.SoLuong).FirstOrDefault();
                                 // Update hoá đơn chi tiết
                                 HoaDonCT hoa = new HoaDonCT()
                                 {
-                                    IDSP = idsp.ID,
+                                    IDSP = idsp1,
                                     //IDHD = idhd2 ,
-                                    SoLuong = FrmSoLuong.soluong,
+                                    SoLuong = soluong + FrmSoLuong.soluong,
                                     DonGia = idsp.GiaBan
                                 };
                                 _ihdcts.UpdateHDCT(idhd2, hoa);
+                                //dtgrid_giohang.Rows.Clear();
+                                //LoadGioHang();
+                                //dtgrid_sp.Rows.Clear();
+                                //LoadSpCT();
                             }
                             // update hoá đơn 
                             HoaDon hd = new HoaDon()
@@ -399,44 +394,28 @@ namespace C_PL.Views
                                 NgayThanhToan = null,
                             };
                             _ihds.UpdateHoaDon(idhd2, hd);
-                            // Loà lại giỏ hàng 
-                            dtgrid_giohang.Rows.Clear();
-                            LoadGioHang();
-                            // load lại sản phẩm 
                             dtgrid_sp.Rows.Clear();
                             LoadSpCT();
+                            dtgrid_giohang.Rows.Clear();
+                            LoadGioHang();
                         }
                     }
+                    
+               
                 }
-            
-            }
+
+        }
             catch
             {
-                MessageBox.Show("Bạn nên chọn vào ô có dữ liệu .");
+                MessageBox.Show("Mời bạn thao tác lại.");
             }
-        }
+}
 
         private void btn_chonkh_Click(object sender, EventArgs e)
         {
             try
             {
-                if (_check.checkRong(txt_tenkh.Text) == false)
-                {
-                    MessageBox.Show("Tên khách hàng không được bỏ trống .");
-                    return;
-                }
-                else if (_check.CheckSDT(txt_sdtkh.Text) == false)
-                {
-                    MessageBox.Show("Mời bạn nhập đúng sdt khách hàng.");
-                    return;
-                }
-                else if (_check.checkRong(txt_diachi.Text) == false)
-                {
-                    MessageBox.Show("Địa chỉ khách hàng không được bỏ trống .");
-                    return;
-                }
-
-                else if (lb_tenkh.Text != "" && lb_mahd.Text != "")
+                if (lb_tenkh.Text != "" && lb_mahd.Text != "")
                 {
                     MessageBox.Show($"đã tạo hoá đơn cho khách hàng {lb_tenkh.Text}. Mời bạn huỷ hoá đơn hoặc chuyển hoá đơn này vào trong hoá đơn chờ hoặc thanh toán hoá đơn để tạo hoá đơn tiếp.");
                     return;
@@ -459,7 +438,7 @@ namespace C_PL.Views
                                 MaKH = "KH" + Convert.ToString(_ikhs.GetAllKH().Count + 1),
                                 SDT = Convert.ToString(txt_sdtkh.Text),
                                 DiaChi = Convert.ToString(txt_diachi.Text),
-                                Ten = txt_tenkh.Text,
+                                Ten = Convert.ToString(txt_tenkh.Text),
 
                             });
                             LoadKH();
@@ -506,7 +485,7 @@ namespace C_PL.Views
             }
             catch
             {
-                MessageBox.Show("Bạn nên chọn vào ô có dữ liệu.");
+                MessageBox.Show("Mời bạn thao tác lại.");
             }
 
         }
@@ -530,6 +509,8 @@ namespace C_PL.Views
                     _ihds.UpdateHoaDon(idhd, hd);
                     MessageBox.Show($"Hoá đơn {lb_mahd.Text} được đưa vào hoá đơn chờ.");
                     Reset();
+                   
+                    LoadSpCT();
                 }
                 else
                 {
@@ -554,15 +535,16 @@ namespace C_PL.Views
                     var idhd = _ihds.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
                     HoaDon hd = new HoaDon()
                     {
-                        SoLuong = _ihdcts.GetAllHDCT().Sum(c => c.SoLuong),
+                        SoLuong = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd).Sum(c => c.SoLuong),
                         IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_manv.Text)).Select(c => c.ID).FirstOrDefault(),
-                        DonGia = _ihdcts.GetAllHDCT().Sum(c => c.SoLuong * c.DonGia),
+                        DonGia = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd).Sum(c => c.SoLuong * c.DonGia),
                         TrangThai = "Huỷ",
                         NgayThanhToan = null ,
                     };
                     _ihds.UpdateHoaDon(idhd, hd);
                     MessageBox.Show($"Huỷ hoá {lb_mahd.Text} đơn thành công.");
                     Reset();
+                    LoadSpCT();
                 }
             }
             catch
@@ -634,7 +616,7 @@ namespace C_PL.Views
             lb_mahd.Text = "";
             lb_tenkh.Text = "";
             lb_tongtien.Text = "0";
-            dtgrid_giohang.Rows.Clear();
+            LoadGioHang();
             cbb_nhasx.Text = "";
             cbb_size.Text = "";
             cbb_mausac.Text = "";
@@ -706,6 +688,60 @@ namespace C_PL.Views
         private void txt_timkiemsp_KeyUp(object sender, KeyEventArgs e)
         {
             TimKiemSP(txt_timkiemsp.Text);
+        }
+
+        private void ptb_reset_Click(object sender, EventArgs e)
+        {
+            dtgrid_sp.Rows.Clear();
+            LoadSpCT();
+        }
+
+        private void dtgrid_giohang_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            //if(e.RowIndex >= 0) 
+            //{
+            //    DataGridViewRow r = dtgrid_giohang.Rows[e.RowIndex];
+            //    if (dtgrid_giohang.Rows[e.RowIndex].Cells.Count == null)
+            //    {
+            //        return;
+            //    }
+            //    else
+            //    {
+            //        if (int.TryParse(dtgrid_giohang.Rows[r.Index].Cells[4].Value.ToString(), out int x))
+            //        {
+            //            if (dtgrid_giohang.Rows[r.Index].Cells[4].Value != _lsthoadonchitiet[r.Index].SoLuong.ToString())
+            //            {
+            //                if (Convert.ToInt32(dtgrid_giohang.Rows[r.Index].Cells[4].Value.ToString()) <= 0)
+            //                {
+            //                    MessageBox.Show("Nhap sai so luong.");
+            //                    dtgrid_giohang.Rows[r.Index].Cells[4].Value = _lsthoadonchitiet[r.Index].SoLuong;
+            //                }
+            //                else
+            //                {
+            //                    var p = _ictsp.GetAll().FirstOrDefault(c => c.ID == _lsthoadonchitiet[r.Index].IDSP);
+            //                    if (p.SoLuong < Convert.ToInt32(dtgrid_giohang.Rows[r.Index].Cells[4].Value))
+            //                    {
+            //                        MessageBox.Show("So luong san pham trong gio hang vuot qua so luong cho phep.");
+            //                        dtgrid_giohang.Rows[r.Index].Cells[4].Value = _lsthoadonchitiet[r.Index].SoLuong;
+            //                    }
+            //                    else
+            //                    {
+            //                        _lsthoadonchitiet[r.Index].SoLuong = Convert.ToInt32(dtgrid_giohang.Rows[r.Index].Cells[4].Value);
+            //                        //var idhd1 = _i
+            //                        //var tinhtien = _ihdcts.GetAllHDCT().Where(c => c.IDHD == Guid.Parse(idhd1.ToString())).Sum(c => c.DonGia * c.SoLuong);
+            //                        //lb_tongtien.Text = tinhtien.ToString();
+            //                    }
+            //                }
+            //            }
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("Nhap sai so luong.");
+            //            dtgrid_giohang.Rows[r.Index].Cells[4].Value = _lsthoadonchitiet[r.Index].SoLuong;
+            //        }
+            //    }
+
+            //}
         }
     }
 }

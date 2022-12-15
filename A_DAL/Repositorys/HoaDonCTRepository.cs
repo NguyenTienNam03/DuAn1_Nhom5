@@ -26,7 +26,7 @@ namespace A_DAL.Repositorys
             return true;
         }
 
-        public bool DeleteHoaDonCT(Guid id )
+        public bool DeleteHoaDonCT(Guid id)
         {
             if(id == null ) { return false; }
             var hdct1 = _context.hoaDonCTs.FirstOrDefault(c => c.IDHD == id);
@@ -38,7 +38,7 @@ namespace A_DAL.Repositorys
         public bool DeleteSP(Guid id)
         {
             if(id == null) { return false; }
-            var hdct1 = _context.hoaDonCTs.FirstOrDefault(c => c.IDSP== id);
+            var hdct1 = _context.hoaDonCTs.FirstOrDefault(c => c.IDSP == id);
             _context.hoaDonCTs.Remove(hdct1);
             _context.SaveChanges();
             return true;
