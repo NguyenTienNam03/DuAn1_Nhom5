@@ -40,6 +40,7 @@ namespace C_PL.Views
             LoadHSX();
             LoadMS();
             check_con.Checked = true;
+            btn_xoa.Visible = false;
             ////Reset();
         }
         public void LoadSPCT()

@@ -95,7 +95,7 @@ namespace C_PL.Views
             {
                 var a = _ikhs.GetAllKH().Find(c => c.ID == x.IDkh);
                 var b = _invs.GetAllNV().Find(c => c.ID == x.IDnv);
-                dtgrid_hdcho.Rows.Add(x.IDhd, x.Mahd, a.TenKH, b.MaNV, x.NgayTao);
+                dtgrid_hdcho.Rows.Add(x.IDhd, x.Mahd, a.TenKH, b.Ten, x.NgayTao);
             }
         }
 
@@ -194,8 +194,9 @@ namespace C_PL.Views
                 {
                     return;
                 } else
-                { 
-                    var id = _ihdcts.GetAllHDCT().Where(c => c.IDSP == Guid.Parse(r.Cells[0].Value.ToString())).Select(c => c.IDSP).FirstOrDefault();
+                {
+                    //var idsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == Guid.Parse( dtgrid_giohang.Rows[e.RowIndex].Cells[0].Value.ToString()));
+                    var id = _ihdcts.GetAllHDCT().Where(c => c.IDSP == Guid.Parse(dtgrid_giohang.Rows[e.RowIndex].Cells[0].Value.ToString())).Select(c => c.IDSP).FirstOrDefault();
                     var soluong = _ighcts.GetAllghct().Where(c => c.IdSP == id).Select(c => c.SoLuong).FirstOrDefault();
                     var idsp1 = _ictsp.GetAll().FirstOrDefault(c => c.ID == id);
                     //cập nhật lại số lượng
@@ -247,8 +248,6 @@ namespace C_PL.Views
                 if (dialogResult == DialogResult.Yes)
                 {
                     
-                    
-
                         HoaDon hd = new HoaDon()
                         {
                             ID = Guid.NewGuid(),
@@ -266,14 +265,14 @@ namespace C_PL.Views
                         lb_tenkh.Text = tenkh;
                     
                 }
-            }
+        }
             catch
             {
                 MessageBox.Show("Mời bạn thao tác lại.");
                 return;
             }
-          
-        }
+
+}
 
 
 
@@ -302,15 +301,40 @@ namespace C_PL.Views
 
         private void btn_thanhtoan_Click(object sender, EventArgs e)
         {
-            var a = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
-            laymahd = Guid.Parse(a.ToString());
-            var b = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDkh).FirstOrDefault();
-            layidkh = Guid.Parse(b.ToString());
-            LoadSpCT();
-            FrmThanhToan thanhtoan = new FrmThanhToan();
-            thanhtoan.ShowDialog();
-            LoadSpCT();
+            try
+            {
+                List<HoaDonCT> _lsthdct = new List<HoaDonCT>();
+                var idhd = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
+                var idhdct = _ihdcts.GetAllHDCT().FirstOrDefault(c => c.IDHD == idhd);
+                if (lb_mahd.Text == "")
+                {
+                    MessageBox.Show("Bạn chua co hoa don .");
+                    return;
+                } else if (_lsthdct.Any() == false)
+                {
+                    MessageBox.Show("Giỏ hàng chưa có sản phẩm .");
+                    return;
+                }
+                else
+                {
+                    var a = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
+                    laymahd = Guid.Parse(a.ToString());
+                    var b = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDkh).FirstOrDefault();
+                    layidkh = Guid.Parse(b.ToString());
+                    LoadSpCT();
+                    FrmThanhToan thanhtoan = new FrmThanhToan();
+                    thanhtoan.ShowDialog();
+                    LoadSpCT();
+                }
 
+
+            }
+            catch
+            {
+                MessageBox.Show("Mời bạn thao tác lại.");
+                return;
+            }
+           
 
         }
 
@@ -415,72 +439,80 @@ namespace C_PL.Views
         {
             try
             {
-                if (lb_tenkh.Text != "" && lb_mahd.Text != "")
+                if (txt_tenkh.Text == "")
                 {
-                    MessageBox.Show($"đã tạo hoá đơn cho khách hàng {lb_tenkh.Text}. Mời bạn huỷ hoá đơn hoặc chuyển hoá đơn này vào trong hoá đơn chờ hoặc thanh toán hoá đơn để tạo hoá đơn tiếp.");
-                    return;
-                }
-                else if (lb_tenkh.Text != "" && lb_mahd.Text == "")
-                {
-                    DialogResult dialogResult = MessageBox.Show("Bạn có muốn đổi khách hàng không ?", "Thông báo ", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        var timidkh = _ikhs.GetAllKH().Where(c => c.TenKH == Convert.ToString(txt_tenkh.Text)).Select(c => c.ID).FirstOrDefault();
-                        if (_ikhs.GetAllKH().Any(c => c.ID == timidkh) == true)
-                        {
-
-                        }
-                        else
-                        {
-                            _ikhs.AddKH(new KhachHang()
-                            {
-                                ID = Guid.NewGuid(),
-                                MaKH = "KH" + Convert.ToString(_ikhs.GetAllKH().Count + 1),
-                                SDT = Convert.ToString(txt_sdtkh.Text),
-                                DiaChi = Convert.ToString(txt_diachi.Text),
-                                Ten = Convert.ToString(txt_tenkh.Text),
-
-                            });
-                            LoadKH();
-                        }
-                        lb_tenkh.Text = txt_tenkh.Text;
-                    }
-                    MessageBox.Show("Thay đổi khách hàng thành công.");
-                    txt_sdtkh.Text = "";
-                    txt_tenkh.Text = "";
-                    txt_diachi.Text = "";
-                }
+                lb_tenkh.Text = "Ẩn Danh";
+                }     
                 else
                 {
-                    DialogResult dialogResult = MessageBox.Show("Ban co muon chon khach hang nay khong ?", "Thong bao", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
+                    if (lb_tenkh.Text != "" && lb_mahd.Text != "")
                     {
-                        var timidkh = _ikhs.GetAllKH().Where(c => c.TenKH == Convert.ToString(txt_tenkh.Text)).Select(c => c.ID).FirstOrDefault();
-                        if (_ikhs.GetAllKH().Any(c => c.ID == timidkh) == true)
+                        MessageBox.Show($"đã tạo hoá đơn cho khách hàng {lb_tenkh.Text}. Mời bạn huỷ hoá đơn hoặc chuyển hoá đơn này vào trong hoá đơn chờ hoặc thanh toán hoá đơn để tạo hoá đơn tiếp.");
+                        return;
+                    }
+                    else if (lb_tenkh.Text != "" && lb_mahd.Text == "")
+                    {
+                        DialogResult dialogResult = MessageBox.Show("Bạn có muốn đổi khách hàng không ?", "Thông báo ", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
                         {
-
-                        }
-                        else
-                        {
-                            _ikhs.AddKH(new KhachHang()
+                            var timidkh = _ikhs.GetAllKH().Where(c => c.TenKH == Convert.ToString(txt_tenkh.Text)).Select(c => c.ID).FirstOrDefault();
+                            if (_ikhs.GetAllKH().Any(c => c.ID == timidkh) == true)
                             {
-                                ID = Guid.NewGuid(),
-                                MaKH = "KH" + Convert.ToString(_ikhs.GetAllKH().Count + 1),
-                                SDT = Convert.ToString(txt_sdtkh.Text),
-                                DiaChi = Convert.ToString(txt_diachi.Text),
-                                Ten = txt_tenkh.Text,
 
-                            });
-                            LoadKH();
+                            }
+                            else
+                            {
+                                _ikhs.AddKH(new KhachHang()
+                                {
+                                    ID = Guid.NewGuid(),
+                                    MaKH = "KH" + Convert.ToString(_ikhs.GetAllKH().Count + 1),
+                                    SDT = Convert.ToString(txt_sdtkh.Text),
+                                    DiaChi = Convert.ToString(txt_diachi.Text),
+                                    Ten = Convert.ToString(txt_tenkh.Text),
 
+                                });
+                                LoadKH();
+                            }
+                            lb_tenkh.Text = txt_tenkh.Text;
                         }
-                        lb_tenkh.Text = txt_tenkh.Text;
-                        MessageBox.Show("Khach hang da duoc chon.");
+                        MessageBox.Show("Thay đổi khách hàng thành công.");
                         txt_sdtkh.Text = "";
                         txt_tenkh.Text = "";
                         txt_diachi.Text = "";
                     }
+                    else
+                    {
+                        DialogResult dialogResult = MessageBox.Show("Ban co muon chon khach hang nay khong ?", "Thong bao", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            var timidkh = _ikhs.GetAllKH().Where(c => c.TenKH == Convert.ToString(txt_tenkh.Text)).Select(c => c.ID).FirstOrDefault();
+                            if (_ikhs.GetAllKH().Any(c => c.ID == timidkh) == true)
+                            {
+
+                            }
+                            else
+                            {
+                                _ikhs.AddKH(new KhachHang()
+                                {
+                                    ID = Guid.NewGuid(),
+                                    MaKH = "KH" + Convert.ToString(_ikhs.GetAllKH().Count + 1),
+                                    SDT = Convert.ToString(txt_sdtkh.Text),
+                                    DiaChi = Convert.ToString(txt_diachi.Text),
+                                    Ten = txt_tenkh.Text,
+
+                                });
+                                LoadKH();
+
+                            }
+                            lb_tenkh.Text = txt_tenkh.Text;
+                            MessageBox.Show("Khach hang da duoc chon.");
+                            txt_sdtkh.Text = "";
+                            txt_tenkh.Text = "";
+                            txt_diachi.Text = "";
+                        }
+                    }
                 }
+
 
             }
             catch
@@ -494,28 +526,36 @@ namespace C_PL.Views
         {
             try
             {
-                DialogResult dialogResult = MessageBox.Show("Bạn muốn hoá đơn chờ không ?", "Thông báo", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                if(lb_mahd.Text == "")
                 {
-                    var idhd = _ihds.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
-                    HoaDon hd = new HoaDon()
+                    MessageBox.Show("Chưa có hoá đơn .");
+                    return;
+                }else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Bạn muốn hoá đơn chờ không ?", "Thông báo", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
                     {
-                        SoLuong = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd).Sum(c => c.SoLuong),
-                        IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_manv.Text)).Select(c => c.ID).FirstOrDefault(),
-                        DonGia = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd).Sum(c => c.SoLuong * c.DonGia),
-                        TrangThai = "Chờ thanh toán",
-                        NgayThanhToan = null ,
-                    };
-                    _ihds.UpdateHoaDon(idhd, hd);
-                    MessageBox.Show($"Hoá đơn {lb_mahd.Text} được đưa vào hoá đơn chờ.");
-                    Reset();
-                   
-                    LoadSpCT();
-                }
-                else
-                {
+                        var idhd = _ihds.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
+                        HoaDon hd = new HoaDon()
+                        {
+                            SoLuong = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd).Sum(c => c.SoLuong),
+                            IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_manv.Text)).Select(c => c.ID).FirstOrDefault(),
+                            DonGia = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd).Sum(c => c.SoLuong * c.DonGia),
+                            TrangThai = "Chờ thanh toán",
+                            NgayThanhToan = null,
+                        };
+                        _ihds.UpdateHoaDon(idhd, hd);
+                        MessageBox.Show($"Hoá đơn {lb_mahd.Text} được đưa vào hoá đơn chờ.");
+                        Reset();
 
+                        LoadSpCT();
+                    }
+                    else
+                    {
+
+                    }
                 }
+               
             }
             catch
             {
@@ -523,29 +563,39 @@ namespace C_PL.Views
             }
         }
 
+        
 
         private void btn_huy_Click(object sender, EventArgs e)
         {
             //Huỷ hoá đơn
             try
             {
-                DialogResult dialogResult = MessageBox.Show("Bạn muốn huỷ hoá đơn không ?", "Thông báo", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                if (lb_mahd.Text == "")
                 {
-                    var idhd = _ihds.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
-                    HoaDon hd = new HoaDon()
-                    {
-                        SoLuong = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd).Sum(c => c.SoLuong),
-                        IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_manv.Text)).Select(c => c.ID).FirstOrDefault(),
-                        DonGia = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd).Sum(c => c.SoLuong * c.DonGia),
-                        TrangThai = "Huỷ",
-                        NgayThanhToan = null ,
-                    };
-                    _ihds.UpdateHoaDon(idhd, hd);
-                    MessageBox.Show($"Huỷ hoá {lb_mahd.Text} đơn thành công.");
-                    Reset();
-                    LoadSpCT();
+                    MessageBox.Show("Chưa có hoá đơn .");
+                    return;
                 }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Bạn muốn huỷ hoá đơn không ?", "Thông báo", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        var idhd = _ihds.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
+                        HoaDon hd = new HoaDon()
+                        {
+                            SoLuong = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd).Sum(c => c.SoLuong),
+                            IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_manv.Text)).Select(c => c.ID).FirstOrDefault(),
+                            DonGia = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd).Sum(c => c.SoLuong * c.DonGia),
+                            TrangThai = "Huỷ",
+                            NgayThanhToan = null,
+                        };
+                        _ihds.UpdateHoaDon(idhd, hd);
+                        MessageBox.Show($"Huỷ hoá {lb_mahd.Text} đơn thành công.");
+                        Reset();
+                        LoadSpCT();
+                    }
+                }
+               
             }
             catch
             {
@@ -644,10 +694,22 @@ namespace C_PL.Views
                 dtgrid_sp.Rows.Add(y.a.ID, y.a.MaCTSP, y.d.TenSp, y.e.TenHSX, y.b.Mau, y.c.SoSize, y.a.SoLuong, y.a.GiaBan);
             }
         }
+        public void Locgia(int gia)
+        {
+            dtgrid_sp.Columns[0].Visible = false;
+            dtgrid_sp.Rows.Clear();
+            foreach (var x in _ictsp.GetAll().Where(c => c.GiaBan <= Convert.ToInt32(gia)))
+            {
+                var y = _isps.GetAllsp().Find(c => c.IDsp == x.IDSP);
+                var z = _imss.GetAllMS().Find(c => c.IDms == x.IDms);
+                var a = _isize.GetSizes().Find(c => c.id == x.IDSize);
+                var b = _ihsxs.GetAllHSX().Find(c => c.ID == x.IDHSX);
+                dtgrid_sp.Rows.Add(x.ID, x.MaCTSP, y.TenSp, b.TenHSX, z.Mau, a.SoSize, x.SoLuong, x.GiaBan);
+            }
+        }
         private void btn_loc_Click(object sender, EventArgs e)
         {
-
-            LocSP();
+                LocSP();
         }
         public void Timkiemkh(string sdt)
         {
@@ -742,6 +804,28 @@ namespace C_PL.Views
             //    }
 
             //}
+        }
+
+        private void txt_giamax_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_check.CheckSoNguyenduong(txt_giamax.Text) == false)
+                {
+                    MessageBox.Show("Bạn nhập giá lớn hơn 0.");
+                    LoadSpCT();
+                }
+                else
+                {
+                    Locgia(Convert.ToInt32(txt_giamax.Text));
+                }
+
+            }
+            catch
+            {
+
+            }
+
         }
     }
 }

@@ -55,9 +55,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.txt_giamax = new System.Windows.Forms.TextBox();
-            this.txt_giamin = new System.Windows.Forms.TextBox();
             this.cbb_mausac = new System.Windows.Forms.ComboBox();
             this.cbb_size = new System.Windows.Forms.ComboBox();
             this.dtgrid_sp = new System.Windows.Forms.DataGridView();
@@ -289,9 +287,7 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.txt_giamax);
-            this.groupBox2.Controls.Add(this.txt_giamin);
             this.groupBox2.Controls.Add(this.cbb_mausac);
             this.groupBox2.Controls.Add(this.cbb_size);
             this.groupBox2.Controls.Add(this.dtgrid_sp);
@@ -305,10 +301,10 @@
             // 
             // ptb_reset
             // 
-            this.ptb_reset.Image = global::C_PL.Properties.Resources.people1;
-            this.ptb_reset.Location = new System.Drawing.Point(487, 141);
+            this.ptb_reset.Image = global::C_PL.Properties.Resources.Refresh_icon;
+            this.ptb_reset.Location = new System.Drawing.Point(481, 159);
             this.ptb_reset.Name = "ptb_reset";
-            this.ptb_reset.Size = new System.Drawing.Size(36, 37);
+            this.ptb_reset.Size = new System.Drawing.Size(33, 30);
             this.ptb_reset.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ptb_reset.TabIndex = 19;
             this.ptb_reset.TabStop = false;
@@ -317,7 +313,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(501, 26);
+            this.label2.Location = new System.Drawing.Point(293, 95);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 22);
             this.label2.TabIndex = 16;
@@ -326,16 +322,16 @@
             // cbb_nhasx
             // 
             this.cbb_nhasx.FormattingEnabled = true;
-            this.cbb_nhasx.Location = new System.Drawing.Point(501, 51);
+            this.cbb_nhasx.Location = new System.Drawing.Point(361, 87);
             this.cbb_nhasx.Name = "cbb_nhasx";
-            this.cbb_nhasx.Size = new System.Drawing.Size(158, 30);
+            this.cbb_nhasx.Size = new System.Drawing.Size(134, 30);
             this.cbb_nhasx.TabIndex = 15;
             // 
             // btn_loc
             // 
             this.btn_loc.BackColor = System.Drawing.Color.Yellow;
             this.btn_loc.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_loc.Location = new System.Drawing.Point(554, 116);
+            this.btn_loc.Location = new System.Drawing.Point(534, 37);
             this.btn_loc.Name = "btn_loc";
             this.btn_loc.Size = new System.Drawing.Size(118, 62);
             this.btn_loc.TabIndex = 14;
@@ -394,34 +390,19 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(282, 95);
+            this.label6.Location = new System.Drawing.Point(292, 45);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 22);
+            this.label6.Size = new System.Drawing.Size(63, 22);
             this.label6.TabIndex = 6;
-            this.label6.Text = "Đến :";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(279, 37);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(76, 22);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Giá từ : ";
+            this.label6.Text = "Dưới :";
             // 
             // txt_giamax
             // 
-            this.txt_giamax.Location = new System.Drawing.Point(361, 87);
+            this.txt_giamax.Location = new System.Drawing.Point(361, 37);
             this.txt_giamax.Name = "txt_giamax";
             this.txt_giamax.Size = new System.Drawing.Size(134, 30);
             this.txt_giamax.TabIndex = 4;
-            // 
-            // txt_giamin
-            // 
-            this.txt_giamin.Location = new System.Drawing.Point(361, 37);
-            this.txt_giamin.Name = "txt_giamin";
-            this.txt_giamin.Size = new System.Drawing.Size(134, 30);
-            this.txt_giamin.TabIndex = 3;
+            this.txt_giamax.TextChanged += new System.EventHandler(this.txt_giamax_TextChanged);
             // 
             // cbb_mausac
             // 
@@ -782,14 +763,14 @@
             // 
             // Column23
             // 
-            this.Column23.HeaderText = "Mã KH";
+            this.Column23.HeaderText = "Tên KH";
             this.Column23.MinimumWidth = 6;
             this.Column23.Name = "Column23";
             this.Column23.Width = 125;
             // 
             // Column24
             // 
-            this.Column24.HeaderText = "NV tạo";
+            this.Column24.HeaderText = "Tên NV";
             this.Column24.MinimumWidth = 6;
             this.Column24.Name = "Column24";
             this.Column24.Width = 125;
@@ -849,9 +830,7 @@
         private Label label8;
         private Label label7;
         private Label label6;
-        private Label label5;
         private TextBox txt_giamax;
-        private TextBox txt_giamin;
         private ComboBox cbb_mausac;
         private ComboBox cbb_size;
         private GroupBox groupBox3;
@@ -895,13 +874,13 @@
         private Label lb_tongtien;
         private Label lb_mahd;
         private Label lb_tenkh;
+        private Label lb_manv;
+        private Label label3;
+        private PictureBox ptb_reset;
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewTextBoxColumn Column19;
         private DataGridViewTextBoxColumn Column23;
         private DataGridViewTextBoxColumn Column24;
         private DataGridViewTextBoxColumn Column6;
-        private Label lb_manv;
-        private Label label3;
-        private PictureBox ptb_reset;
     }
 }

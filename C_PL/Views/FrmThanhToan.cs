@@ -110,6 +110,7 @@ namespace C_PL.Views
                     };
                     _ihoadon.UpdateHoaDon(idhd, hd);
                     MessageBox.Show("Thanh toán thành công .");
+
                     IN();
                     this.Close();
                 }
@@ -178,7 +179,7 @@ namespace C_PL.Views
             // Xem lai font chu cho to len
             e.Graphics.DrawString("STT", new Font("Varial", 10, FontStyle.Bold), Brushes.Black, new PointF(10, y));
 
-            e.Graphics.DrawString("Ten SP", new Font("Varial", 10, FontStyle.Bold), Brushes.Black, new PointF(50, y));
+            e.Graphics.DrawString("Ten SP", new Font("Varial", 10, FontStyle.Bold), Brushes.Black, new PointF(100, y));
 
             e.Graphics.DrawString("So luong", new Font("Varial", 10, FontStyle.Bold), Brushes.Black, new PointF(w / 2, y));
 
@@ -186,13 +187,13 @@ namespace C_PL.Views
 
             e.Graphics.DrawString("Thanh tien", new Font("Varial", 10, FontStyle.Bold), Brushes.Black, new PointF(w - 200, y));
 
-            var tensp = (from d in _isps.GetAllsp()
-                         join f in _ictsp.GetAll() on d.IDsp equals f.IDSP
-                         select new
-                         {
-                             d,
-                             f
-                         }).ToList();
+            var tensp = from a in _ictsp.GetAll()
+                        join b in _isps.GetAllsp() on a.IDSP equals b.IDsp 
+                        join c in _ihdcts.GetAllHDCT() on a.ID equals c.IDSP
+                        select new
+                        {
+                            a,b,c 
+                        };
             int stt = 1;
             y += 30;
             foreach (var n in _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd))
@@ -201,7 +202,7 @@ namespace C_PL.Views
                 foreach (var m in tensp)
                 {
                     e.Graphics.DrawString(string.Format("{0}", stt++), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(10, y));
-                    e.Graphics.DrawString(m.d.TenSp, new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(50, y));
+                    e.Graphics.DrawString(m.b.TenSp, new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(100, y));
                     e.Graphics.DrawString(string.Format("{0:N0}", n.SoLuong), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(w / 2, y));
                     e.Graphics.DrawString(string.Format("{0:N0}", n.DonGia), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(w / 2 + 100, y));
                     e.Graphics.DrawString(string.Format("{0:N0}", n.SoLuong * n.DonGia), new Font("Varial", 8, FontStyle.Regular), Brushes.Black, new PointF(w - 200, y));

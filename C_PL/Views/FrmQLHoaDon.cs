@@ -38,6 +38,7 @@ namespace C_PL.Views
             _isps = new SanPhamService();
             _ictsp= new ChiTietSPService();
             LoadHoadon();
+            btn_xoahoadon.Visible = false;
         }
         public void Reset()
         {

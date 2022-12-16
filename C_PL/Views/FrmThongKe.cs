@@ -58,10 +58,6 @@ namespace C_PL.Views
             lb_tongdoanhthu.Text = _ihdds.GetAllhd().Sum(c => c.DonGia).ToString();
             lb_tonghoadatt.Text = _ihdds.GetAllhd().Where(c => c.TrangThai == "Đã thanh toán").Count().ToString();
             lb_tonghdcho.Text = _ihdds.GetAllhd().Where(c => c.TrangThai == "Chờ thanh toán").Count().ToString();
-
-
-
-           
         }
 
         private void check_homnay_Click(object sender, EventArgs e)

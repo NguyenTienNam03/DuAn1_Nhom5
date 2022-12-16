@@ -58,10 +58,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txt_timkiem = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.rbtn_doanhthumin = new System.Windows.Forms.RadioButton();
-            this.rbtn_doanhthumax = new System.Windows.Forms.RadioButton();
-            this.rbtn_min = new System.Windows.Forms.RadioButton();
-            this.rbtn_max = new System.Windows.Forms.RadioButton();
             this.dtgrid_thongkesp = new System.Windows.Forms.DataGridView();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -313,10 +309,6 @@
             this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.txt_timkiem);
             this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.rbtn_doanhthumin);
-            this.tabPage2.Controls.Add(this.rbtn_doanhthumax);
-            this.tabPage2.Controls.Add(this.rbtn_min);
-            this.tabPage2.Controls.Add(this.rbtn_max);
             this.tabPage2.Controls.Add(this.dtgrid_thongkesp);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
@@ -385,54 +377,6 @@
             this.label11.Size = new System.Drawing.Size(189, 22);
             this.label11.TabIndex = 6;
             this.label11.Text = "Tìm kiếm theo mã SP: ";
-            // 
-            // rbtn_doanhthumin
-            // 
-            this.rbtn_doanhthumin.AutoSize = true;
-            this.rbtn_doanhthumin.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.rbtn_doanhthumin.Location = new System.Drawing.Point(970, 183);
-            this.rbtn_doanhthumin.Name = "rbtn_doanhthumin";
-            this.rbtn_doanhthumin.Size = new System.Drawing.Size(168, 26);
-            this.rbtn_doanhthumin.TabIndex = 4;
-            this.rbtn_doanhthumin.TabStop = true;
-            this.rbtn_doanhthumin.Text = "Doanh thu ít nhất ";
-            this.rbtn_doanhthumin.UseVisualStyleBackColor = true;
-            // 
-            // rbtn_doanhthumax
-            // 
-            this.rbtn_doanhthumax.AutoSize = true;
-            this.rbtn_doanhthumax.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.rbtn_doanhthumax.Location = new System.Drawing.Point(744, 183);
-            this.rbtn_doanhthumax.Name = "rbtn_doanhthumax";
-            this.rbtn_doanhthumax.Size = new System.Drawing.Size(199, 26);
-            this.rbtn_doanhthumax.TabIndex = 3;
-            this.rbtn_doanhthumax.TabStop = true;
-            this.rbtn_doanhthumax.Text = "Doanh thu nhiều nhất ";
-            this.rbtn_doanhthumax.UseVisualStyleBackColor = true;
-            // 
-            // rbtn_min
-            // 
-            this.rbtn_min.AutoSize = true;
-            this.rbtn_min.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.rbtn_min.Location = new System.Drawing.Point(970, 140);
-            this.rbtn_min.Name = "rbtn_min";
-            this.rbtn_min.Size = new System.Drawing.Size(120, 26);
-            this.rbtn_min.TabIndex = 2;
-            this.rbtn_min.TabStop = true;
-            this.rbtn_min.Text = "Bán ít nhất ";
-            this.rbtn_min.UseVisualStyleBackColor = true;
-            // 
-            // rbtn_max
-            // 
-            this.rbtn_max.AutoSize = true;
-            this.rbtn_max.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.rbtn_max.Location = new System.Drawing.Point(744, 140);
-            this.rbtn_max.Name = "rbtn_max";
-            this.rbtn_max.Size = new System.Drawing.Size(151, 26);
-            this.rbtn_max.TabIndex = 1;
-            this.rbtn_max.TabStop = true;
-            this.rbtn_max.Text = "Bán nhiều nhất ";
-            this.rbtn_max.UseVisualStyleBackColor = true;
             // 
             // dtgrid_thongkesp
             // 
@@ -530,10 +474,6 @@
         private Label label12;
         private TextBox txt_timkiem;
         private Label label11;
-        private RadioButton rbtn_doanhthumin;
-        private RadioButton rbtn_doanhthumax;
-        private RadioButton rbtn_min;
-        private RadioButton rbtn_max;
         private DataGridView dtgrid_thongkesp;
         private DataGridViewTextBoxColumn Column7;
         private DataGridViewTextBoxColumn Column8;
