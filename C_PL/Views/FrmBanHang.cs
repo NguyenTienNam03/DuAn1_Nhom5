@@ -95,7 +95,7 @@ namespace C_PL.Views
             {
                 var a = _ikhs.GetAllKH().Find(c => c.ID == x.IDkh);
                 var b = _invs.GetAllNV().Find(c => c.ID == x.IDnv);
-                dtgrid_hdcho.Rows.Add(x.IDhd, x.Mahd, a.TenKH, b.Ten, x.NgayTao);
+                dtgrid_hdcho.Rows.Add(x.IDhd, x.Mahd, a.TenKH, b.MaNV, x.NgayTao);
             }
         }
 
@@ -153,7 +153,7 @@ namespace C_PL.Views
             
             dtgrid_sp.Columns[0].Visible = false;
             dtgrid_sp.Rows.Clear();
-            foreach (var x in _ictsp.GetAll())
+            foreach (var x in _ictsp.GetAll().Where(c => c.Trangthai == "Còn hàng"))
             {
                 var y = _isps.GetAllsp().Find(c => c.IDsp == x.IDSP);
                 var z = _imss.GetAllMS().Find(c => c.IDms == x.IDms);
@@ -256,7 +256,7 @@ namespace C_PL.Views
                             NgayTao = DateTime.Now,
                             IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_manv.Text)).Select(c => c.ID).FirstOrDefault(),
                             IDKH = _ikhs.GetAllKH().Where(c => c.TenKH == Convert.ToString(lb_tenkh.Text)).Select(c => c.ID).FirstOrDefault(),
-                            TrangThai = "",
+                            TrangThai = "Chờ thanh toán",
                         };
                         _ihds.AddHoaDon(hd);
                         MessageBox.Show("Tạo hoá đơn thành công .");
@@ -305,14 +305,15 @@ namespace C_PL.Views
             {
                 List<HoaDonCT> _lsthdct = new List<HoaDonCT>();
                 var idhd = _ihds.GetAllhd().Where(c => c.Mahd == lb_mahd.Text).Select(c => c.IDhd).FirstOrDefault();
-                var idhdct = _ihdcts.GetAllHDCT().FirstOrDefault(c => c.IDHD == idhd);
+                var idhdct = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd).Select(c => c.IDSP).Count();
+ 
                 if (lb_mahd.Text == "")
                 {
                     MessageBox.Show("Bạn chua co hoa don .");
                     return;
-                } else if (_lsthdct.Any() == false)
+                }else if (idhdct == 0)
                 {
-                    MessageBox.Show("Giỏ hàng chưa có sản phẩm .");
+                    MessageBox.Show("Giỏ hàng bạn chưa có sp.");
                     return;
                 }
                 else
@@ -340,10 +341,10 @@ namespace C_PL.Views
 
         private void dtgrid_sp_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 int row = dtgrid_giohang.Rows.Count;
-            DataGridViewRow r = dtgrid_sp.Rows[e.RowIndex];
+                DataGridViewRow r = dtgrid_sp.Rows[e.RowIndex];
                 if (r.Cells[0].Value == null)
                 {
                     return;
@@ -363,10 +364,7 @@ namespace C_PL.Views
                             IDspct = a;
                             FrmSoLuong sl = new FrmSoLuong();
                             sl.ShowDialog();
-                            dtgrid_giohang.Rows.Clear();
-                            LoadGioHang();
-                            dtgrid_sp.Rows.Clear();
-                            LoadSpCT();
+
                             var idsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == Guid.Parse(r.Cells[0].Value.ToString()));
 
                             var idhd2 = _ihds.GetAllhd().Where(c => c.Mahd == Convert.ToString(lb_mahd.Text)).Select(c => c.IDhd).FirstOrDefault();
@@ -414,7 +412,7 @@ namespace C_PL.Views
                                 SoLuong = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd2).Sum(c => c.SoLuong),
                                 DonGia = _ihdcts.GetAllHDCT().Where(c => c.IDHD == idhd2).Sum(c => c.SoLuong * c.DonGia),
                                 IDNV = _invs.GetAllNV().Where(c => c.MaNV == Convert.ToString(lb_manv.Text)).Select(c => c.ID).FirstOrDefault(),
-                                TrangThai = "",
+                                TrangThai = "Chờ thanh toán",
                                 NgayThanhToan = null,
                             };
                             _ihds.UpdateHoaDon(idhd2, hd);
@@ -428,11 +426,11 @@ namespace C_PL.Views
                
                 }
 
-        }
-            catch
-            {
-                MessageBox.Show("Mời bạn thao tác lại.");
-            }
+        //}
+        //    catch
+        //    {
+        //        MessageBox.Show("Mời bạn thao tác lại.");
+        //    }
 }
 
         private void btn_chonkh_Click(object sender, EventArgs e)

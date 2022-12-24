@@ -68,21 +68,41 @@ namespace C_PL.Views
                     
                     soluong = Convert.ToInt32(txt_nhapsoluong.Text);
                     soluongconlai = Convert.ToInt32(id.SoLuong) - Convert.ToInt32(txt_nhapsoluong.Text);
-                    ChiTietSanPham spct = new ChiTietSanPham()
+                    if (soluongconlai == 0)
                     {
-                        Id = id.ID,
-                        IDHSX = id.IDHSX,
-                        IDMauSac = id.IDms,
-                        IDSize = id.IDSize,
-                        IDSP = id.IDSP,
-                        MaSPCT = id.MaCTSP,
-                        GiaBan = id.GiaBan,
-                        GiaNhap = id.GiaNhap,
-                        TrangThai = id.Trangthai,
-                        Anh = id.anh,
-                        SoLuong = soluongconlai,
-                    };
-                    _ictsp.UpdateCRSP(id.ID, spct);
+                        ChiTietSanPham spct1 = new ChiTietSanPham()
+                        {
+                            Id = id.ID,
+                            IDHSX = id.IDHSX,
+                            IDMauSac = id.IDms,
+                            IDSize = id.IDSize,
+                            IDSP = id.IDSP,
+                            MaSPCT = id.MaCTSP,
+                            GiaBan = id.GiaBan,
+                            GiaNhap = id.GiaNhap,
+                            TrangThai = "Hết hàng",
+                            Anh = id.anh,
+                            SoLuong = 0,
+                        };
+                        _ictsp.UpdateCRSP(id.ID, spct1);
+                    } else
+                    {
+                        ChiTietSanPham spct = new ChiTietSanPham()
+                        {
+                            Id = id.ID,
+                            IDHSX = id.IDHSX,
+                            IDMauSac = id.IDms,
+                            IDSize = id.IDSize,
+                            IDSP = id.IDSP,
+                            MaSPCT = id.MaCTSP,
+                            GiaBan = id.GiaBan,
+                            GiaNhap = id.GiaNhap,
+                            TrangThai = id.Trangthai,
+                            Anh = id.anh,
+                            SoLuong = soluongconlai,
+                        };
+                        _ictsp.UpdateCRSP(id.ID, spct);
+                    }
                     this.Close();
                     
                 }

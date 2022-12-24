@@ -770,7 +770,7 @@
             // 
             // Column24
             // 
-            this.Column24.HeaderText = "Tên NV";
+            this.Column24.HeaderText = "Mã NV";
             this.Column24.MinimumWidth = 6;
             this.Column24.Name = "Column24";
             this.Column24.Width = 125;
