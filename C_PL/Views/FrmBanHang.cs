@@ -196,34 +196,39 @@ namespace C_PL.Views
                 } else
                 {
                     //var idsp = _ictsp.GetAll().FirstOrDefault(c => c.ID == Guid.Parse( dtgrid_giohang.Rows[e.RowIndex].Cells[0].Value.ToString()));
-                    var id = _ihdcts.GetAllHDCT().Where(c => c.IDSP == Guid.Parse(dtgrid_giohang.Rows[e.RowIndex].Cells[0].Value.ToString())).Select(c => c.IDSP).FirstOrDefault();
-                    var soluong = _ighcts.GetAllghct().Where(c => c.IdSP == id).Select(c => c.SoLuong).FirstOrDefault();
-                    var idsp1 = _ictsp.GetAll().FirstOrDefault(c => c.ID == id);
-                    //cập nhật lại số lượng
-                    ChiTietSanPham ctsp = new ChiTietSanPham()
-                    {
-                        Id = idsp1.ID,
-                        IDHSX = idsp1.IDHSX,
-                        IDMauSac = idsp1.IDms,
-                        IDSize = idsp1.IDSize,
-                        MaSPCT = idsp1.MaCTSP,
-                        IDSP = idsp1.IDSP,
-                        Anh = idsp1.anh,
-                        GiaBan = idsp1.GiaBan,
-                        GiaNhap = idsp1.GiaNhap,
-                        TrangThai = idsp1.Trangthai,
-                        SoLuong = soluong + idsp1.SoLuong,
-                    };
-                    _ictsp.UpdateCRSP(idsp1.ID, ctsp);
                     if (e.ColumnIndex == 7)
                     {
                         if (MessageBox.Show("Ban co muon xoa san pham nay khong ?", "Thong bao", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            MessageBox.Show(_ihdcts.DeleteSP(id));
-                            dtgrid_giohang.Rows.Clear();
-                            LoadGioHang();
-                            dtgrid_sp.Rows.Clear();
-                            LoadSpCT();
+                            var id = _ihdcts.GetAllHDCT().Where(c => c.IDSP == Guid.Parse(dtgrid_giohang.Rows[e.RowIndex].Cells[0].Value.ToString())).Select(c => c.IDSP).FirstOrDefault();
+                            //var soluong = _ihdcts.GetAllHDCT().Where(c => c.IDSP == Guid.Parse(dtgrid_giohang.Rows[e.RowIndex].Cells[0].Value.ToString())).Select(c => c.SoLuong).FirstOrDefault();
+                            var soluong = _ighcts.GetAllghct().Where(c => c.IdSP == id).Select(c => c.SoLuong).FirstOrDefault();
+                            var idsp1 = _ictsp.GetAll().FirstOrDefault(c => c.ID == id);
+                            //cập nhật lại số lượng
+                            if (id == idsp1.ID)
+                            {
+                                ChiTietSanPham ctsp = new ChiTietSanPham()
+                                {
+                                    Id = id,
+                                    IDHSX = idsp1.IDHSX,
+                                    IDMauSac = idsp1.IDms,
+                                    IDSize = idsp1.IDSize,
+                                    MaSPCT = idsp1.MaCTSP,
+                                    IDSP = idsp1.IDSP,
+                                    Anh = idsp1.anh,
+                                    GiaBan = idsp1.GiaBan,
+                                    GiaNhap = idsp1.GiaNhap,
+                                    TrangThai = idsp1.Trangthai,
+                                    SoLuong = soluong + idsp1.SoLuong,
+                                };
+                                _ictsp.UpdateCRSP(id, ctsp);
+                                dtgrid_sp.Rows.Clear();
+                                LoadSpCT();
+                                MessageBox.Show(_ihdcts.DeleteSP(id));
+                                dtgrid_giohang.Rows.Clear();
+                                LoadGioHang();
+                               
+                            }
                         }
                     }
                     
