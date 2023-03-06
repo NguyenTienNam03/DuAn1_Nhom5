@@ -232,7 +232,7 @@ namespace C_PL.Views
 
             y += 30;
             e.Graphics.DrawString(string.Format("Tien tra khach : "), new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w / 2, y));
-            e.Graphics.DrawString((Convert.ToDouble(lb_tientrakhach.Text) * 0.2) + " VND", new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w - 150, y));
+            e.Graphics.DrawString((Convert.ToDouble(lb_tientrakhach.Text)) + " VND", new Font("Varial", 13, FontStyle.Bold), Brushes.Black, new PointF(w - 150, y));
 
 
         }
